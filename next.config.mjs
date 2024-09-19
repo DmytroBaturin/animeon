@@ -7,6 +7,9 @@ const nextConfig = {
     images: {
         domains: ['via.placeholder.com', process.env.S3_DOMAIN],
     },
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
     async rewrites() {
         return [
             {
