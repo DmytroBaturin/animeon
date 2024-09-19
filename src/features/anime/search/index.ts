@@ -1,0 +1,1 @@
+export { SearchAnime } from './ui'

@@ -1,0 +1,22 @@
+# Ігноруємо файли конфігурацій
+node_modules/
+package-lock.json
+tsconfig.json
+postcss.config.mjs
+tailwind.config.js
+next-env.d.ts
+next.config.mjs
+
+# Ігноруємо файли та директорії, які не потребують лінтингу
+.git/
+.gitignore
+.prettierrc.js
+
+# Ігноруємо збірки або компільовані файли
+dist/
+build/
+*.min.js
+*.min.css
+
+
+components.json
