@@ -3,7 +3,7 @@
 import { PageLayout } from '@/shared/layouts/page'
 import Image from 'next/image'
 import logo from '@/shared/assets/icons/logo.svg'
-import { useRef, useState, MouseEvent } from 'react'
+import { useRef, useState } from 'react'
 import { Button } from '@/shared/components/ui/button'
 import { UserAvatar } from '@/entities/user'
 import { SearchAnime } from '@/features/anime/search'
@@ -24,19 +24,20 @@ const headerLinks: HeaderLink[] = [
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
-
   const handleCloseMenu = () => {
     setIsMenuOpen(false)
   }
 
   const buttonRef = useRef<HTMLButtonElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
+  const searchRef = useRef<HTMLDivElement>(null)
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
   useOutsideClick(menuRef, (event: MouseEvent) => {
-    if (buttonRef.current && buttonRef.current.contains(event.target as Node))
-      return
+    const target = event.target as Node
+
+    if (buttonRef.current && buttonRef.current.contains(target)) return
+    if (searchRef.current && searchRef.current.contains(target)) return
+
     handleCloseMenu()
   })
 
@@ -91,7 +92,8 @@ export const Header = () => {
                   <li>{link.title}</li>
                 </Link>
               ))}
-              <SearchAnime trigger={<li>Пошук</li>} />
+
+              <SearchAnime trigger={<li>Пошук</li>} ref={searchRef} />
 
               <li className="text-yellow-400">Підписка</li>
             </nav>

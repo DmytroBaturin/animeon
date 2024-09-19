@@ -24,6 +24,8 @@ import {
 } from '@/shared/components/ui/drawer'
 import { useMediaQuery } from '@/shared/lib/hooks/usemediaquery'
 
+import { forwardRef } from 'react'
+
 interface BaseProps {
   children: React.ReactNode
 }
@@ -40,12 +42,21 @@ interface CredenzaProps extends BaseProps {
 
 const desktop = '(min-width: 768px)'
 
-const Credenza = ({ children, ...props }: RootCredenzaProps) => {
-  const isDesktop = useMediaQuery(desktop)
-  const Credenza = isDesktop ? Dialog : Drawer
+const Credenza = forwardRef<HTMLDivElement, RootCredenzaProps>(
+  ({ children, ...props }, ref) => {
+    const isDesktop = useMediaQuery(desktop)
+    const CredenzaComponent = isDesktop ? Dialog : Drawer // Виправив назву, щоб уникнути конфлікту
+    return (
+      <CredenzaComponent {...props} ref={ref}>
+        {children}
+      </CredenzaComponent>
+    )
+  },
+)
 
-  return <Credenza {...props}>{children}</Credenza>
-}
+Credenza.displayName = 'Credenza'
+
+export default Credenza
 
 const CredenzaTrigger = ({ className, children, ...props }: CredenzaProps) => {
   const isDesktop = useMediaQuery(desktop)
