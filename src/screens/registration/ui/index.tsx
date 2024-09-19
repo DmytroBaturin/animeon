@@ -32,7 +32,7 @@ const registrationSchema = yup.object().shape({
 export const RegistrationPage = () => {
   return (
     <PageLayout>
-      <div className="flex h-screen -mt-[96px] justify-center items-center w-full">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center w-full h-full">
         <Formik
           initialValues={{
             name: '',
@@ -46,9 +46,9 @@ export const RegistrationPage = () => {
           }}
         >
           {({ errors, touched, handleChange, handleBlur, values }) => (
-            <Form className="md:w-[30%] w-full">
+            <Form className="lg:w-[20%] w-full">
               <Card
-                className="w-full bg-muted/40  backdrop-blur-sm border border-white/[15%] shadow-2xl"
+                className="w-full bg-muted/40  border border-white/[15%] shadow-2xl"
                 variant="ghost"
               >
                 <CardHeader>
