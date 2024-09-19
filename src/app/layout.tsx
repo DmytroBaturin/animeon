@@ -4,6 +4,8 @@ import { Header } from '@/widgets/header'
 import { Footer } from '@/widgets/footer'
 import { Exo_2 } from 'next/font/google'
 
+export const runtime = 'edge'
+
 const exo = Exo_2({
   subsets: ['cyrillic', 'latin', 'cyrillic-ext'],
 })
