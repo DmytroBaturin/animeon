@@ -18,6 +18,8 @@ import meetingIco from '@/shared/assets/icons/release/Meeting.svg'
 import numbersIco from '@/shared/assets/icons/release/Numbers.svg'
 import Image from 'next/image'
 import { WithIcon } from '@/shared/components/ui/with-icon'
+import { Tabs, TabsContent } from '@/shared/components/ui/tabs'
+import { ReleaseTabs } from '@/screens/release/ui/tabs'
 
 interface ReleasePageProps {
   anime?: string
@@ -37,10 +39,10 @@ const stats = [
 
 export const ReleasePage = ({ children, anime }: ReleasePageProps) => {
   return (
-    <div className="w-full">
+    <div className="w-full mt-10">
       <div className="flex flex-col lg:flex-row justify-around gap-[42px] w-full">
-        <div className="w-fit flex-col gap-3 items-center flex">
-          <Skeleton className="h-[420px]  w-[297px] bg-gray-300" />
+        <div className="w-full lg:w-fit flex-col gap-3 items-center flex">
+          <Skeleton className="h-[420px] w-[297px] bg-gray-300" />
           <Popover>
             <PopoverTrigger asChild>
               <Button>
@@ -62,9 +64,9 @@ export const ReleasePage = ({ children, anime }: ReleasePageProps) => {
           </Popover>
         </div>
         <div className="w-full ">
-          <div className="border-b-[1px] border-white">
+          <div className="border-b-[1px] flex flex-col gap-2 border-white">
             <h1 className="font-bold text-4xl">Naruto</h1>
-            <p>Naruto</p>
+            <p>Description</p>
           </div>
           <div />
         </div>
@@ -83,12 +85,13 @@ export const ReleasePage = ({ children, anime }: ReleasePageProps) => {
           </CardContent>
         </Card>
       </div>
-      <Card
-        variant="primary"
-        className="mt-4 h-[600px] md:mt-6 bg-muted/90 backdrop-blur-sm"
+      <Tabs
+        defaultValue="account"
+        className="mt-4 rounded-[30px] px-[10%] py-[10px] h-[600px] md:mt-6 bg-muted"
       >
-        {children}
-      </Card>
+        <ReleaseTabs />
+        <TabsContent value="account">{children}</TabsContent>
+      </Tabs>
     </div>
   )
 }

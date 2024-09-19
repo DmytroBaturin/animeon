@@ -1,3 +1,3 @@
 export default function Page() {
-  return <div>Release Page</div>
+  return <div>Player</div>
 }
