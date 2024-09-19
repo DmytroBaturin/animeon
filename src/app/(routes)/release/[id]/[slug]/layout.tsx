@@ -1,6 +1,7 @@
 import { PageLayout } from '@/shared/layouts/page'
 import { ReleasePage } from '@/screens/release'
 
+export const runtime = 'edge'
 export default function Layout({
   children,
   params,
