@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { Skeleton } from '@/shared/components/ui/skeleton'
-import { routes } from '@/shared/config/routes'
 import Link from 'next/link'
+import { routes } from '@/shared/config/routes'
 
 const AnimeCard = () => {
   return (

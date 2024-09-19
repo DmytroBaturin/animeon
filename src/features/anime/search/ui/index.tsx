@@ -34,7 +34,7 @@ export const SearchAnime = ({ trigger }: SearchAnimeProps) => {
             <Input placeholder="Пошук..." />
           </CredenzaTitle>
         </CredenzaHeader>
-        <CredenzaBody className="flex flex-col gap-3 h-[600px]">
+        <CredenzaBody className="flex flex-col gap-3 lg:h-[600px] h-[400px]">
           <AnimeCardRowSkeleton />
           <AnimeCardRowSkeleton />
           <AnimeCardRowSkeleton />

@@ -1,11 +1,10 @@
-'use client'
+'use server'
 
 import SliderFullScreen from '@/screens/home/ui/slider'
 import { Button } from '@/shared/components/ui/button'
 import { Tabs, TabsContent } from '@/shared/components/ui/tabs'
 import { PageLayout } from '@/shared/layouts/page'
-import { ReactNode, useEffect } from 'react'
-import { getAnimePosters } from '@/shared/api/anime/anime'
+import { ReactNode } from 'react'
 
 interface HomePageProps {
   tablist: ReactNode
@@ -13,10 +12,11 @@ interface HomePageProps {
   serverList: ReactNode
 }
 
-export const HomePage = ({ tablist, activeTab, serverList }: HomePageProps) => {
-  useEffect(() => {
-    getAnimePosters().then((res) => console.log(res))
-  }, [])
+export const HomePage = async ({
+  tablist,
+  activeTab,
+  serverList,
+}: HomePageProps) => {
   return (
     <div>
       <SliderFullScreen />
