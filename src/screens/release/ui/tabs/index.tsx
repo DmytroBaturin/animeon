@@ -1,10 +1,8 @@
-'use client'
-
 import { useRef, useEffect } from 'react'
 import { TabsList, TabsTrigger } from '@/shared/components/ui/tabs'
 
 export const ReleaseTabs = () => {
-  const tabsRef = useRef(null)
+  const tabsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (tabsRef.current) {
