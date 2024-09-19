@@ -39,10 +39,10 @@ const SliderFullScreen = ({ posters }: { posters?: ResponsePosters[] }) => {
   }
 
   return (
-    <div className="relative left-0 -mt-[96px] md:-mt-[80px] h-screen w-full overflow-hidden flex justify-center items-center">
+    <div className="relative left-0 -mt-[96px] md:-mt-[80px] h-dvh w-full overflow-hidden flex justify-center items-center">
       <Slider className="w-full h-full" ref={sliderRef} {...settings}>
         {slides.map((slide, index) => (
-          <div key={index} className="relative w-full h-screen">
+          <div key={index} className="relative w-full h-dvh">
             <Image
               src={slide}
               className="absolute top-0 left-0 w-full h-full object-cover"
