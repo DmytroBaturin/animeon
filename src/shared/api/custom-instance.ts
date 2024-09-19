@@ -13,15 +13,8 @@ const getBody = <T>(c: Response | Request): Promise<T> => {
 }
 
 const getUrl = (contextUrl: string): string => {
-  if (!contextUrl) {
-    throw new Error('Invalid URL: URL is empty or undefined')
-  }
-  const apiPrefix = '/api/v1' // Adjust this if necessary
-  const fullUrl = contextUrl.startsWith('/')
-    ? `${apiPrefix}${contextUrl}`
-    : `${apiPrefix}/${contextUrl}`
-
-  return fullUrl
+  const baseUrl = process.env.API_HOST
+  return `${baseUrl}${contextUrl}`
 }
 
 const getHeaders = (headers?: HeadersInit): HeadersInit => {
@@ -37,6 +30,7 @@ export const customInstance = async <T>(
   options: RequestInit,
 ): Promise<T> => {
   const requestUrl = getUrl(url)
+  console.log(requestUrl)
   const requestHeaders = getHeaders(options.headers)
   const requestInit: RequestInit = {
     ...options,
