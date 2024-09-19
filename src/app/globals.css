@@ -67,10 +67,6 @@
   }
 }
 
-.bg-muted-60 {
-  background-color: rgba(var(--muted), 0.6);
-}
-
 @layer base {
   * {
     @apply border-border text-foreground m-0 p-0 box-border;

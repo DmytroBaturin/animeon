@@ -18,7 +18,7 @@ export const ReleasesPage = () => {
           <AnimeCardSkeleton />
           <AnimeCardSkeleton />
         </ListLayout>
-        <div className="w-full bg-gray-300 flex">
+        <div className="w-full   justify-start items-start flex">
           <PaginationFilter />
         </div>
       </div>

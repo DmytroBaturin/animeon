@@ -3,5 +3,5 @@ export const routes = {
   releases: '/releases',
   login: '/login',
   registration: '/registration',
-  release: (id: number, slug: string) => `/release/${id}/${slug}`,
+  release: (id: string, slug: string) => `/release/${id}/${slug}`,
 }

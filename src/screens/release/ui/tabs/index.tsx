@@ -1,24 +1,12 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
 import { TabsList, TabsTrigger } from '@/shared/components/ui/tabs'
 
 export const ReleaseTabs = () => {
-  const tabsRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (tabsRef.current) {
-      tabsRef.current.scrollTo({ left: 0, behavior: 'smooth' })
-    }
-  }, [])
-
   return (
-    <TabsList
-      ref={tabsRef}
-      className="flex overflow-x-auto bg-black/20 overflow-y-hidden whitespace-nowrap scrollbar-hide scroll-snap-type-x mandatory"
-    >
+    <TabsList className="flex overflow-x-auto bg-black/20 overflow-y-hidden whitespace-nowrap scrollbar-hide scroll-snap-type-x mandatory">
       <div className="flex space-x-4">
-        <TabsTrigger value="account">Плеєр</TabsTrigger>
+        <TabsTrigger value="">Плеєр</TabsTrigger>
         <TabsTrigger value="trailer">Трейлер</TabsTrigger>
         <TabsTrigger value="similar">Схожі</TabsTrigger>
         <TabsTrigger value="comments">Відгуки</TabsTrigger>

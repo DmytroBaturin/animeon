@@ -4,25 +4,25 @@ import {
   PaginationEllipsis,
   PaginationItem,
   PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
 } from '@/shared/components/ui/pagination'
 
 export const PaginationFilter = () => {
   return (
-    <Pagination>
+    <Pagination className="items-start justify-start">
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious href="#" />
+          <PaginationLink isActive href="#">
+            1
+          </PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href="#">1</PaginationLink>
+          <PaginationLink href="#">2</PaginationLink>
         </PaginationItem>
         <PaginationItem>
           <PaginationEllipsis />
         </PaginationItem>
         <PaginationItem>
-          <PaginationNext href="#" />
+          <PaginationLink href="#">10</PaginationLink>
         </PaginationItem>
       </PaginationContent>
     </Pagination>
