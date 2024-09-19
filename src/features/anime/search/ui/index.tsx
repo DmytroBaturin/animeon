@@ -30,14 +30,14 @@ export const SearchAnime = forwardRef<HTMLInputElement, SearchAnimeProps>(
             </Button>
           )}
         </CredenzaTrigger>
-        <CredenzaContent className="w-[100%] md:w-[60%]">
-          <div ref={ref}>
+        <CredenzaContent className="w-[100%] md:top-[30%] h-[40%] md:h-fit md:w-[60%]">
+          <div className="flex flex-col gap-4" ref={ref}>
             <CredenzaHeader>
               <CredenzaTitle>
                 <Input placeholder="Пошук..." />
               </CredenzaTitle>
             </CredenzaHeader>
-            <CredenzaBody className="flex flex-col gap-3 lg:h-[600px] h-[400px]">
+            <CredenzaBody className="flex flex-col gap-3 h-fit">
               <AnimeCardRowSkeleton />
               <AnimeCardRowSkeleton />
               <AnimeCardRowSkeleton />
