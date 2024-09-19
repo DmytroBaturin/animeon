@@ -48,11 +48,13 @@ const SliderFullScreen = ({ posters }: { posters?: ResponsePosters[] }) => {
               className="absolute top-0 left-0 w-full h-full object-cover"
               alt={`Slide ${index + 1}`}
               layout="fill"
-              priority={true}
+              priority
             />
-            <PageLayout classname="absolute bottom-[180px] z-10 w-full text-center">
+            <PageLayout classname="absolute bottom-[10%] md:bottom-[20%] z-10 w-full text-center">
               <div className="flex gap-2 items-start flex-col justify-center">
-                <h2 className="font-bold text-3xl text-white drop-shadow-sm">Наруто</h2>
+                <h2 className="font-bold text-3xl text-white drop-shadow-sm">
+                  Наруто
+                </h2>
                 <p className="font-bold text-base text-white drop-shadow-sm">
                   3 серія 20 січня
                 </p>

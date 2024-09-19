@@ -6,6 +6,7 @@ import { routes } from '@/shared/config/routes'
 const AnimeCard = () => {
   return (
     <Link
+      scroll={false}
       className="h-[330px] flex justify-between flex-col items-center w-full max-w-[200px]"
       href={routes.release(1, 'slug')}
     >
