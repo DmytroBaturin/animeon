@@ -92,7 +92,8 @@ export const Header = () => {
                   <li>{link.title}</li>
                 </Link>
               ))}
-
+              {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+              {/* @ts-expect-error */}
               <SearchAnime trigger={<li>Пошук</li>} ref={searchRef} />
 
               <li className="text-yellow-400">Підписка</li>
