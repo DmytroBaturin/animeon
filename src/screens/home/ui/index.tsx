@@ -4,10 +4,11 @@ import SliderFullScreen from '@/screens/home/ui/slider'
 import { Button } from '@/shared/components/ui/button'
 import { Tabs, TabsContent } from '@/shared/components/ui/tabs'
 import { PageLayout } from '@/shared/layouts/page'
-import { ReactNode } from 'react'
+import { ReactNode, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { routes } from '@/shared/config/routes'
+import { getAnimePosters } from '@/shared/api/anime/anime'
 
 interface HomePageProps {
   tablist: ReactNode
@@ -19,12 +20,15 @@ export const HomePage = ({ tablist, activeTab, serverList }: HomePageProps) => {
   const router = useRouter()
 
   const handleTabChange = (tabValue: string) => {
-    const params = new URLSearchParams(window.location.search)
-    params.set('tab', tabValue)
-
-    router.push(`?${params.toString()}`, { scroll: false })
+    router.push(`?tab=${tabValue.toString()}`, { scroll: false })
   }
-
+  useEffect(() => {
+    ;(async () => {
+      getAnimePosters().then((res) => {
+        console.log(res)
+      })
+    })()
+  }, [])
   return (
     <div>
       <SliderFullScreen />

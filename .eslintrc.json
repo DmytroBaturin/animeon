@@ -14,10 +14,16 @@
     "unused-imports/no-unused-imports": "error",
     "unicorn/prefer-module": "off",
     "react/jsx-props-no-spreading": "off",
-    "@typescript-eslint/no-unused-vars": ["error", { "varsIgnorePattern": "^_" }],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "varsIgnorePattern": "^_" }
+    ],
     "react/require-default-props": "off",
     "arrow-body-style": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    ],
     "react/function-component-definition": [
       "error",
       {
@@ -41,7 +47,7 @@
     {
       "files": ["src/app/**"],
       "rules": {
-        "react/function-component-definition": "off" // Вимикає правило для папки app
+        "react/function-component-definition": "off"
       }
     }
   ]

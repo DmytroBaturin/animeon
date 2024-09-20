@@ -10,10 +10,11 @@ export default async function Page({
     { label: 'Фільми', value: 'films' },
     { label: 'Популярні', value: 'popular' },
   ]
+  const activeTab = searchParams.tab || 'last'
   return (
     <HomePage
-      serverList={<HomePageList tab={searchParams.tab || 'last'} />}
-      activeTab={searchParams.tab}
+      serverList={<HomePageList tab={activeTab} />}
+      activeTab={activeTab}
       tablist={<HomeTabList tabs={tabs} />}
     />
   )

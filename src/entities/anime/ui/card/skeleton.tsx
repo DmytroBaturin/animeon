@@ -8,7 +8,7 @@ const AnimeCard = () => {
     <Link
       scroll={false}
       className="h-[330px] flex justify-between flex-col items-center w-full max-w-[200px]"
-      href={routes.release(1, 'slug')}
+      href={routes.release('1', 'slug')}
     >
       <Skeleton className="h-full bg-gray-300 max-h-[280px] w-full rounded-[10px]" />
       <div className="flex flex-col gap-2 font-bold text-center items-center">

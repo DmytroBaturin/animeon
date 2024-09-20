@@ -14,8 +14,7 @@ module.exports = {
       },
     },
     input: {
-      target:
-        'http://animeon-load-balancer-1013191312.eu-north-1.elb.amazonaws.com/swagger/?format=openapi',
+      target: 'http://localhost:8000/swagger/?format=openapi',
     },
   },
 }

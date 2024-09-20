@@ -15,9 +15,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, error, icon, action, label, ...props }, ref) => {
     return (
       <div className="flex w-full flex-col gap-2">
-        <Label asChild>
-          <p className="text-base">{label}</p>
-        </Label>
+        {label && (
+          <Label asChild>
+            <p className="text-base" />
+          </Label>
+        )}
+
         <span className="flex relative items-center">
           {icon && <div className="absolute left-0 px-3 py-1">{icon}</div>}
           <input

@@ -14,7 +14,7 @@ const getBody = <T>(c: Response | Request): Promise<T> => {
 
 const getUrl = (contextUrl: string): string => {
   const baseUrl = process.env.API_HOST
-  return `${baseUrl}${contextUrl}`
+  return `${baseUrl}/api/v1${contextUrl}`
 }
 
 const getHeaders = (headers?: HeadersInit): HeadersInit => {

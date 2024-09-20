@@ -2,10 +2,9 @@
 const nextConfig = {
     env: {
         API_HOST: process.env.API_HOST,
-        S3_DOMAIN: process.env.S3_DOMAIN,
     },
     images: {
-        domains: ['via.placeholder.com', process.env.S3_DOMAIN],
+        domains: ['via.placeholder.com'],
     },
     eslint: {
         ignoreDuringBuilds: true,
