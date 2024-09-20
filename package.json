@@ -29,6 +29,7 @@
     "immer": "^10.1.1",
     "lucide-react": "^0.441.0",
     "next": "14.2.11",
+    "next-auth": "^4.24.7",
     "plyr": "^3.7.8",
     "plyr-react": "^5.3.0",
     "react": "^18",
