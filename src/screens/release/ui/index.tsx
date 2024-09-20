@@ -30,7 +30,7 @@ export const ReleasePage = ({
       <Tabs
         value={activeTab}
         onValueChange={handleNavigationClick}
-        className="mt-4 rounded-[30px] px-[10%] py-[10px] h-[600px] md:mt-6 bg-muted"
+        className="mt-4 rounded-[30px] px-[10%] py-[10px] lg:h-full lg:min-h-[650px] md:mt-6 bg-muted"
       >
         {tabs}
         <TabsContent value={activeTab}>{children}</TabsContent>

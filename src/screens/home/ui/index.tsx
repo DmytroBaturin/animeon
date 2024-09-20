@@ -1,10 +1,13 @@
-'use server'
+'use client'
 
 import SliderFullScreen from '@/screens/home/ui/slider'
 import { Button } from '@/shared/components/ui/button'
 import { Tabs, TabsContent } from '@/shared/components/ui/tabs'
 import { PageLayout } from '@/shared/layouts/page'
 import { ReactNode } from 'react'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { routes } from '@/shared/config/routes'
 
 interface HomePageProps {
   tablist: ReactNode
@@ -12,11 +15,16 @@ interface HomePageProps {
   serverList: ReactNode
 }
 
-export const HomePage = async ({
-  tablist,
-  activeTab,
-  serverList,
-}: HomePageProps) => {
+export const HomePage = ({ tablist, activeTab, serverList }: HomePageProps) => {
+  const router = useRouter()
+
+  const handleTabChange = (tabValue: string) => {
+    const params = new URLSearchParams(window.location.search)
+    params.set('tab', tabValue)
+
+    router.push(`?${params.toString()}`, { scroll: false })
+  }
+
   return (
     <div>
       <SliderFullScreen />
@@ -25,6 +33,7 @@ export const HomePage = async ({
           <Tabs
             className="w-full max-w-full"
             defaultValue={activeTab || 'last'}
+            onValueChange={handleTabChange}
           >
             {tablist}
             <TabsContent
@@ -33,7 +42,9 @@ export const HomePage = async ({
             >
               {serverList}
               <div className="w-full justify-center items-center flex">
-                <Button className="w-[190px]">Показати більше</Button>
+                <Link href={routes.releases}>
+                  <Button className="w-[190px]">Показати більше</Button>
+                </Link>
               </div>
             </TabsContent>
           </Tabs>
