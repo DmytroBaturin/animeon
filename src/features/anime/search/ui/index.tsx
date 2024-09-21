@@ -16,30 +16,39 @@ import { AnimeCardRow } from '@/entities/anime'
 import { forwardRef, useCallback, useEffect, useState } from 'react'
 import { debounce } from 'next/dist/server/utils'
 import { searchAnime } from '@/shared/api/anime/anime'
-import { ResponsePaginatedAnimeList } from '@/shared/api/model'
+import { FixedSizeList as List } from 'react-window'
+import InfiniteLoader from 'react-window-infinite-loader'
 
 interface SearchAnimeProps {
   trigger?: React.ReactNode
+  handleCloseMenu?: () => void
 }
 
 export const SearchAnime = forwardRef<HTMLInputElement, SearchAnimeProps>(
-  ({ trigger }: SearchAnimeProps, ref) => {
+  ({ trigger, handleCloseMenu }: SearchAnimeProps, ref) => {
     const [searchValue, setSearchValue] = useState<string>('')
-    const [searchResults, setSearchResults] =
-      useState<ResponsePaginatedAnimeList>({})
-    const [isOpen, setIsOpen] = useState(false) // State to control Credenza visibility
+    const [searchResults, setSearchResults] = useState<any[]>([])
+    const [page, setPage] = useState<number>(1)
+    const [hasMore, setHasMore] = useState(true)
+    const [isOpen, setIsOpen] = useState(false)
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
       setSearchValue(e.target.value)
+      setPage(1)
+      setSearchResults([])
     }
 
     const fetchAnime = useCallback(
-      debounce((nextValue: string) => {
+      debounce((nextValue: string, page: number) => {
         let active = true
-        searchAnime({ search: nextValue, page_size: 6 })
+        searchAnime({ search: nextValue, page_size: 10, page })
           .then((data) => {
             if (active) {
-              setSearchResults(data.data)
+              setSearchResults((prevResults) => [
+                ...prevResults,
+                ...data.data.results,
+              ])
+              setHasMore(!!data.data.next)
             }
           })
           .catch(() => {
@@ -53,12 +62,22 @@ export const SearchAnime = forwardRef<HTMLInputElement, SearchAnimeProps>(
     )
 
     useEffect(() => {
-      fetchAnime(searchValue)
-    }, [searchValue])
+      fetchAnime(searchValue, page)
+    }, [searchValue, page])
 
     const handleAnimeClick = () => {
-      // Close Credenza when AnimeCardRow is clicked
       setIsOpen(false)
+      handleCloseMenu && handleCloseMenu()
+    }
+
+    const loadMoreAnime = () => {
+      if (hasMore) {
+        setPage((prevPage) => prevPage + 1)
+      }
+    }
+
+    const isItemLoaded = (index: number) => {
+      return !!searchResults[index]
     }
 
     return (
@@ -66,7 +85,7 @@ export const SearchAnime = forwardRef<HTMLInputElement, SearchAnimeProps>(
         <CredenzaTrigger asChild>
           {trigger || (
             <Button size="icon" variant="ghost" onClick={() => setIsOpen(true)}>
-              <Image src={search} alt="search" />{' '}
+              <Image src={search} alt="search" />
             </Button>
           )}
         </CredenzaTrigger>
@@ -77,13 +96,38 @@ export const SearchAnime = forwardRef<HTMLInputElement, SearchAnimeProps>(
                 <Input onChange={handleSearch} placeholder="Пошук..." />
               </CredenzaTitle>
             </CredenzaHeader>
-            <CredenzaBody className="flex flex-col gap-3 h-fit">
-              {searchResults &&
-                searchResults?.results?.map((anime, _) => (
-                  <div key={_} onClick={handleAnimeClick}>
-                    <AnimeCardRow {...anime} />
-                  </div>
-                ))}
+            <CredenzaBody className="flex flex-col items-start justify-center gap-3 h-full">
+              <InfiniteLoader
+                isItemLoaded={isItemLoaded}
+                itemCount={
+                  hasMore ? searchResults.length + 1 : searchResults.length
+                }
+                loadMoreItems={loadMoreAnime}
+              >
+                {({ onItemsRendered, ref }) => (
+                  <List
+                    height={400}
+                    itemCount={searchResults.length}
+                    itemSize={60}
+                    width="100%"
+                    onItemsRendered={onItemsRendered}
+                    ref={ref}
+                  >
+                    {({ index, style }) => (
+                      <div onClick={handleAnimeClick} style={style}>
+                        {searchResults[index] ? (
+                          <AnimeCardRow key={index} {...searchResults[index]} />
+                        ) : (
+                          <div style={{ padding: '10px', textAlign: 'center' }}>
+                            Завантаження...
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </List>
+                )}
+              </InfiniteLoader>
+              {!hasMore && <p>Немає більше результатів</p>}
             </CredenzaBody>
           </div>
         </CredenzaContent>

@@ -3,44 +3,24 @@
 import { PageLayout } from '@/shared/layouts/page'
 import Image from 'next/image'
 import logo from '@/shared/assets/icons/logo.svg'
-import { useRef, useState } from 'react'
+import { LegacyRef } from 'react'
 import { Button } from '@/shared/components/ui/button'
 import { UserAvatar } from '@/entities/user'
 import { SearchAnime } from '@/features/anime/search'
 import { routes } from '@/shared/config/routes'
 import Link from 'next/link'
-import { useOutsideClick } from '@/shared/lib/hooks/useoutsideclick'
+import { headerLinks } from '@/widgets/header/model/navigation'
+import { useHeader } from '@/widgets/header/model'
 
-interface HeaderLink {
-  title: string
-  href: string
-}
-
-const headerLinks: HeaderLink[] = [
-  { title: 'Головна', href: routes.home },
-  { title: 'Каталог', href: routes.releases },
-  { title: 'Випадкове', href: routes.home },
-]
-
-export const Header = (isAuth: boolean) => {
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
-  const handleCloseMenu = () => {
-    setIsMenuOpen(false)
-  }
-
-  const buttonRef = useRef<HTMLButtonElement>(null)
-  const menuRef = useRef<HTMLDivElement>(null)
-  const searchRef = useRef<HTMLDivElement>(null)
-
-  useOutsideClick(menuRef, (event: MouseEvent) => {
-    const target = event.target as Node
-
-    if (buttonRef.current && buttonRef.current.contains(target)) return
-    if (searchRef.current && searchRef.current.contains(target)) return
-
-    handleCloseMenu()
-  })
-
+export const Header = () => {
+  const {
+    handleCloseMenu,
+    isMenuOpen,
+    menuRef,
+    setIsMenuOpen,
+    searchRef,
+    buttonRef,
+  } = useHeader()
   return (
     <header className="fixed bg-gradient-primary z-10 flex items-center w-screen h-[96px] md:h-[80px]">
       <PageLayout>
@@ -68,7 +48,7 @@ export const Header = (isAuth: boolean) => {
           <div className="hidden md:flex items-center gap-9">
             <nav className="list-none items-center flex gap-9">
               <SearchAnime />
-              {!isAuth && <Link href={routes.login}>Авторизація</Link>}
+              <Link href={routes.login}>Авторизація</Link>
             </nav>
             <UserAvatar />
           </div>
@@ -92,9 +72,12 @@ export const Header = (isAuth: boolean) => {
                   <li>{link.title}</li>
                 </Link>
               ))}
-              {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-              {/* @ts-expect-error */}
-              <SearchAnime trigger={<li>Пошук</li>} ref={searchRef} />
+
+              <SearchAnime
+                handleCloseMenu={handleCloseMenu}
+                trigger={<li>Пошук</li>}
+                ref={searchRef as LegacyRef<HTMLInputElement>}
+              />
 
               <li className="text-yellow-400">Підписка</li>
             </nav>

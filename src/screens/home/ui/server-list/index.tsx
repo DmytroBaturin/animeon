@@ -14,7 +14,7 @@ export const HomePageList = async ({ tab = '' }: { tab: string }) => {
   return (
     <ListLayout>
       {anime?.data?.results.map((value) => (
-        <AnimeCard key={value.id} {...value} />
+        <AnimeCard key={`${value.slug}${value.id}`} {...value} />
       ))}
     </ListLayout>
   )

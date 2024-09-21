@@ -39,7 +39,7 @@ export const Comment = ({
                 <p className="font-light">{date}</p>
               </div>
             </div>
-            <p>
+            <p className="break-all">
               {commentTo && (
                 <span className="text-yellow-400">@{commentTo} </span>
               )}
@@ -56,14 +56,17 @@ export const Comment = ({
               {reactions}
             </div>
           </div>
-          {isReplying && replyForm}
+          <div className="">{isReplying && replyForm}</div>
           {!isReply && (
             <p className="text-xs text-blue-400 underline">
               Показати всі відповіді
             </p>
           )}
         </div>
-        {replies}
+
+        <div className="flex items-start w-full flex-col justify-startmr-32">
+          {replies}
+        </div>
       </div>
     </div>
   )

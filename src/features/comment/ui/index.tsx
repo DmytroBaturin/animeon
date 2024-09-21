@@ -11,7 +11,7 @@ const comments = [
     date: 'today',
   },
   {
-    content: 'comment content',
+    content: 'commeds adsadsadsadsadsadnt content',
     userName: 'Dmytro',
     date: 'today',
   },

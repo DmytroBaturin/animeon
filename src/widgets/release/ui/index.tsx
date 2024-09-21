@@ -55,11 +55,14 @@ export const ReleaseDetails = ({ anime }: { anime: ResponseAnime }) => {
           </PopoverContent>
         </Popover>
       </div>
-      <div className="w-full ">
-        <div className="border-b-[1px] flex flex-col gap-2 border-white">
+      <div className="w-full">
+        <div className="border-b-[1px] flex flex-col gap-3 pb-4 border-white">
           <h1 className="font-bold text-4xl">{anime.title}</h1>
           <p>{anime.short_description}</p>
         </div>
+        <p className="mt-4 max-h-[300px] overflow-y-scroll">
+          {anime.description}
+        </p>
       </div>
       <Card className="w-full bg-gradient-secondary backdrop-blur-sm">
         <CardContent className="p-4 flex flex-col gap-4">

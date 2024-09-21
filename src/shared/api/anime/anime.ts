@@ -160,7 +160,7 @@ export const getRandomAnime = async (
  * @summary Ellipsis.
  */
 export type searchAnimeResponse = {
-  data: ResponsePaginatedAnimeList[]
+  data: ResponsePaginatedAnimeList
   status: number
 }
 

@@ -19,4 +19,13 @@ export const useHeader = () => {
 
     handleCloseMenu()
   })
+
+  return {
+    isMenuOpen,
+    setIsMenuOpen,
+    handleCloseMenu,
+    buttonRef,
+    menuRef,
+    searchRef,
+  }
 }

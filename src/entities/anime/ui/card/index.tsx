@@ -9,6 +9,8 @@ const AnimeCardComponent = ({
   card_image,
   id,
   slug,
+  type,
+  year,
   count_episodes,
 }: ResponseAnimeList) => {
   return (
@@ -33,7 +35,9 @@ const AnimeCardComponent = ({
         )}
         <div className="flex flex-col font-bold text-center items-center mt-2">
           <h2 className="text-base">{title}</h2>
-          <p className="text-xs">{count_episodes}</p>
+          <p className="text-xs">
+            {year} | {type || 'Аніме'} | Серій: {count_episodes}
+          </p>
         </div>
       </div>
     </Link>

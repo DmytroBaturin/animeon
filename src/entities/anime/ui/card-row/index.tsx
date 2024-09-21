@@ -12,6 +12,7 @@ const AnimeCardComponent = ({
   slug,
   type,
   year,
+  count_episodes,
 }: ResponseAnimeList) => {
   return (
     <Link href={routes.release(id, slug)}>
@@ -19,7 +20,7 @@ const AnimeCardComponent = ({
         {card_image ? (
           <Image
             src={card_image}
-            alt={title}
+            alt={title || 'anime'}
             className="w-9 h-9 bg-gray-300 rounded-full"
             width={50}
             height={50}
@@ -30,7 +31,9 @@ const AnimeCardComponent = ({
 
         <div className="flex flex-col font-bold ">
           <h2 className="text-base">{title}</h2>
-          <p className="text-xs">{type}</p>
+          <p className="text-xs">
+            {year} | {type || 'Аніме'} | Серій: {count_episodes}
+          </p>
         </div>
       </div>
     </Link>

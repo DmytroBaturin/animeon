@@ -17,10 +17,20 @@ export const generatePaginationItems = ({
   const items = []
 
   const totalPagesToShow = 1
-  const startPages = 1 // Показувати завжди перші 3 сторінки
-  const endPages = 1 // Показувати завжди останні 3 сторінки
+  const startPages = 1
+  const endPages = 1
 
-  // Завжди показуємо перші 3 сторінки
+  if (num_pages === 1) {
+    items.push(
+      <PaginationItem key={1}>
+        <PaginationLink isActive href="#">
+          1
+        </PaginationLink>
+      </PaginationItem>,
+    )
+    return items
+  }
+
   for (let i = 1; i <= Math.min(startPages, num_pages!); i++) {
     items.push(
       <PaginationItem key={i}>
@@ -35,7 +45,6 @@ export const generatePaginationItems = ({
     )
   }
 
-  // Показуємо еліпсис після перших сторінок, якщо потрібно
   if (active_page! > startPages + 1) {
     items.push(<PaginationEllipsis key="start-ellipsis" />)
   }

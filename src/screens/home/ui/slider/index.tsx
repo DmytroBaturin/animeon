@@ -39,7 +39,7 @@ const SliderFullScreen = ({ posters }: { posters?: ResponsePosters[] }) => {
     index: number,
     event: React.MouseEvent<HTMLButtonElement>,
   ) => {
-    event.preventDefault() // Запобігаємо стандартній поведінці
+    event.preventDefault() // Prevent default behavior
     if (sliderRef.current) {
       sliderRef.current.slickGoTo(index)
     }
@@ -49,43 +49,56 @@ const SliderFullScreen = ({ posters }: { posters?: ResponsePosters[] }) => {
     <div className="relative left-0 -mt-[96px] md:-mt-[80px] h-dvh w-full overflow-hidden flex justify-center items-center">
       <Slider className="w-full h-full" ref={sliderRef} {...settings}>
         {posters && posters.length > 0 ? (
-          posters?.map((poster, index) => (
-            <div key={poster.description} className="relative w-full h-dvh">
-              <Image
-                src={poster.image || slides[index]}
-                className="absolute top-0 left-0 w-full h-full object-cover"
-                alt={`Slide ${index + 1}`}
-                layout="fill"
-                priority
-              />
-              <PageLayout classname="absolute bottom-[10%] md:bottom-[20%] z-10 w-full text-center">
-                <div className="flex gap-2 items-start flex-col justify-center">
-                  <h2 className="font-bold text-3xl text-white drop-shadow-sm">
-                    {poster.anime?.title || 'Назва аніме'}
-                  </h2>
-                  <p className="font-bold text-base text-white drop-shadow-sm">
-                    {poster.anime?.count_episodes || 'Назва аніме'}
-                  </p>
-                  <div className="flex gap-2">
-                    {posters.map((_, index) => (
-                      <Button
-                        key={`${_}`}
-                        onClick={(e) => goToSlide(index, e)}
-                        className={`h-2 w-[25px] p-0 rounded-full drop-shadow-sm ${
-                          index === activeSlide ? 'bg-accent' : 'bg-[#939393]'
-                        }`}
-                      />
-                    ))}
+          posters.map((poster, index) => {
+            // Check if the image is valid before rendering the Image component
+            const imageSrc =
+              poster.image && poster.image !== '' ? poster.image : slides[index]
+
+            return (
+              <div
+                key={`${poster.anime?.id}-${poster.anime?.slug}-${index}`}
+                className="relative w-full h-dvh"
+              >
+                <Image
+                  src={imageSrc}
+                  className="absolute top-0 left-0 w-full h-full object-cover"
+                  alt={`Slide ${index + 1}`}
+                  layout="fill"
+                  priority
+                />
+                <PageLayout classname="absolute bottom-[10%] md:bottom-[20%] z-10 w-full text-center">
+                  <div className="flex gap-2 items-start flex-col justify-center">
+                    <h2 className="font-bold text-3xl text-white drop-shadow-sm">
+                      {poster.anime?.title || 'Назва аніме'}
+                    </h2>
+                    <p className="font-bold text-base text-white drop-shadow-sm">
+                      {poster.anime?.count_episodes || 'Назва аніме'}
+                    </p>
+                    <div className="flex gap-2">
+                      {posters.map((_, index) => (
+                        <Button
+                          key={`${poster.anime?.id}-${poster.anime?.slug}-${index}`}
+                          onClick={(e) => goToSlide(index, e)}
+                          className={`h-2 w-[25px] p-0 rounded-full drop-shadow-sm ${
+                            index === activeSlide ? 'bg-accent' : 'bg-[#939393]'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <Link
+                      passHref
+                      href={routes.release(
+                        poster.anime?.id || '',
+                        poster.anime?.slug || '',
+                      )}
+                    >
+                      <Button className="mt-2">Перейти на аніме</Button>
+                    </Link>
                   </div>
-                  <Link
-                    href={routes.release(poster.anime?.id, poster.anime?.slug)}
-                  >
-                    <Button className="mt-2">Перейти на аніме</Button>
-                  </Link>
-                </div>
-              </PageLayout>
-            </div>
-          ))
+                </PageLayout>
+              </div>
+            )
+          })
         ) : (
           <div className="relative w-full h-dvh">
             <Image
