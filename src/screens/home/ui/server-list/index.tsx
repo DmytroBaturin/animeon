@@ -1,16 +1,21 @@
 'use server'
 
 import { ListLayout } from '@/shared/layouts/list'
-import { AnimeCardSkeleton } from '@/entities/anime'
+import { AnimeCard } from '@/entities/anime'
+import { getAnimeList } from '@/shared/api/anime/anime'
 
-export const HomePageList = async ({ tab }: { tab: string }) => {
+export const HomePageList = async ({ tab = '' }: { tab: string }) => {
+  const anime = await getAnimeList(
+    {
+      type: tab,
+    },
+    { cache: 'no-cache' },
+  )
   return (
     <ListLayout>
-      <AnimeCardSkeleton />
-      <AnimeCardSkeleton />
-      <AnimeCardSkeleton />
-      <AnimeCardSkeleton />
-      <AnimeCardSkeleton />
+      {anime?.data?.results.map((value) => (
+        <AnimeCard key={value.id} {...value} />
+      ))}
     </ListLayout>
   )
 }

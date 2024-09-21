@@ -2,6 +2,8 @@
   "extends": ["next/core-web-vitals", "cecilia", "next/typescript"],
   "plugins": ["unused-imports"],
   "rules": {
+    "no-shadow": "warn",
+    "camelcase": "off",
     "no-param-reassign": [
       "error",
       {

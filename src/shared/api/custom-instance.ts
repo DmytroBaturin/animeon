@@ -21,7 +21,6 @@ const getHeaders = (headers?: HeadersInit): HeadersInit => {
   return {
     ...headers,
     Authorization: 'token',
-    'Content-Type': 'multipart/form-data',
   }
 }
 
@@ -30,7 +29,6 @@ export const customInstance = async <T>(
   options: RequestInit,
 ): Promise<T> => {
   const requestUrl = getUrl(url)
-  console.log(requestUrl)
   const requestHeaders = getHeaders(options.headers)
   const requestInit: RequestInit = {
     ...options,

@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode } from 'react'
+import { ReactNode, useEffect } from 'react'
 import { Tabs, TabsContent } from '@/shared/components/ui/tabs'
 import { useRouter, useSelectedLayoutSegment } from 'next/navigation'
 
@@ -24,6 +24,11 @@ export const ReleasePage = ({
   const handleNavigationClick = (key: string) => {
     router.push(`${baseUrl}/${key}`, { scroll: false })
   }
+
+  useEffect(() => {
+    window.scroll(0, 0)
+  }, [])
+
   return (
     <div className="w-full mt-10">
       {details}

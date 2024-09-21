@@ -15,15 +15,17 @@ import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
 import Link from 'next/link'
 import { routes } from '@/shared/config/routes'
+import type { RequestUserRegister } from '@/shared/api/model'
+import { registration } from '@/screens/registration/model'
 
 const registrationSchema = yup.object().shape({
-  name: yup.string().required("Це обов'язкове поле"),
+  username: yup.string().required("Це обов'язкове поле"),
   email: yup
     .string()
     .email('Не вірний формат мейлу')
     .required("Це обов'язкове поле"),
   password: yup.string().required("Це обов'язкове поле"),
-  passwordConfirmation: yup
+  password_repeat: yup
     .string()
     .required("Це обов'язкове поле")
     .oneOf([yup.ref('password')], 'Паролі не співпадають'),
@@ -35,14 +37,14 @@ export const RegistrationPage = () => {
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center w-full h-full">
         <Formik
           initialValues={{
-            name: '',
+            username: '',
             email: '',
             password: '',
-            passwordConfirmation: '',
+            password_repeat: '',
           }}
           validationSchema={registrationSchema}
-          onSubmit={(values) => {
-            console.log(values)
+          onSubmit={(values: RequestUserRegister) => {
+            registration(values)
           }}
         >
           {({ errors, touched, handleChange, handleBlur, values }) => (
@@ -58,12 +60,14 @@ export const RegistrationPage = () => {
                   <Input
                     label="Псевдонім"
                     placeholder="Введіть свій псевдонім"
-                    name="name"
-                    value={values.name}
+                    name="username"
+                    value={values.username}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     error={
-                      touched.name && errors.name ? errors.name : undefined
+                      touched.username && errors.username
+                        ? errors.username
+                        : undefined
                     }
                   />
 
@@ -94,15 +98,14 @@ export const RegistrationPage = () => {
                   />
                   <Input
                     label="Підтвердіть пароль"
-                    name="passwordConfirmation"
-                    value={values.passwordConfirmation}
+                    name="password_repeat"
+                    value={values.password_repeat}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     placeholder="Введіть свій пароль ще раз"
                     error={
-                      touched.passwordConfirmation &&
-                      errors.passwordConfirmation
-                        ? errors.passwordConfirmation
+                      touched.password_repeat && errors.password_repeat
+                        ? errors.password_repeat
                         : undefined
                     }
                   />

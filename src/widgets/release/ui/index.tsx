@@ -7,7 +7,6 @@ import {
 import { Button } from '@/shared/components/ui/button'
 import { WithIcon } from '@/shared/components/ui/with-icon'
 import { Card, CardContent } from '@/shared/components/ui/card'
-import Image from 'next/image'
 
 import analyticsIco from '@/shared/assets/icons/release/Analytics.svg'
 import calendarIco from '@/shared/assets/icons/release/Calendar.svg'
@@ -17,6 +16,8 @@ import japanIco from '@/shared/assets/icons/release/Japan.svg'
 import dossierIco from '@/shared/assets/icons/release/Dossier.svg'
 import meetingIco from '@/shared/assets/icons/release/Meeting.svg'
 import numbersIco from '@/shared/assets/icons/release/Numbers.svg'
+import type { ResponseAnime } from '@/shared/api/model'
+import { StatItem } from '@/widgets/release/ui/stat-item'
 
 const stats = [
   { icon: analyticsIco, text: 'Статус', key: 'status' },
@@ -29,7 +30,7 @@ const stats = [
   { icon: headsetIco, text: 'Озвучення', key: 'voiceovers' },
 ] as { icon: string; text: string; key: keyof unknown }[]
 
-export const ReleaseDetails = () => {
+export const ReleaseDetails = ({ anime }: { anime: ResponseAnime }) => {
   return (
     <div className="flex flex-col lg:flex-row justify-around gap-[42px] w-full">
       <div className="w-full lg:w-fit flex-col gap-3 items-center flex">
@@ -56,22 +57,19 @@ export const ReleaseDetails = () => {
       </div>
       <div className="w-full ">
         <div className="border-b-[1px] flex flex-col gap-2 border-white">
-          <h1 className="font-bold text-4xl">Naruto</h1>
-          <p>Description</p>
+          <h1 className="font-bold text-4xl">{anime.title}</h1>
+          <p>{anime.short_description}</p>
         </div>
-        <div />
       </div>
       <Card className="w-full bg-gradient-secondary backdrop-blur-sm">
         <CardContent className="p-4 flex flex-col gap-4">
           {stats.map((stat) => (
-            <span key={stat.text}>
-              <WithIcon
-                icon={<Image alt={stat.text} src={stat.icon} />}
-                classname="w-full"
-              >
-                {stat.text}
-              </WithIcon>
-            </span>
+            <StatItem
+              key={stat.key}
+              icon={stat.icon}
+              text={stat.text}
+              data={anime[stat.key]}
+            />
           ))}
         </CardContent>
       </Card>

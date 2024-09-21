@@ -4,7 +4,7 @@ const nextConfig = {
         API_HOST: process.env.API_HOST,
     },
     images: {
-        domains: ['via.placeholder.com'],
+        domains: ['via.placeholder.com', 'localhost'],
     },
     eslint: {
         ignoreDuringBuilds: true,
