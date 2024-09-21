@@ -5,11 +5,15 @@ import {
 } from '@/shared/components/ui/pagination'
 import { ResponsePaginatedAnimeList } from '@/shared/api/model'
 
+interface PaginationProps extends ResponsePaginatedAnimeList {
+  handlePageChange: (page: number) => void
+}
+
 export const generatePaginationItems = ({
   num_pages,
   active_page,
   handlePageChange,
-}: ResponsePaginatedAnimeList) => {
+}: PaginationProps) => {
   const items = []
 
   const totalPagesToShow = 1

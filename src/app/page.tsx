@@ -4,6 +4,8 @@ import { Suspense } from 'react'
 import { ListLayout } from '@/shared/layouts/list'
 import { AnimeCardSkeleton } from '@/entities/anime'
 
+export const runtime = 'nodejs'
+
 export default async function Page({
   searchParams,
 }: {
@@ -22,6 +24,7 @@ export default async function Page({
   const postersArray = Array.isArray(posters.data)
     ? posters.data
     : [posters.data]
+
   return (
     <HomePage
       posters={postersArray}

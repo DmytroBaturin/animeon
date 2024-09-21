@@ -3,18 +3,18 @@ import { AppLayout } from '@/shared/layouts/app'
 import { Header } from '@/widgets/header'
 import { Footer } from '@/widgets/footer'
 import { Exo_2 } from 'next/font/google'
-
-export const runtime = 'edge'
+import { isAccessCookieValid } from '@/shared/api/token'
 
 const exo = Exo_2({
   subsets: ['cyrillic', 'latin', 'cyrillic-ext'],
 })
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const isAuth = await isAccessCookieValid()
   return (
     <html lang="en">
       <meta
@@ -23,7 +23,7 @@ export default function RootLayout({
       />
 
       <body className={`bg-background ${exo.className}`}>
-        <AppLayout header={<Header />} footer={<Footer />}>
+        <AppLayout header={<Header isAuth={!!isAuth} />} footer={<Footer />}>
           {children}
         </AppLayout>
       </body>

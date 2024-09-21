@@ -2,8 +2,10 @@
   "extends": ["next/core-web-vitals", "cecilia", "next/typescript"],
   "plugins": ["unused-imports"],
   "rules": {
+    "@typescript-eslint/no-explicit-any": "warn",
     "no-shadow": "warn",
     "camelcase": "off",
+    "no-plusplus": "off",
     "no-param-reassign": [
       "error",
       {

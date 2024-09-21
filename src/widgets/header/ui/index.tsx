@@ -22,7 +22,7 @@ const headerLinks: HeaderLink[] = [
   { title: 'Випадкове', href: routes.home },
 ]
 
-export const Header = () => {
+export const Header = (isAuth: boolean) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const handleCloseMenu = () => {
     setIsMenuOpen(false)
@@ -68,7 +68,7 @@ export const Header = () => {
           <div className="hidden md:flex items-center gap-9">
             <nav className="list-none items-center flex gap-9">
               <SearchAnime />
-              <Link href={routes.login}>Авторизація</Link>
+              {!isAuth && <Link href={routes.login}>Авторизація</Link>}
             </nav>
             <UserAvatar />
           </div>

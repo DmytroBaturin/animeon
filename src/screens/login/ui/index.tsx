@@ -16,9 +16,10 @@ import { Input } from '@/shared/components/ui/input'
 import Link from 'next/link'
 import { routes } from '@/shared/config/routes'
 import { TokenObtainPair } from '@/shared/api/model'
-import { login } from '@/screens/login/model'
+import { useLogin } from '@/screens/login/model'
 
 export const LoginPage = () => {
+  const { login, errors, clearError, getFieldError } = useLogin()
   const loginSchema = yup.object().shape({
     username: yup.string().required("Це обов'язкове поле"),
     password: yup.string().required("Це обов'язкове поле"),
@@ -52,13 +53,16 @@ export const LoginPage = () => {
                     name="username"
                     placeholder="Введіть свій псевдонім"
                     value={values.username}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      handleChange(e)
+                      clearError('username')
+                    }}
                     onBlur={handleBlur}
-                    error={
-                      touched.username && errors.username
-                        ? errors.username
-                        : undefined
-                    }
+                    error={getFieldError(
+                      touched.username,
+                      errors.username,
+                      'username',
+                    )}
                   />
                   <Input
                     label="Пароль"
@@ -66,13 +70,16 @@ export const LoginPage = () => {
                     type="password"
                     placeholder="Введіть свій пароль"
                     value={values.password}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      handleChange(e)
+                      clearError('password')
+                    }}
                     onBlur={handleBlur}
-                    error={
-                      touched.password && errors.password
-                        ? errors.password
-                        : undefined
-                    }
+                    error={getFieldError(
+                      touched.password,
+                      errors.password,
+                      'password',
+                    )}
                   />
                 </CardContent>
                 <CardFooter className="flex gap-2 items-center justify-center flex-col">

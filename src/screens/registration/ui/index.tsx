@@ -16,7 +16,7 @@ import { Input } from '@/shared/components/ui/input'
 import Link from 'next/link'
 import { routes } from '@/shared/config/routes'
 import type { RequestUserRegister } from '@/shared/api/model'
-import { registration } from '@/screens/registration/model'
+import { useRegistration } from '@/screens/registration/model'
 
 const registrationSchema = yup.object().shape({
   username: yup.string().required("Це обов'язкове поле"),
@@ -32,15 +32,22 @@ const registrationSchema = yup.object().shape({
 })
 
 export const RegistrationPage = () => {
+  const {
+    errors: _serverErrors,
+    registration,
+    clearError,
+    getFieldError,
+  } = useRegistration()
+
   return (
     <PageLayout>
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center w-full h-full">
         <Formik
           initialValues={{
-            username: '',
-            email: '',
-            password: '',
-            password_repeat: '',
+            username: 'admin',
+            email: 'admin@gmail.com',
+            password: 'admin',
+            password_repeat: 'admin',
           }}
           validationSchema={registrationSchema}
           onSubmit={(values: RequestUserRegister) => {
@@ -50,7 +57,7 @@ export const RegistrationPage = () => {
           {({ errors, touched, handleChange, handleBlur, values }) => (
             <Form className="lg:w-[20%] w-full">
               <Card
-                className="w-full bg-muted/40  border border-white/[15%] shadow-2xl"
+                className="w-full bg-muted/40 border border-white/[15%] shadow-2xl"
                 variant="ghost"
               >
                 <CardHeader>
@@ -62,25 +69,29 @@ export const RegistrationPage = () => {
                     placeholder="Введіть свій псевдонім"
                     name="username"
                     value={values.username}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      clearError('username')
+                      handleChange(e)
+                    }}
                     onBlur={handleBlur}
-                    error={
-                      touched.username && errors.username
-                        ? errors.username
-                        : undefined
-                    }
+                    error={getFieldError(
+                      touched.username,
+                      errors.username,
+                      'username',
+                    )}
                   />
 
                   <Input
                     label="Емейл"
                     name="email"
                     placeholder="Введіть свій емейл"
-                    value={values.email}
-                    onChange={handleChange}
+                    value={values.email || ''}
+                    onChange={(e) => {
+                      clearError('email')
+                      handleChange(e)
+                    }}
                     onBlur={handleBlur}
-                    error={
-                      touched.email && errors.email ? errors.email : undefined
-                    }
+                    error={getFieldError(touched.email, errors.email, 'email')}
                   />
                   <Input
                     label="Пароль"
@@ -88,26 +99,32 @@ export const RegistrationPage = () => {
                     type="password"
                     placeholder="Введіть свій пароль"
                     value={values.password}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      clearError('password')
+                      handleChange(e)
+                    }}
                     onBlur={handleBlur}
-                    error={
-                      touched.password && errors.password
-                        ? errors.password
-                        : undefined
-                    }
+                    error={getFieldError(
+                      touched.password,
+                      errors.password,
+                      'password',
+                    )}
                   />
                   <Input
                     label="Підтвердіть пароль"
                     name="password_repeat"
                     value={values.password_repeat}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      clearError('password_repeat')
+                      handleChange(e)
+                    }}
                     onBlur={handleBlur}
                     placeholder="Введіть свій пароль ще раз"
-                    error={
-                      touched.password_repeat && errors.password_repeat
-                        ? errors.password_repeat
-                        : undefined
-                    }
+                    error={getFieldError(
+                      touched.password_repeat,
+                      errors.password_repeat,
+                      'password_repeat',
+                    )}
                   />
                 </CardContent>
                 <CardFooter className="flex gap-2 items-center justify-center flex-col">
