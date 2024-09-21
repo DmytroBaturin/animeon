@@ -3,9 +3,48 @@
 import { FilterAnimeTrigger } from '@/features/anime/filter/ui/trigger'
 import { Card, CardContent } from '@/shared/components/ui/card'
 import { useFilterModel } from '@/features/anime/filter/model'
+import { getAnimeFilters } from '@/shared/api/anime/anime'
+import { useEffect } from 'react'
+import { FilterSelect } from '@/features/anime/filter/ui/filter-select'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { Button } from '@/shared/components/ui/button'
 
 export const FilterAnime = () => {
-  const { state } = useFilterModel()
+  const { state, api } = useFilterModel()
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
+  const filterFetch = () => {
+    getAnimeFilters().then((res) => {
+      api.setFilterList(res.data)
+    })
+  }
+
+  useEffect(() => {
+    filterFetch()
+  }, [])
+
+  const handleChangeFilter = (filterKey: string, filterValue: string) => {
+    const params = new URLSearchParams(searchParams.toString())
+
+    if (filterValue) {
+      params.set(filterKey, filterValue)
+    } else {
+      params.delete(filterKey)
+    }
+
+    router.push(`?${params.toString()}`)
+  }
+
+  const getActiveFilterValue = (filterKey: string) => {
+    return searchParams.get(filterKey) || ''
+  }
+
+  const resetFilters = () => {
+    const params = new URLSearchParams()
+    router.push(`?${params.toString()}`)
+  }
+
   return (
     <div className="flex gap-2 w-full flex-col">
       <span className="w-full flex items-end justify-end">
@@ -13,8 +52,32 @@ export const FilterAnime = () => {
       </span>
       {state.isFilterOpen && (
         <Card className="w-full">
-          <CardContent>
-            <p>Filters</p>
+          <CardContent className="p-4 flex-wrap justify-center flex gap-2">
+            <FilterSelect
+              placeholder="Озвучка"
+              options={state.filterList.voiceover}
+              value={getActiveFilterValue('voiceover')}
+              onChange={(value) => handleChangeFilter('voiceover', value)}
+            />
+            <FilterSelect
+              placeholder="Сезони"
+              options={state.filterList.season}
+              value={getActiveFilterValue('season')}
+              onChange={(value) => handleChangeFilter('season', value)}
+            />
+            <FilterSelect
+              placeholder="Режисери"
+              options={state.filterList.directors}
+              value={getActiveFilterValue('directors')}
+              onChange={(value) => handleChangeFilter('directors', value)}
+            />
+            <FilterSelect
+              placeholder="Студії"
+              options={state.filterList.studios}
+              value={getActiveFilterValue('studios')}
+              onChange={(value) => handleChangeFilter('studios', value)}
+            />
+            <Button onClick={resetFilters}>Скинути фільтри</Button>
           </CardContent>
         </Card>
       )}

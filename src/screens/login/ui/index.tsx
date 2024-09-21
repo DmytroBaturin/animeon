@@ -15,13 +15,12 @@ import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
 import Link from 'next/link'
 import { routes } from '@/shared/config/routes'
+import { TokenObtainPair } from '@/shared/api/model'
+import { login } from '@/screens/login/model'
 
 export const LoginPage = () => {
   const loginSchema = yup.object().shape({
-    email: yup
-      .string()
-      .email('Не вірний формат мейлу')
-      .required("Це обов'язкове поле"),
+    username: yup.string().required("Це обов'язкове поле"),
     password: yup.string().required("Це обов'язкове поле"),
   })
 
@@ -30,12 +29,12 @@ export const LoginPage = () => {
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center w-full h-full">
         <Formik
           initialValues={{
-            email: '',
+            username: '',
             password: '',
           }}
           validationSchema={loginSchema}
-          onSubmit={(values) => {
-            console.log(values)
+          onSubmit={(values: TokenObtainPair) => {
+            login(values)
           }}
         >
           {({ errors, touched, handleChange, handleBlur, values }) => (
@@ -49,14 +48,16 @@ export const LoginPage = () => {
                 </CardHeader>
                 <CardContent className="flex flex-col gap-3">
                   <Input
-                    label="Емейл"
-                    name="email"
-                    placeholder="Введіть свій емейл"
-                    value={values.email}
+                    label="Псевдонім"
+                    name="username"
+                    placeholder="Введіть свій псевдонім"
+                    value={values.username}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     error={
-                      touched.email && errors.email ? errors.email : undefined
+                      touched.username && errors.username
+                        ? errors.username
+                        : undefined
                     }
                   />
                   <Input

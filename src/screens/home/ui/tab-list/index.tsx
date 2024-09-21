@@ -2,17 +2,12 @@
 
 import { TabsList, TabsTrigger } from '@/shared/components/ui/tabs'
 
-export interface TabParamsProps {
-  label: string
-  value: string
-}
-
-export const HomeTabList = ({ tabs }: { tabs: TabParamsProps[] }) => {
+export const HomeTabList = ({ tabs }: { tabs: { [key: string]: string } }) => {
   return (
     <TabsList className="max-w-[400px] h-full grid grid-cols-3 w-full">
-      {tabs.map((tab) => (
-        <TabsTrigger key={tab.value} value={tab.value}>
-          {tab.label}
+      {Object.entries(tabs).map(([key, value]) => (
+        <TabsTrigger key={key} value={key}>
+          {value}
         </TabsTrigger>
       ))}
     </TabsList>

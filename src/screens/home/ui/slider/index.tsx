@@ -1,5 +1,3 @@
-'use client'
-
 import React, { useRef, useState } from 'react'
 import Slider from 'react-slick'
 
@@ -9,6 +7,8 @@ import Image from 'next/image'
 import type { ResponsePosters } from '@/shared/api/model'
 import { Button } from '@/shared/components/ui/button'
 import { PageLayout } from '@/shared/layouts/page'
+import Link from 'next/link'
+import { routes } from '@/shared/config/routes'
 
 const slides = [
   'https://via.placeholder.com/1920x1080?text=Slide+1',
@@ -26,13 +26,20 @@ const SliderFullScreen = ({ posters }: { posters?: ResponsePosters[] }) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    focusOnChange: false,
+    focusOnSelect: false,
+    touchMove: false,
     arrows: false,
     autoplay: true,
     autoplaySpeed: 3000,
     beforeChange: (_: number, next: number) => setActiveSlide(next),
   }
 
-  const goToSlide = (index: number) => {
+  const goToSlide = (
+    index: number,
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    event.preventDefault() // Запобігаємо стандартній поведінці
     if (sliderRef.current) {
       sliderRef.current.slickGoTo(index)
     }
@@ -41,39 +48,55 @@ const SliderFullScreen = ({ posters }: { posters?: ResponsePosters[] }) => {
   return (
     <div className="relative left-0 -mt-[96px] md:-mt-[80px] h-dvh w-full overflow-hidden flex justify-center items-center">
       <Slider className="w-full h-full" ref={sliderRef} {...settings}>
-        {slides.map((slide, index) => (
-          <div key={index} className="relative w-full h-dvh">
+        {posters && posters.length > 0 ? (
+          posters?.map((poster, index) => (
+            <div key={poster.description} className="relative w-full h-dvh">
+              <Image
+                src={poster.image || slides[index]}
+                className="absolute top-0 left-0 w-full h-full object-cover"
+                alt={`Slide ${index + 1}`}
+                layout="fill"
+                priority
+              />
+              <PageLayout classname="absolute bottom-[10%] md:bottom-[20%] z-10 w-full text-center">
+                <div className="flex gap-2 items-start flex-col justify-center">
+                  <h2 className="font-bold text-3xl text-white drop-shadow-sm">
+                    {poster.anime?.title || 'Назва аніме'}
+                  </h2>
+                  <p className="font-bold text-base text-white drop-shadow-sm">
+                    {poster.anime?.count_episodes || 'Назва аніме'}
+                  </p>
+                  <div className="flex gap-2">
+                    {posters.map((_, index) => (
+                      <Button
+                        key={`${_}`}
+                        onClick={(e) => goToSlide(index, e)}
+                        className={`h-2 w-[25px] p-0 rounded-full drop-shadow-sm ${
+                          index === activeSlide ? 'bg-accent' : 'bg-[#939393]'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <Link
+                    href={routes.release(poster.anime?.id, poster.anime?.slug)}
+                  >
+                    <Button className="mt-2">Перейти на аніме</Button>
+                  </Link>
+                </div>
+              </PageLayout>
+            </div>
+          ))
+        ) : (
+          <div className="relative w-full h-dvh">
             <Image
-              src={slide}
+              src={slides[0]}
               className="absolute top-0 left-0 w-full h-full object-cover"
-              alt={`Slide ${index + 1}`}
+              alt="Slide"
               layout="fill"
               priority
             />
-            <PageLayout classname="absolute bottom-[10%] md:bottom-[20%] z-10 w-full text-center">
-              <div className="flex gap-2 items-start flex-col justify-center">
-                <h2 className="font-bold text-3xl text-white drop-shadow-sm">
-                  Наруто
-                </h2>
-                <p className="font-bold text-base text-white drop-shadow-sm">
-                  3 серія 20 січня
-                </p>
-                <div className="flex gap-2">
-                  {slides.map((_, index) => (
-                    <Button
-                      key={index}
-                      onClick={() => goToSlide(index)}
-                      className={`h-2 w-[25px] p-0 rounded-full drop-shadow-sm ${
-                        index === activeSlide ? 'bg-accent' : 'bg-[#939393]'
-                      }`}
-                    />
-                  ))}
-                </div>
-                <Button className="mt-2">Перейти на аніме</Button>
-              </div>
-            </PageLayout>
           </div>
-        ))}
+        )}
       </Slider>
     </div>
   )
