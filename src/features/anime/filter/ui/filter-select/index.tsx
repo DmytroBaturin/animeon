@@ -38,7 +38,7 @@ export const FilterSelect = ({
       }}
       value={selectedValue as string}
     >
-      <SelectTrigger className="bg-primary/70 w-fit">
+      <SelectTrigger className="bg-primary/70 w-full sm:w-[160px]">
         <SelectValue placeholder={placeholder}>
           {placeholder}: {selectedValue}
         </SelectValue>

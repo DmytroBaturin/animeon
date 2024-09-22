@@ -41,6 +41,7 @@ export const PaginationFilter = ({
             </PaginationLink>
           </PaginationItem>
         )}
+
         {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
         {/* @ts-expect-error */}
         {generatePaginationItems({ active_page, num_pages, handlePageChange })}
