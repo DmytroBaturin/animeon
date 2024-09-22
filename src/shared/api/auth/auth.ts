@@ -60,10 +60,14 @@ export const userLogin = async (
   tokenObtainPair: TokenObtainPair,
   options?: RequestInit,
 ): Promise<userLoginResponse> => {
+  console.log(JSON.stringify(tokenObtainPair))
   return customInstance<Promise<userLoginResponse>>(getUserLoginUrl(), {
     ...options,
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    headers: {
+      'Content-Type': 'application/json',
+      ...options?.headers,
+    },
     body: JSON.stringify(tokenObtainPair),
   })
 }

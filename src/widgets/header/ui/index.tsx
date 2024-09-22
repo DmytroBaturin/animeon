@@ -12,7 +12,7 @@ import Link from 'next/link'
 import { headerLinks } from '@/widgets/header/model/navigation'
 import { useHeader } from '@/widgets/header/model'
 
-export const Header = () => {
+export const Header = (isAuth: boolean) => {
   const {
     handleCloseMenu,
     isMenuOpen,
@@ -48,7 +48,7 @@ export const Header = () => {
           <div className="hidden md:flex items-center gap-9">
             <nav className="list-none items-center flex gap-9">
               <SearchAnime />
-              <Link href={routes.login}>Авторизація</Link>
+              {isAuth && <Link href={routes.login}>Авторизація</Link>}
             </nav>
             <UserAvatar />
           </div>

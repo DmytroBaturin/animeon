@@ -2,6 +2,7 @@
 const nextConfig = {
     env: {
         API_HOST: process.env.API_HOST,
+        SECURE_CODE: process.env.SECURE_CODE
     },
     images: {
         domains: ['via.placeholder.com', 'localhost'],

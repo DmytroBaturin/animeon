@@ -18,7 +18,7 @@ export const CreateComment = ({ isReply = false }: CreateCommentProps) => {
       )}
     >
       <div className="w-full items-center flex gap-3">
-        <div className="hidden sm:flex">
+        <div className={cn(isReply && 'hidden sm:flex')}>
           <UserAvatar />
         </div>
         {isReply ? (

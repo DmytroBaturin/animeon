@@ -1,7 +1,6 @@
-import { userLogin } from '@/shared/api/auth/auth'
-import { TokenObtainPair } from '@/shared/api/model'
 import { useState } from 'react'
-import { setAccessCookie } from '@/shared/api/token'
+import { TokenObtainPair } from '@/shared/api/model'
+import { signIn } from 'next-auth/react'
 
 interface ErrorMessages {
   location: string
@@ -13,22 +12,13 @@ export const useLogin = () => {
 
   const login = async ({ password, username }: TokenObtainPair) => {
     try {
-      const res = await userLogin(
-        { password, username },
-        {
-          headers: { 'Content-Type': 'application/json' },
-        },
-      )
-
-      if (res.status === 400 && (res as any).data?.errors) {
-        setErrors((res as any).data.errors)
-      } else {
-        console.log('res.data', res.data)
-        setAccessCookie({ access: res.data.access, refresh: res.data.refresh })
-      }
-    } catch (error) {
-      console.error('Registration failed', error)
-    }
+      const res = await signIn('credentials', {
+        redirect: false,
+        password,
+        username,
+      })
+      console.log(res)
+    } catch {}
   }
 
   const findLocation = (location: string): string | undefined => {

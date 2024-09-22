@@ -30,8 +30,8 @@ export const LoginPage = () => {
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center w-full h-full">
         <Formik
           initialValues={{
-            username: '',
-            password: '',
+            username: 'admin',
+            password: 'admin',
           }}
           validationSchema={loginSchema}
           onSubmit={(values: TokenObtainPair) => {

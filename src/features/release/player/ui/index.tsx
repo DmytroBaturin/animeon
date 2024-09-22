@@ -8,10 +8,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/shared/components/ui/select'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useReleaseModel } from '@/screens/release/model'
+import { getAnimeEpisode } from '@/shared/api/anime/anime'
 
-export const Player = () => {
+export const Player = ({ id, slug }: { id: string; slug: string }) => {
   const [voice, setVoice] = useState('light')
+  const { initOrder } = useReleaseModel()
+  const [order, setOrder] = useState<number>(initOrder)
+
+  useEffect(() => {
+    getAnimeEpisode(id, slug, order)
+  }, [])
+
   return (
     <div className="flex flex-col gap-3">
       <Select onValueChange={(value) => setVoice(value)}>
