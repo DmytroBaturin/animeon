@@ -6,6 +6,7 @@ postcss.config.mjs
 tailwind.config.js
 next-env.d.ts
 next.config.mjs
+src/shared/api/
 
 # Ігноруємо файли та директорії, які не потребують лінтингу
 .git/

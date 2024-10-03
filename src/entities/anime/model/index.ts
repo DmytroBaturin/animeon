@@ -10,12 +10,16 @@ interface ReleaseState {
 }
 
 export const useRelease = create<ReleaseState>()(
-  immer((setState, getState) => ({
+  immer((setState) => ({
     release: {} as ResponseAnime,
     api: {
       setRelease: (release: ResponseAnime) => {
         setState((state) => {
-          state.release = release
+          state.release = {
+            ...release,
+            genres: release.genres ? [...release.genres] : undefined, // Clone the array to make it mutable
+            studio: release.studio ? [...release.studio] : undefined, // Clone the array to make it mutable
+          }
         })
       },
     },

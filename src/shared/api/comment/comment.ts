@@ -68,7 +68,7 @@ export const reactionComment = async (
       body: JSON.stringify(commentReact),
     },
 )}
-}
+
 
 /**
  * Ellipsis.
@@ -106,4 +106,4 @@ export const getReplyComments = async (
       method: 'GET',
     },
   )
-)}
+}

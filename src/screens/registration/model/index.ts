@@ -1,7 +1,6 @@
 import { userRegister } from '@/shared/api/auth/auth'
 import { type RequestUserRegister } from '@/shared/api/model'
 import { useState } from 'react'
-import { setAccessCookie } from '@/shared/api/token'
 
 interface ErrorMessages {
   location: string
@@ -28,7 +27,7 @@ export const useRegistration = () => {
       if (res.status === 400 && (res as any).data?.errors) {
         setErrors((res as any).data.errors)
       } else {
-        setAccessCookie({ access: res.data.access, refresh: res.data.refresh })
+        console.log('res.data', res.data)
       }
     } catch (error) {
       console.error('Registration failed', error)

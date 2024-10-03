@@ -19,7 +19,7 @@ import { TokenObtainPair } from '@/shared/api/model'
 import { useLogin } from '@/screens/login/model'
 
 export const LoginPage = () => {
-  const { login, errors, clearError, getFieldError } = useLogin()
+  const { login, clearError, getFieldError } = useLogin()
   const loginSchema = yup.object().shape({
     username: yup.string().required("Це обов'язкове поле"),
     password: yup.string().required("Це обов'язкове поле"),

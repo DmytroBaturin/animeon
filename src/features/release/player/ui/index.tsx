@@ -14,19 +14,21 @@ export const Player = ({ release }: { release: ResponseAnimeEpisode }) => {
   useEffect(() => {
     if (
       release.voiceover &&
-      release.voiceover[0] &&
+      release.voiceover.length > 0 &&
       release.voiceover[0].file
     ) {
       setVoiceOver(release.voiceover[0].file as string)
     }
-  }, [])
-  console.log(voiceOver)
+  }, [release, setVoiceOver])
+
   return (
     <div className="flex flex-col gap-3">
       <PlayerVoiceOverSelect
         voiceovers={release?.voiceover as EpisodeVoiceover[]}
       />
-      {release?.voiceover?.length > 0 && release.voiceover[0]?.file ? (
+      {release?.voiceover &&
+      release.voiceover.length > 0 &&
+      release.voiceover[0]?.file ? (
         <ReleasePlayer
           timemarkers={{
             end_ending: release.end_ending ?? 0,
@@ -34,10 +36,7 @@ export const Player = ({ release }: { release: ResponseAnimeEpisode }) => {
             end_opening: release.end_opening ?? 0,
             start_ending: release.start_ending ?? 0,
           }}
-          src={
-            'https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8' ??
-            ''
-          }
+          src={voiceOver ?? ''}
         />
       ) : (
         <div>Серія недоступна</div>

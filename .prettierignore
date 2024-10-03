@@ -1,0 +1,7 @@
+build
+src/shared/api/
+
+package.json
+package-lock.json
+components.json
+.prettierrc.js

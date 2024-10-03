@@ -1,7 +1,6 @@
 import { userLogin } from '@/shared/api/auth/auth'
 import { TokenObtainPair } from '@/shared/api/model'
 import { useState } from 'react'
-import { setAccessCookie } from '@/shared/api/token'
 
 interface ErrorMessages {
   location: string
@@ -24,7 +23,6 @@ export const useLogin = () => {
         setErrors((res as any).data.errors)
       } else {
         console.log('res.data', res.data)
-        setAccessCookie({ access: res.data.access, refresh: res.data.refresh })
       }
     } catch (error) {
       console.error('Registration failed', error)

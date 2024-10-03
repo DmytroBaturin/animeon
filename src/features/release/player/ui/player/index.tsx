@@ -35,19 +35,23 @@ export const ReleasePlayer = ({
 
   const skipOpening = () => {
     if (playerRef.current && timemarkers) {
-      playerRef.current.currentTime = timemarkers.end_opening
+      playerRef.current.currentTime = timemarkers.end_opening ?? 0
     }
   }
 
   const skipEnding = () => {
     if (playerRef.current && timemarkers) {
-      playerRef.current.currentTime = timemarkers.end_ending
+      playerRef.current.currentTime = timemarkers.end_ending ?? 0
     }
   }
 
   useEffect(() => {
     if (src && timemarkers) {
-      const { start_opening, end_opening, start_ending } = timemarkers
+      const {
+        start_opening = 0,
+        end_opening = 0,
+        start_ending = 0,
+      } = timemarkers
       if (currentTime >= start_opening && currentTime <= end_opening) {
         setShowSkipOpeningButton(true)
       } else {
@@ -70,19 +74,19 @@ export const ReleasePlayer = ({
           markers={[
             {
               label: 'Початок опенінгу',
-              time: timemarkers?.start_opening,
+              time: timemarkers?.start_opening ?? 0,
             },
             {
               label: 'Кінець опенінгу',
-              time: timemarkers?.end_opening,
+              time: timemarkers?.end_opening ?? 0,
             },
             {
               label: 'Початок ендінгу',
-              time: timemarkers?.start_ending,
+              time: timemarkers?.start_ending ?? 0,
             },
             {
               label: 'Кінець ендінгу',
-              time: timemarkers?.end_ending,
+              time: timemarkers?.end_ending ?? 0,
             },
           ]}
           slots={{

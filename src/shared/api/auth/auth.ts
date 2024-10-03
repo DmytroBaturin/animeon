@@ -12,8 +12,8 @@ import type {
   ResponseUserRegister,
   TokenBlacklist,
   TokenRefresh,
-} from "../model"
-import { customInstance } from "../custom-instance";
+} from '../model'
+import { customInstance } from '../custom-instance'
 
 // https://stackoverflow.com/questions/49579094/typescript-conditional-types-filter-out-readonly-properties-pick-only-requir/49579497#49579497
 type IfEquals<X, Y, A = X, B = never> =
@@ -45,7 +45,7 @@ type NonReadonly<T> = [T] extends [UnionToIntersection<T>]
 
 /**
  * Ellipsis.
- * @summary Ellipsis
+ * @summary Ellipsis.
  */
 export type userLoginResponse = {
   data: ResponseUserLogin
@@ -70,7 +70,7 @@ export const userLogin = async (
 
 /**
  * Ellipsis.
- * @summary Ellipsis
+ * @summary Ellipsis.
  */
 export type userLogoutResponse = {
   data: ResponseUserLogout
@@ -91,11 +91,11 @@ export const userLogout = async (
     headers: { 'Content-Type': 'application/json', ...options?.headers },
     body: JSON.stringify(tokenBlacklist),
   })
-)}
+}
 
 /**
  * Ellipsis.
- * @summary Ellipsis
+ * @summary Ellipsis.
  */
 export type userRegisterResponse = {
   data: ResponseUserRegister
@@ -143,4 +143,5 @@ export const authTokenRefreshCreate = async (
       headers: { 'Content-Type': 'application/json', ...options?.headers },
       body: JSON.stringify(tokenRefresh),
     },
-)}
+  )
+}
