@@ -1,8 +1,6 @@
 import { Player } from '@/features/release/player'
 import { getAnimeEpisode } from '@/shared/api/anime/anime'
 
-export const runtime = 'nodejs'
-
 export default async function Page({
   params,
   searchParams,
