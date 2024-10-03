@@ -1,7 +1,7 @@
-'use server'
-
 import { Player } from '@/features/release/player'
 import { getAnimeEpisode } from '@/shared/api/anime/anime'
+
+export const runtime = 'edge'
 
 export default async function Page({
   params,
