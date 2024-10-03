@@ -11,12 +11,12 @@ import type {
   ResponsePaginatedUserAnimeList,
   User,
   UserAnimeListParams,
-} from "../model"
-import { customInstance } from "../custom-instance";
+} from '../model'
+import { customInstance } from '../custom-instance'
 
 /**
  * Ellipsis.
- * @summary Ellipsis
+ * @summary Ellipsis.
  */
 export type userReadResponse = {
   data: User
@@ -38,7 +38,7 @@ export const userRead = async (
 
 /**
  * Ellipsis.
- * @summary Ellipsis
+ * @summary Ellipsis.
  */
 export type userAnimeListResponse = {
   data: ResponsePaginatedUserAnimeList
@@ -54,7 +54,9 @@ export const getUserAnimeListUrl = (params?: UserAnimeListParams) => {
     }
   })
 
-  return normalizedParams.size > 0 ? `/user/anime/?${normalizedParams.toString()}` : `/user/anime/`
+  return normalizedParams.size > 0
+    ? `/user/anime/?${normalizedParams.toString()}`
+    : `/user/anime/`
 }
 
 export const userAnimeList = async (
@@ -66,13 +68,13 @@ export const userAnimeList = async (
     {
       ...options,
       method: 'GET',
-    }
+    },
   )
 }
 
 /**
  * Ellipsis.
- * @summary Ellipsis
+ * @summary Ellipsis.
  */
 export type userAddAnimeResponse = {
   data: unknown
@@ -97,7 +99,7 @@ export const userAddAnime = async (
 
 /**
  * Ellipsis.
- * @summary Ellipsis
+ * @summary Ellipsis.
  */
 export type userDeleteAnimeResponse = {
   data: unknown
@@ -120,12 +122,12 @@ export const userDeleteAnime = async (
       headers: { 'Content-Type': 'application/json', ...options?.headers },
       body: JSON.stringify(requestUserAnimeDelete),
     },
-)}
+  )
 }
 
 /**
  * Ellipsis.
- * @summary Ellipsis
+ * @summary Ellipsis.
  */
 export type userAddViewedEpisodeResponse = {
   data: unknown
@@ -148,4 +150,5 @@ export const userAddViewedEpisode = async (
       headers: { 'Content-Type': 'application/json', ...options?.headers },
       body: JSON.stringify(requestViewedEpisode),
     },
-)}
+  )
+}

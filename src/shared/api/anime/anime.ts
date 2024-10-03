@@ -20,12 +20,12 @@ import type {
   ResponsePosters,
   ResponseStudio,
   SearchAnimeParams,
-} from "../model"
-import { customInstance } from "../custom-instance";
+} from '../model'
+import { customInstance } from '../custom-instance'
 
 /**
  * Ellipsis.
- * @summary Ellipsis
+ * @summary Ellipsis.
  */
 export type getDirectorResponse = {
   data: ResponseDirector
@@ -48,7 +48,7 @@ export const getDirector = async (
 
 /**
  * Ellipsis.
- * @summary Ellipsis
+ * @summary Ellipsis.
  */
 export type getAnimeFiltersResponse = {
   data: ResponseFiltersAnime
@@ -67,12 +67,13 @@ export const getAnimeFilters = async (
     {
       ...options,
       method: 'GET',
+    },
   )
 }
 
 /**
  * Ellipsis.
- * @summary Ellipsis
+ * @summary Ellipsis.
  */
 export type getAnimeListResponse = {
   data: ResponsePaginatedAnimeList
@@ -88,7 +89,9 @@ export const getGetAnimeListUrl = (params?: GetAnimeListParams) => {
     }
   })
 
-  return normalizedParams.size > 0 ? `/anime/list/?${normalizedParams.toString()}` : `/anime/list/`
+  return normalizedParams.size > 0
+    ? `/anime/list/?${normalizedParams.toString()}`
+    : `/anime/list/`
 }
 
 export const getAnimeList = async (
@@ -106,7 +109,7 @@ export const getAnimeList = async (
 
 /**
  * Ellipsis.
- * @summary Ellipsis
+ * @summary Ellipsis.
  */
 export type getAnimePostersResponse = {
   data: ResponsePosters
@@ -125,13 +128,13 @@ export const getAnimePosters = async (
     {
       ...options,
       method: 'GET',
-    
+    },
   )
 }
 
 /**
  * Ellipsis.
- * @summary Ellipsis
+ * @summary Ellipsis.
  */
 export type getRandomAnimeResponse = {
   data: ResponseAnimeRandom
@@ -150,13 +153,13 @@ export const getRandomAnime = async (
     {
       ...options,
       method: 'GET',
+    },
   )
 }
-)}
 
 /**
  * Ellipsis.
- * @summary Ellipsis
+ * @summary Ellipsis.
  */
 export type searchAnimeResponse = {
   data: ResponsePaginatedAnimeList
@@ -172,7 +175,9 @@ export const getSearchAnimeUrl = (params?: SearchAnimeParams) => {
     }
   })
 
-  return normalizedParams.size > 0 ? `/anime/search/?${normalizedParams.toString()}` : `/anime/search/`
+  return normalizedParams.size > 0
+    ? `/anime/search/?${normalizedParams.toString()}`
+    : `/anime/search/`
 }
 
 export const searchAnime = async (
@@ -184,13 +189,13 @@ export const searchAnime = async (
     {
       ...options,
       method: 'GET',
+    },
   )
 }
-)}
 
 /**
  * Ellipsis.
- * @summary Ellipsis
+ * @summary Ellipsis.
  */
 export type getStudioResponse = {
   data: ResponseStudio
@@ -213,7 +218,7 @@ export const getStudio = async (
 
 /**
  * Ellipsis.
- * @summary Ellipsis
+ * @summary Ellipsis.
  */
 export type getAnimeEpisodeResponse = {
   data: ResponseAnimeEpisode
@@ -239,13 +244,13 @@ export const getAnimeEpisode = async (
     {
       ...options,
       method: 'GET',
+    },
   )
 }
-)}
 
 /**
  * Ellipsis.
- * @summary Ellipsis
+ * @summary Ellipsis.
  */
 export type getAnimeResponse = {
   data: ResponseAnime
@@ -269,7 +274,7 @@ export const getAnime = async (
 
 /**
  * Ellipsis.
- * @summary Ellipsis
+ * @summary Ellipsis.
  */
 export type getAnimeArcheResponse = {
   data: ResponseAnimeArch[]
@@ -292,11 +297,11 @@ export const getAnimeArche = async (
       method: 'GET',
     },
   )
-)}
+}
 
 /**
  * Ellipsis.
- * @summary Ellipsis
+ * @summary Ellipsis.
  */
 export type getAnimeCommentsResponse = {
   data: ResponsePaginatedCommentAnimeList
@@ -316,7 +321,9 @@ export const getGetAnimeCommentsUrl = (
     }
   })
 
-  return normalizedParams.size > 0 ? `/anime/${id}/${slug}/comments/?${normalizedParams.toString()}` : `/anime/${id}/${slug}/comments/`
+  return normalizedParams.size > 0
+    ? `/anime/${id}/${slug}/comments/?${normalizedParams.toString()}`
+    : `/anime/${id}/${slug}/comments/`
 }
 
 export const getAnimeComments = async (
@@ -332,11 +339,11 @@ export const getAnimeComments = async (
       method: 'GET',
     },
   )
-)}
+}
 
 /**
  * Ellipsis.
- * @summary Ellipsis
+ * @summary Ellipsis.
  */
 export type reactionAnimeResponse = {
   data: ResponseAnimeReact
@@ -361,4 +368,5 @@ export const reactionAnime = async (
       headers: { 'Content-Type': 'application/json', ...options?.headers },
       body: JSON.stringify(animeReact),
     },
-)}
+  )
+}
