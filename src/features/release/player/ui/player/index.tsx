@@ -69,8 +69,20 @@ export const ReleasePlayer = ({
         <PlyrLayout
           markers={[
             {
-              label: 'dsa',
-              time: 32,
+              label: 'Початок опенінгу',
+              time: timemarkers?.start_opening,
+            },
+            {
+              label: 'Кінець опенінгу',
+              time: timemarkers?.end_opening,
+            },
+            {
+              label: 'Початок ендінгу',
+              time: timemarkers?.start_ending,
+            },
+            {
+              label: 'Кінець ендінгу',
+              time: timemarkers?.end_ending,
             },
           ]}
           slots={{

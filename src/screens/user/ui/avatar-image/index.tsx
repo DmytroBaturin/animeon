@@ -13,18 +13,18 @@ export const AvatarImage = () => {
       >
         <defs>
           <pattern
-            className="object-cover bg-gray-300"
+            className="object-cover w-full h-full"
             id="bias"
             patternUnits="objectBoundingBox"
             width="100%"
             height="100%"
           >
-            <image className="" href={japanIco.src} width="100%" />
+            <image href={japanIco.src} width="100%" />
           </pattern>
         </defs>
         <path
           d="M0 0H304V160.5C304 160.5 281 160.5 247.5 170.254C210.982 180.887 181.967 214.547 89.5 211C18.0853 208.261 0 170.254 0 170.254V0Z"
-          fill="white"
+          fill="url(#bias)"
         />
       </svg>
     </div>

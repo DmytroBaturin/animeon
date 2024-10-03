@@ -18,7 +18,7 @@ export default async function Page({
     params.slug,
     searchParams.order || 1,
     {
-      cache: 'force-cache',
+      cache: 'no-cache',
     },
   )
 

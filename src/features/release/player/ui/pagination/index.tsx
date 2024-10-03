@@ -7,7 +7,6 @@ export const PlayerPagination = () => {
   const episodes = release?.episodes
   const router = useRouter()
   const searchParams = useSearchParams()
-  console.log(release)
   const handleChangeOrder = (filterValue: string) => {
     const params = new URLSearchParams(searchParams.toString())
 

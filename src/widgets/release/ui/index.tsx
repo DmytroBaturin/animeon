@@ -58,7 +58,7 @@ export const ReleaseDetails = ({ anime }: { anime: ResponseAnime }) => {
       <div className="w-full">
         <div className="border-b-[1px] flex flex-col gap-3 pb-4 border-white">
           <h1 className="font-bold text-4xl">{anime.title}</h1>
-          <p>{anime.short_description}</p>
+          <p>{anime.other_title}</p>
         </div>
         <p className="mt-4 max-h-[300px] overflow-y-scroll">
           {anime.description}

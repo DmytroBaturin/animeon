@@ -3,6 +3,9 @@ const nextConfig = {
     env: {
         API_HOST: process.env.API_HOST,
     },
+    poweredByHeader: false,
+    trailingSlash: false,
+    skipTrailingSlashRedirect: true,
     images: {
         domains: ['via.placeholder.com', 'localhost'],
     },
