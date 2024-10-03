@@ -15,7 +15,7 @@ export const FilterAnime = () => {
   const searchParams = useSearchParams()
 
   const filterFetch = () => {
-    getAnimeFilters().then((res) => {
+    getAnimeFilters({ cache: 'no-cache' }).then((res) => {
       api.setFilterList(res.data)
     })
   }

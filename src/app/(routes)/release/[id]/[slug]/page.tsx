@@ -13,13 +13,12 @@ export default async function Page({
     slug: string
   }
 }) {
-  console.log(searchParams)
   const release = await getAnimeEpisode(
     params.id,
     params.slug,
     searchParams.order || 1,
     {
-      cache: 'no-cache',
+      cache: 'force-cache',
     },
   )
 

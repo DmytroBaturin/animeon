@@ -44,10 +44,12 @@ export const SearchAnime = forwardRef<HTMLInputElement, SearchAnimeProps>(
         searchAnime({ search: nextValue, page_size: 10, page })
           .then((data) => {
             if (active) {
-              setSearchResults((prevResults) => [
-                ...prevResults,
-                ...data.data.results,
-              ])
+              if (data?.data?.results) {
+                setSearchResults((prevResults) => [
+                  ...prevResults,
+                  ...data.data.results,
+                ])
+              }
               setHasMore(!!data.data.next)
             }
           })

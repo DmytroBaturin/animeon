@@ -39,7 +39,7 @@ const SliderFullScreen = ({ posters }: { posters?: ResponsePosters[] }) => {
     index: number,
     event: React.MouseEvent<HTMLButtonElement>,
   ) => {
-    event.preventDefault() // Prevent default behavior
+    event.preventDefault()
     if (sliderRef.current) {
       sliderRef.current.slickGoTo(index)
     }
@@ -50,9 +50,8 @@ const SliderFullScreen = ({ posters }: { posters?: ResponsePosters[] }) => {
       <Slider className="w-full h-full" ref={sliderRef} {...settings}>
         {posters && posters.length > 0 ? (
           posters.map((poster, index) => {
-            // Check if the image is valid before rendering the Image component
             const imageSrc =
-              poster.image && poster.image !== '' ? poster.image : slides[index]
+              poster.image && poster.image !== '' ? poster.image : slides[0]
 
             return (
               <div

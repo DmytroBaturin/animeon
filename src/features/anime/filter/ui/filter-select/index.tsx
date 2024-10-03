@@ -19,11 +19,13 @@ export const FilterSelect = ({
   value,
   onChange,
 }: FilterSelectProps) => {
-  const orderedOptions = Object.entries(options).sort(([keyA], [keyB]) => {
-    if (keyA === '') return -1
-    if (keyB === '') return 1
-    return 0
-  })
+  const orderedOptions = Object.entries(options || {}).sort(
+    ([keyA], [keyB]) => {
+      if (keyA === '') return -1
+      if (keyB === '') return 1
+      return 0
+    },
+  )
 
   const selectedValue = (options[value] as string) || ''
 

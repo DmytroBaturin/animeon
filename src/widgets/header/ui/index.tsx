@@ -11,6 +11,7 @@ import { routes } from '@/shared/config/routes'
 import Link from 'next/link'
 import { headerLinks } from '@/widgets/header/model/navigation'
 import { useHeader } from '@/widgets/header/model'
+import { MobileNavigation } from '@/widgets/header/ui/mobile-navigation'
 
 export const Header = () => {
   const {
@@ -55,33 +56,17 @@ export const Header = () => {
         </div>
 
         {isMenuOpen && (
-          <div
-            ref={menuRef}
-            className="absolute top-[96px] left-0 w-full bg-primary shadow-md md:hidden"
-          >
-            <nav className="list-none font-bold p-4 flex flex-col gap-4">
-              <div className="border-b-2 flex items-center justify-between border-white/10 pb-4">
-                <UserAvatar />
-              </div>
-              {headerLinks.map((link) => (
-                <Link
-                  onClick={handleCloseMenu}
-                  href={link.href}
-                  key={link.title}
-                >
-                  <li>{link.title}</li>
-                </Link>
-              ))}
-
+          <MobileNavigation
+            handleCloseMenu={handleCloseMenu}
+            ref={menuRef as LegacyRef<HTMLDivElement>}
+            searchNode={
               <SearchAnime
                 handleCloseMenu={handleCloseMenu}
                 trigger={<li>Пошук</li>}
                 ref={searchRef as LegacyRef<HTMLInputElement>}
               />
-
-              <li className="text-yellow-400">Підписка</li>
-            </nav>
-          </div>
+            }
+          />
         )}
       </PageLayout>
     </header>
