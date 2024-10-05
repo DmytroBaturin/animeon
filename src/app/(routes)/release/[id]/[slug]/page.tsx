@@ -1,11 +1,9 @@
-'use client'
+'use server'
 
-import { useEffect, useState } from 'react'
+import { Player } from '@/features/release/player'
 import { getAnimeEpisode } from '@/shared/api/anime/anime'
-import { PlayerWrapper } from '@/features/release/player'
-import { ResponseAnimeEpisode } from '@/shared/api/model'
 
-export default function Page({
+export default async function Page({
   params,
   searchParams,
 }: {
@@ -15,39 +13,14 @@ export default function Page({
     slug: string
   }
 }) {
-  const [release, setRelease] = useState<ResponseAnimeEpisode | null>(null)
-  const [loading, setLoading] = useState<boolean>(true)
+  const release = await getAnimeEpisode(
+    params.id,
+    params.slug,
+    searchParams.order || 1,
+    {
+      cache: 'no-cache',
+    },
+  )
 
-  useEffect(() => {
-    async function fetchEpisode() {
-      setLoading(true)
-      try {
-        const response = await getAnimeEpisode(
-          params.id,
-          params.slug,
-          searchParams.order || 1,
-          {
-            cache: 'no-cache',
-          },
-        )
-        setRelease(response.data)
-      } catch (error) {
-        console.error('Failed to fetch episode:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchEpisode()
-  }, [params.id, params.slug, searchParams.order])
-
-  if (loading) {
-    return <div>Loading...</div>
-  }
-
-  if (!release) {
-    return <div>Серія недоступна</div>
-  }
-
-  return <PlayerWrapper release={release} />
+  return <Player release={release.data} />
 }
