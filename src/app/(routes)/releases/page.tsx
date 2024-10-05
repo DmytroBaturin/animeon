@@ -1,6 +1,7 @@
 import { ReleasesPage } from '@/screens/releases/ui'
 import { getAnimeList } from '@/shared/api/anime/anime'
 
+export const runtime = 'edge'
 export default async function Page({
   searchParams,
 }: {

@@ -1,6 +1,6 @@
 {
-  "extends": ["next/core-web-vitals", "cecilia", "next/typescript"],
-  "plugins": ["unused-imports"],
+  "extends": ["next/core-web-vitals", "cecilia", "next/typescript", "plugin:eslint-plugin-next-on-pages/recommended"],
+  "plugins": ["unused-imports", "eslint-plugin-next-on-pages"],
   "rules": {
     "@typescript-eslint/no-explicit-any": "warn",
     "no-shadow": "warn",
