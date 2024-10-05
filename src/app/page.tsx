@@ -4,8 +4,6 @@ import { Suspense } from 'react'
 import { ListLayout } from '@/shared/layouts/list'
 import { AnimeCardSkeleton } from '@/entities/anime'
 
-export const runtime = 'nodejs'
-
 export default async function Page({
   searchParams,
 }: {

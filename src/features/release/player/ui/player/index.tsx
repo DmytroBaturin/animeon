@@ -1,13 +1,7 @@
 'use client'
 
-import {
-  Controls,
-  MediaPlayer,
-  MediaPlayerInstance,
-  MediaProvider,
-  useMediaState,
-} from '@vidstack/react'
 import '@/shared/components/ui/player.css'
+
 import {
   PlyrLayout,
   plyrLayoutIcons,
@@ -16,6 +10,13 @@ import '@vidstack/react/player/styles/base.css'
 import '@vidstack/react/player/styles/plyr/theme.css'
 import { Button } from '@/shared/components/ui/button'
 import { useEffect, useRef, useState } from 'react'
+import {
+  Controls,
+  MediaPlayer,
+  MediaPlayerInstance,
+  MediaProvider,
+  useMediaState,
+} from '@vidstack/react'
 
 export const ReleasePlayer = ({
   src,
@@ -94,7 +95,7 @@ export const ReleasePlayer = ({
           slots={{
             captionsButton: false,
           }}
-          icons={plyrLayoutIcons}
+          icons={plyrLayoutIcons || undefined}
         />
         {showSkipOpeningButton && (
           <Controls.Group className="absolute left-10 bottom-16">
