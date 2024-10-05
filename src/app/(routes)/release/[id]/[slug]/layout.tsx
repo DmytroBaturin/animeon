@@ -6,6 +6,8 @@ import { routes } from '@/shared/config/routes'
 import { getAnime } from '@/shared/api/anime/anime'
 import { ReleaseInitializer } from '@/entities/anime/model/initializer/release'
 
+export const runtime = 'edge'
+
 export default async function Layout({
   children,
   params,

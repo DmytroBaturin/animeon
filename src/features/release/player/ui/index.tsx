@@ -3,7 +3,6 @@
 import '@/shared/components/ui/player.css'
 import { PlayerPagination } from '@/features/release/player/ui/pagination'
 import { PlayerVoiceOverSelect } from '@/features/release/player/ui/voiceover-select'
-import { ReleasePlayer } from '@/features/release/player/ui/player'
 import { EpisodeVoiceover, ResponseAnimeEpisode } from '@/shared/api/model'
 import { usePlayerModel } from '@/features/release/player/model'
 import { useEffect } from 'react'
@@ -29,16 +28,17 @@ export const Player = ({ release }: { release: ResponseAnimeEpisode }) => {
       {release?.voiceover &&
       release.voiceover.length > 0 &&
       release.voiceover[0]?.file ? (
-        <ReleasePlayer
-          timemarkers={{
-            end_ending: release.end_ending ?? 0,
-            start_opening: release.start_opening ?? 0,
-            end_opening: release.end_opening ?? 0,
-            start_ending: release.start_ending ?? 0,
-          }}
-          src={voiceOver ?? ''}
-        />
+        'dsa'
       ) : (
+        // <ReleasePlayer
+        //   timemarkers={{
+        //     end_ending: release.end_ending ?? 0,
+        //     start_opening: release.start_opening ?? 0,
+        //     end_opening: release.end_opening ?? 0,
+        //     start_ending: release.start_ending ?? 0,
+        //   }}
+        //   src={voiceOver ?? ''}
+        // />
         <div>Серія недоступна</div>
       )}
 
