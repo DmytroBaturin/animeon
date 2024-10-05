@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
+
+const HOST = process.env.API_HOST || 'http://localhost:3000';
+
 const nextConfig = {
     env: {
-        API_HOST: process.env.API_HOST,
+        API_HOST: HOST,
     },
     poweredByHeader: false,
     trailingSlash: false,
@@ -16,7 +19,7 @@ const nextConfig = {
         return [
             {
                 source: "/api/v1/:path*",
-                destination: `${process.env.API_HOST}/api/v1/:path*`,
+                destination: `${HOST}/api/v1/:path*`,
             },
         ];
     },
