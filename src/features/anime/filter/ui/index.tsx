@@ -77,6 +77,24 @@ export const FilterAnime = () => {
               value={getActiveFilterValue('studios')}
               onChange={(value) => handleChangeFilter('studios', value)}
             />
+            <FilterSelect
+              placeholder="Статус"
+              options={state.filterList.status}
+              value={getActiveFilterValue('status')}
+              onChange={(value) => handleChangeFilter('status', value)}
+            />
+            <FilterSelect
+              placeholder="Країна"
+              options={state.filterList.countries}
+              value={getActiveFilterValue('countries')}
+              onChange={(value) => handleChangeFilter('countries', value)}
+            />
+            <FilterSelect
+              placeholder="Тип"
+              options={state.filterList.type}
+              value={getActiveFilterValue('type')}
+              onChange={(value) => handleChangeFilter('type', value)}
+            />
             <Button onClick={resetFilters}>Скинути фільтри</Button>
           </CardContent>
         </Card>

@@ -5,11 +5,11 @@ import type { ResponseFiltersAnime } from '@/shared/api/model'
 interface FilterModel {
   state: {
     isFilterOpen: boolean
-    filterList: ResponseFiltersAnime | Record<string, never> // Використовуємо Record для пустого об'єкту
+    filterList: ResponseFiltersAnime | Record<string, never>
   }
   api: {
     toggleFilter: () => void
-    setFilterList: (newFilterList: ResponseFiltersAnime) => void // Додаємо метод setFilterList
+    setFilterList: (newFilterList: ResponseFiltersAnime) => void
   }
 }
 

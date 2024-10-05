@@ -6,6 +6,7 @@ import { PlayerVoiceOverSelect } from '@/features/release/player/ui/voiceover-se
 import { EpisodeVoiceover, ResponseAnimeEpisode } from '@/shared/api/model'
 import { usePlayerModel } from '@/features/release/player/model'
 import { useEffect } from 'react'
+import { ReleasePlayer } from '@/features/release/player/ui/player'
 
 export const Player = ({ release }: { release: ResponseAnimeEpisode }) => {
   const { voiceOver, setVoiceOver } = usePlayerModel()
@@ -28,17 +29,16 @@ export const Player = ({ release }: { release: ResponseAnimeEpisode }) => {
       {release?.voiceover &&
       release.voiceover.length > 0 &&
       release.voiceover[0]?.file ? (
-        'dsa'
+        <ReleasePlayer
+          timemarkers={{
+            end_ending: release.end_ending ?? 0,
+            start_opening: release.start_opening ?? 0,
+            end_opening: release.end_opening ?? 0,
+            start_ending: release.start_ending ?? 0,
+          }}
+          src={voiceOver ?? ''}
+        />
       ) : (
-        // <ReleasePlayer
-        //   timemarkers={{
-        //     end_ending: release.end_ending ?? 0,
-        //     start_opening: release.start_opening ?? 0,
-        //     end_opening: release.end_opening ?? 0,
-        //     start_ending: release.start_ending ?? 0,
-        //   }}
-        //   src={voiceOver ?? ''}
-        // />
         <div>Серія недоступна</div>
       )}
 
