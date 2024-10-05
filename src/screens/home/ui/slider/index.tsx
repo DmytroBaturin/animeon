@@ -10,11 +10,7 @@ import { PageLayout } from '@/shared/layouts/page'
 import Link from 'next/link'
 import { routes } from '@/shared/config/routes'
 
-const slides = [
-  'https://via.placeholder.com/1920x1080?text=Slide+1',
-  'https://via.placeholder.com/1920x1080?text=Slide+2',
-  'https://via.placeholder.com/1920x1080?text=Slide+3',
-]
+const slides = ['https://via.placeholder.com/1920x1080?text=Slide+1']
 
 const SliderFullScreen = ({ posters }: { posters?: ResponsePosters[] }) => {
   const sliderRef = useRef<Slider | null>(null)

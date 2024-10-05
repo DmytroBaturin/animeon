@@ -21,6 +21,10 @@ export default async function Page({
 
   const posters = await getAnimePosters({ cache: 'no-cache' })
 
+  if (!posters || !posters.data) {
+    throw new Error('Failed to fetch anime posters')
+  }
+
   const postersArray = Array.isArray(posters.data)
     ? posters.data
     : [posters.data]
@@ -33,7 +37,7 @@ export default async function Page({
           fallback={
             <ListLayout>
               {Array.from({ length: 10 }).map((_, index) => (
-                <AnimeCardSkeleton key={`SS${index + 1}`} />
+                <AnimeCardSkeleton key={`skeleton-${index + 1}`} />
               ))}
             </ListLayout>
           }
