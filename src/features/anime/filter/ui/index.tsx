@@ -8,7 +8,6 @@ import { useEffect } from 'react'
 import { FilterSelect } from '@/features/anime/filter/ui/filter-select'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Button } from '@/shared/components/ui/button'
-import { FilterInput } from '@/features/anime/filter/ui/filter-input'
 import { debounce } from '@/shared/lib/hooks/debounce'
 
 export const FilterAnime = () => {
@@ -90,11 +89,6 @@ export const FilterAnime = () => {
       {state.isFilterOpen && (
         <Card className="w-full">
           <CardContent className="p-4 flex-wrap justify-center flex gap-2">
-            <FilterInput />
-            <FilterInput
-              onChange={handleInputChange('year_gte')}
-              placeholder="К-сть серій"
-            />
             <FilterSelect
               placeholder="Озвучка"
               options={state.filterList.voiceover}

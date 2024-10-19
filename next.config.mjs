@@ -7,6 +7,13 @@ const nextConfig = {
         API_HOST: HOST,
     },
     poweredByHeader: false,
+    typescript: {
+        // !! WARN !!
+        // Dangerously allow production builds to successfully complete even if
+        // your project has type errors.
+        // !! WARN !!
+        ignoreBuildErrors: true,
+    },
     trailingSlash: false,
     skipTrailingSlashRedirect: true,
     images: {

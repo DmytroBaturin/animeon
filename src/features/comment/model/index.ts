@@ -1,10 +1,14 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 import type { CreateComment, ResponseCommentAnime } from '@/shared/api/model'
-import { getAnimeComments } from '@/shared/api/anime/anime'
+import {
+  getAnimeComments,
+  getAnimeCommentsResponse,
+} from '@/shared/api/anime/anime'
 import {
   createAnimeComment,
   getReplyComments,
+  getReplyCommentsResponse,
 } from '@/shared/api/comment/comment'
 
 interface CommentsState {
@@ -22,16 +26,19 @@ interface CommentsState {
   activeReplyForm: number | null // Додаємо стан для активної форми відповіді
   api: {
     toggleReplyForm: (commentId: number) => void
-    toggleMoreReplies: (commentId: number) => void // Функція для перемикання стану "показати більше"
+    toggleMoreReplies: (commentId: number) => void
     loadMoreReplies: (commentId: number) => Promise<void>
-    toggleReplyMessages: (commentId: number) => void // Функція для перемикання відкриття/закриття відповідей
+    toggleReplyMessages: (commentId: number) => void
     fetchComments: (
-      id: string | number,
+      id: string,
       slug: string,
       page: number,
-    ) => Promise<void>
-    fetchReplyComments: (commentId: number, page?: number) => Promise<void>
-    createComment: (comment: CreateComment, token: string) => Promise<void>
+    ) => Promise<void | getAnimeCommentsResponse>
+    fetchReplyComments: (
+      commentId: number,
+      page?: number,
+    ) => Promise<void | getReplyCommentsResponse>
+    createComment: (comment: CreateComment, token: string) => Promise<unknown>
   }
 }
 
@@ -39,10 +46,10 @@ export const useCommentsModel = create<CommentsState>()(
   immer((set, get) => ({
     comments: [],
     replyComments: {},
-    activeMoreReplies: {}, // Початковий стан для "показати більше"
+    activeMoreReplies: {},
     replyPage: {},
     replyNext: {},
-    isOpenReplies: {}, // Початковий стан для відстеження відкриття/закриття відповідей
+    isOpenReplies: {},
     totalPages: null,
     currentPage: 1,
     replyTo: null,
@@ -58,9 +65,8 @@ export const useCommentsModel = create<CommentsState>()(
             state.comments = response.data.results
             state.totalPages = response.data.num_pages
           })
-          return response // Повертаємо успішну відповідь
         } catch (error) {
-          return Promise.reject(error) // Повертаємо помилку, якщо запит невдалий
+          return Promise.reject(error)
         }
       },
 
