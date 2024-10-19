@@ -17,8 +17,8 @@ export const useRelease = create<ReleaseState>()(
         setState((state) => {
           state.release = {
             ...release,
-            genres: release.genres ? [...release.genres] : undefined, // Clone the array to make it mutable
-            studio: release.studio ? [...release.studio] : undefined, // Clone the array to make it mutable
+            genres: release.genres ? [...release.genres] : undefined,
+            studio: release.studio ? [...release.studio] : undefined,
           }
         })
       },

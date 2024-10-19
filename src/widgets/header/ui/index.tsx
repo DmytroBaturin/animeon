@@ -13,7 +13,7 @@ import { headerLinks } from '@/widgets/header/model/navigation'
 import { useHeader } from '@/widgets/header/model'
 import { MobileNavigation } from '@/widgets/header/ui/mobile-navigation'
 
-export const Header = () => {
+export const Header = ({ isLogged }: { isLogged: boolean }) => {
   const {
     handleCloseMenu,
     isMenuOpen,
@@ -49,14 +49,17 @@ export const Header = () => {
           <div className="hidden md:flex items-center gap-9">
             <nav className="list-none items-center flex gap-9">
               <SearchAnime />
-              <Link href={routes.login}>Авторизація</Link>
+              {!isLogged && <Link href={routes.login}>Авторизація</Link>}
             </nav>
-            <UserAvatar />
+            <Link href={routes.profile}>
+              <UserAvatar />
+            </Link>
           </div>
         </div>
 
         {isMenuOpen && (
           <MobileNavigation
+            isLogged={isLogged}
             handleCloseMenu={handleCloseMenu}
             ref={menuRef as LegacyRef<HTMLDivElement>}
             searchNode={

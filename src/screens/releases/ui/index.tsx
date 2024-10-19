@@ -16,6 +16,11 @@ export const ReleasesPage = ({
         <div className="flex w-full items-end justify-end">
           <FilterAnime />
         </div>
+        {animeList?.results?.length === 0 && (
+          <h1 className="w-full font-bold  text-[32px] flex items-center justify-center">
+            Нічого не знайдено 🥲
+          </h1>
+        )}
         <ListLayout>
           {animeList?.results?.map((anime) => (
             <AnimeCard key={anime.id} {...anime} />

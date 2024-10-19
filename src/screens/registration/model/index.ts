@@ -1,6 +1,7 @@
 import { userRegister } from '@/shared/api/auth/auth'
 import { type RequestUserRegister } from '@/shared/api/model'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 interface ErrorMessages {
   location: string
@@ -9,6 +10,7 @@ interface ErrorMessages {
 
 export const useRegistration = () => {
   const [errors, setErrors] = useState<ErrorMessages[]>([])
+  const router = useRouter()
 
   const registration = async ({
     password,
@@ -27,7 +29,7 @@ export const useRegistration = () => {
       if (res.status === 400 && (res as any).data?.errors) {
         setErrors((res as any).data.errors)
       } else {
-        console.log('res.data', res.data)
+        router.back()
       }
     } catch (error) {
       console.error('Registration failed', error)

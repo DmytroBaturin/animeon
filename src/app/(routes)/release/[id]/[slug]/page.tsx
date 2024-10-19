@@ -1,6 +1,6 @@
-'use client'
+'use server'
 
-import { Player } from '@/features/release/player'
+import { Player } from '@/features/anime/player'
 import { getAnimeEpisode } from '@/shared/api/anime/anime'
 
 export default async function Page({

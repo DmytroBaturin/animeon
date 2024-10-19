@@ -18,6 +18,7 @@ import meetingIco from '@/shared/assets/icons/release/Meeting.svg'
 import numbersIco from '@/shared/assets/icons/release/Numbers.svg'
 import type { ResponseAnime } from '@/shared/api/model'
 import { StatItem } from '@/widgets/release/ui/stat-item'
+import { ListToAdd } from '@/widgets/release/ui/list'
 
 const stats = [
   { icon: analyticsIco, text: 'Статус', key: 'status' },
@@ -44,14 +45,7 @@ export const ReleaseDetails = ({ anime }: { anime: ResponseAnime }) => {
             </Button>
           </PopoverTrigger>
           <PopoverContent className="bg-gradient-secondary shadow-none w-[220px] backdrop-blur-sm border-none">
-            <nav className="list-none font-bold flex flex-col gap-2">
-              <li>Список</li>
-              <li>Список</li>
-              <li>Список</li>
-              <li className="border-t-[1px] text-red-500 p-1 border-white/20">
-                Видалити
-              </li>
-            </nav>
+            <ListToAdd id={anime.id} />
           </PopoverContent>
         </Popover>
       </div>

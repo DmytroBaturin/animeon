@@ -9,12 +9,16 @@ export interface InputProps
   action?: React.ReactNode
   label?: string
   icon?: React.ReactNode
+  widthMain?: string
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, error, icon, action, label, ...props }, ref) => {
+  (
+    { className, type, error, widthMain, icon, action, label, ...props },
+    ref,
+  ) => {
     return (
-      <div className="flex w-full flex-col gap-2">
+      <div className={cn(widthMain || 'w-full', 'flex flex-col gap-2')}>
         {label && (
           <Label asChild>
             <p className="text-base" />

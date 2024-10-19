@@ -1,5 +1,5 @@
-import { UserPage } from '@/screens/user'
+import { LoginPage } from '@/screens/login'
 
 export default function Page() {
-  return <UserPage />
+  return <LoginPage />
 }

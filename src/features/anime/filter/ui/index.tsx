@@ -8,6 +8,8 @@ import { useEffect } from 'react'
 import { FilterSelect } from '@/features/anime/filter/ui/filter-select'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Button } from '@/shared/components/ui/button'
+import { FilterInput } from '@/features/anime/filter/ui/filter-input'
+import { debounce } from '@/shared/lib/hooks/debounce'
 
 export const FilterAnime = () => {
   const { state, api } = useFilterModel()
@@ -40,11 +42,46 @@ export const FilterAnime = () => {
     return searchParams.get(filterKey) || ''
   }
 
+  const handleChangenInputFilter = debounce(
+    (filterKey: string, filterValue: string) => {
+      const params = new URLSearchParams(searchParams.toString())
+
+      if (filterValue) {
+        params.set(filterKey, filterValue)
+      } else {
+        params.delete(filterKey)
+      }
+
+      router.push(`?${params.toString()}`)
+    },
+    500,
+  )
+
+  const handleInputChange =
+    (filterKey: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target
+      console.log(value)
+      if (/^\d*$/.test(value)) {
+        handleChangenInputFilter(filterKey, value)
+      }
+    }
+
   const resetFilters = () => {
     const params = new URLSearchParams()
     router.push(`?${params.toString()}`)
   }
-
+  // year_gte?: string
+  // /**
+  //  * Year_lte.
+  //  */
+  // year_lte?: string
+  // /**
+  //  * Episode_lte.
+  //  */
+  // episode_lte?: string
+  // /**
+  //  * Episode_gte.
+  //  */
   return (
     <div className="flex gap-2 w-full flex-col">
       <span className="w-full flex items-end justify-end">
@@ -53,6 +90,11 @@ export const FilterAnime = () => {
       {state.isFilterOpen && (
         <Card className="w-full">
           <CardContent className="p-4 flex-wrap justify-center flex gap-2">
+            <FilterInput />
+            <FilterInput
+              onChange={handleInputChange('year_gte')}
+              placeholder="К-сть серій"
+            />
             <FilterSelect
               placeholder="Озвучка"
               options={state.filterList.voiceover}

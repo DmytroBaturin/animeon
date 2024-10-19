@@ -1,13 +1,12 @@
-import { userLogin } from '@/shared/api/auth/auth'
 import { TokenObtainPair } from '@/shared/api/model'
 import { useState } from 'react'
-
-interface ErrorMessages {
-  location: string
-  message: string
-}
+import { ErrorMessages } from '@/shared/types'
+import { userLogin } from '@/shared/api/auth/auth'
+import { setCookie } from '@/shared/utils'
+import { useRouter } from 'next/navigation'
 
 export const useLogin = () => {
+  const router = useRouter()
   const [errors, setErrors] = useState<ErrorMessages[]>([])
 
   const login = async ({ password, username }: TokenObtainPair) => {
@@ -19,10 +18,15 @@ export const useLogin = () => {
         },
       )
 
-      if (res.status === 400 && (res as any).data?.errors) {
+      if (
+        res.status === 400 ||
+        (res.status === 401 && (res as any).data?.errors)
+      ) {
         setErrors((res as any).data.errors)
       } else {
-        console.log('res.data', res.data)
+        setCookie('session', res.data.access)
+        router.back()
+        router.refresh()
       }
     } catch (error) {
       console.error('Registration failed', error)

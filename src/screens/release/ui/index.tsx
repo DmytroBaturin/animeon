@@ -30,7 +30,7 @@ export const ReleasePage = ({
   }, [])
 
   return (
-    <div className="w-full mt-10">
+    <div className="w-full relative mt-10">
       {details}
       <Tabs
         value={activeTab}

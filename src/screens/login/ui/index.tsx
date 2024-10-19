@@ -15,8 +15,8 @@ import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
 import Link from 'next/link'
 import { routes } from '@/shared/config/routes'
-import { TokenObtainPair } from '@/shared/api/model'
 import { useLogin } from '@/screens/login/model'
+import { TokenObtainPair } from '@/shared/api/model'
 
 export const LoginPage = () => {
   const { login, clearError, getFieldError } = useLogin()
@@ -34,7 +34,7 @@ export const LoginPage = () => {
             password: '',
           }}
           validationSchema={loginSchema}
-          onSubmit={(values: TokenObtainPair) => {
+          onSubmit={async (values: TokenObtainPair) => {
             login(values)
           }}
         >

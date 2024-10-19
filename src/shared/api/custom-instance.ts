@@ -20,7 +20,6 @@ const getUrl = (contextUrl: string): string => {
 const getHeaders = (headers?: HeadersInit): HeadersInit => {
   return {
     ...headers,
-    Authorization: 'token',
   }
 }
 

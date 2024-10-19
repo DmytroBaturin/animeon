@@ -1,6 +1,6 @@
 'use client'
 
-import japanIco from '@/shared/assets/icons/release/Japan.svg'
+import japanIco from '@/shared/assets/Avatar.png'
 
 export const AvatarImage = () => {
   return (

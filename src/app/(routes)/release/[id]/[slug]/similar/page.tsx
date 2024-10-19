@@ -1,5 +1,11 @@
+'use client'
+
+import { useRelease } from '@/entities/anime/model'
+import { ReleaseSimilar } from '@/screens/release'
+
 export const runtime = 'edge'
 
 export default function Page() {
-  return <div>Similar</div>
+  const { release } = useRelease()
+  return <ReleaseSimilar list={release.similar} />
 }

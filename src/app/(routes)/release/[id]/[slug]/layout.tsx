@@ -5,8 +5,8 @@ import { ReleaseTabs } from '@/screens/release/ui/tabs'
 import { routes } from '@/shared/config/routes'
 import { getAnime } from '@/shared/api/anime/anime'
 import { ReleaseInitializer } from '@/entities/anime/model/initializer/release'
-
-export const runtime = 'edge'
+import Image from 'next/image'
+import background from '@/shared/assets/Avatar.png'
 
 export default async function Layout({
   children,
@@ -19,6 +19,12 @@ export default async function Layout({
 
   return (
     <PageLayout>
+      <Image
+        src={background}
+        alt="background"
+        className="absolute right-0 top-[20px] gradient-mask-b-0 w-full h-[400px] object-cover"
+      />
+
       <ReleaseInitializer data={anime.data}>
         <ReleasePage
           baseUrl={routes.release(params.id, params.slug)}

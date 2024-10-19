@@ -6,6 +6,7 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
+        userwallpaper: "url('../shared/assets/userwallpaper.png')",
         wallpaper: 'url(../shared/assets/wallpaper/wallpaper.png)',
         'gradient-secondary':
           'linear-gradient(180deg, hsla(var(--gradient-from)), hsla(var(--gradient-to), 0))',
@@ -62,6 +63,9 @@ const config: Config = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [
+    require('tailwindcss-animate'),
+    require('tailwind-gradient-mask-image'),
+  ],
 }
 export default config

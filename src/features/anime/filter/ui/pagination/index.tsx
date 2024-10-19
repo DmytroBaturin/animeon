@@ -26,7 +26,6 @@ export const PaginationFilter = ({
     router.push(`?${params.toString()}`)
   }
 
-  console.log(active_page, num_pages, next, previous)
   return (
     <Pagination className="items-start justify-start">
       <PaginationContent>

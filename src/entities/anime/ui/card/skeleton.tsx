@@ -10,10 +10,10 @@ const AnimeCard = () => {
       className="h-[330px] flex justify-between flex-col items-center w-full max-w-[200px]"
       href={routes.release('1', 'slug')}
     >
-      <Skeleton className="h-full bg-gray-300 max-h-[280px] w-full rounded-[10px]" />
+      <Skeleton className="h-full gradient-mask-b-0 bg-gray-300 max-h-[280px] w-full rounded-[10px]" />
       <div className="flex flex-col gap-2 font-bold text-center items-center">
-        <Skeleton className="w-[60px] h-[12px] bg-gray-300" />
-        <Skeleton className="w-[100px] h-[12px] bg-gray-300" />
+        <Skeleton className="w-[60px] gradient-mask-b-0 h-[12px] bg-gray-300" />
+        <Skeleton className="w-[100px] gradient-mask-b-0 h-[12px] bg-gray-300" />
       </div>
     </Link>
   )
