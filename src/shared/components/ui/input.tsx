@@ -1,7 +1,6 @@
 import * as React from 'react'
 
 import { cn } from '@/shared/lib/utils'
-import { Label } from '@/shared/components/ui/label'
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -19,11 +18,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ) => {
     return (
       <div className={cn(widthMain || 'w-full', 'flex flex-col gap-2')}>
-        {label && (
-          <Label asChild>
-            <p className="text-base" />
-          </Label>
-        )}
+        {label && <p className="text-foreground font-bold text-lg">{label}</p>}
 
         <span className="flex relative items-center">
           {icon && <div className="absolute left-0 px-3 py-1">{icon}</div>}

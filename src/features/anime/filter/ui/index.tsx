@@ -59,7 +59,7 @@ export const FilterAnime = () => {
   const handleInputChange =
     (filterKey: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target
-      console.log(value)
+
       if (/^\d*$/.test(value)) {
         handleChangenInputFilter(filterKey, value)
       }

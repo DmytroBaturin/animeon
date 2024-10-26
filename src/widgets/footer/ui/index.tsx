@@ -1,4 +1,6 @@
 import { PageLayout } from '@/shared/layouts/page'
+import Link from 'next/link'
+import { routes } from '@/shared/config/routes'
 
 export const Footer = () => {
   return (
@@ -6,9 +8,9 @@ export const Footer = () => {
       <PageLayout>
         <div className="flex justify-between flex-wrap gap-y-4 items-center">
           <nav className="list-none sm:flex-row flex-col wrap font-bold flex gap-x-9">
-            <li>Конфіденційність</li>
-            <li>Допомога</li>
-            <li>Правовласникам</li>
+            <Link href={routes.privacyPolicy}>Конфіденційність</Link>
+            <Link href={routes.support}>Допомога</Link>
+            <Link href={routes.owners}>Правовласникам</Link>
           </nav>
           <div className="flex items-center gap-9">
             <nav className="list-none flex gap-9">

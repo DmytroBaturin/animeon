@@ -13,6 +13,7 @@ export const SessionInitializer = ({
   isAuthenticated: boolean
 }) => {
   const { setSession } = useSession()
+
   useEffect(() => {
     setSession(isAuthenticated, token || '')
   }, [isAuthenticated, token])

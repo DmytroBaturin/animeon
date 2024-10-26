@@ -1,3 +1,6 @@
+import { logout } from '@/entities/session'
+import { fetchExternalImage } from 'next/dist/server/image-optimizer'
+
 const getBody = <T>(c: Response | Request): Promise<T> => {
   const contentType = c.headers.get('content-type')
 
@@ -27,16 +30,28 @@ export const customInstance = async <T>(
   url: string,
   options: RequestInit,
 ): Promise<T> => {
-  const requestUrl = getUrl(url)
-  const requestHeaders = getHeaders(options.headers)
-  const requestInit: RequestInit = {
-    ...options,
-    headers: requestHeaders,
+  try {
+    const requestUrl = getUrl(url);
+    const requestHeaders = getHeaders(options.headers);
+    const requestInit: RequestInit = {
+      ...options,
+      headers: requestHeaders,
+    };
+
+    const request = new Request(requestUrl, requestInit);
+    const response = await fetch(request);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Request failed with status ${response.status}: ${errorText}`);
+    }
+
+    const data = await getBody<T>(response);
+    return { status: response.status, data } as T;
+
+  } catch (error) {
+
+    return { status: 500, data: null, error: error.message } as unknown as T;
   }
+};
 
-  const request = new Request(requestUrl, requestInit)
-  const response = await fetch(request)
-  const data = await getBody<T>(response)
-
-  return { status: response.status, data } as T
-}

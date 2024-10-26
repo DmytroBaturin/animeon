@@ -9,7 +9,6 @@ export default async function Page({
 }: {
   searchParams: { [key: string]: string }
 }) {
-  console.log(searchParams)
   const session = await checkSession()
   if (!session) {
     return redirect(routes.login)

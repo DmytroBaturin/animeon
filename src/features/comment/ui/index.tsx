@@ -16,7 +16,7 @@ export const CommentsSection = () => {
 
   useEffect(() => {
     if (!release.id || !release.slug) return
-    api.fetchComments(release.id!, release.slug!, 1)
+    api.fetchComments(String(release.id!), release.slug!, 1)
   }, [release])
 
   return (

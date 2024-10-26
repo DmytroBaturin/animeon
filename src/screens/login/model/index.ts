@@ -24,9 +24,9 @@ export const useLogin = () => {
       ) {
         setErrors((res as any).data.errors)
       } else {
-        setCookie('session', res.data.access)
-        router.back()
         router.refresh()
+        await setCookie('session', res.data.access)
+        router.back()
       }
     } catch (error) {
       console.error('Registration failed', error)
