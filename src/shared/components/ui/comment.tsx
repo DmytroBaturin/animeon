@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode } from 'react'
+import { memo, ReactNode } from 'react'
 import { UserAvatar } from '@/entities/user'
 import moment from 'moment'
 
@@ -20,7 +20,7 @@ interface CommentProps {
   handleMoreReplies?: () => void
 }
 
-export const Comment = ({
+export const CommentComponent = ({
   reactions,
   hasReplies,
   date,
@@ -106,3 +106,6 @@ export const Comment = ({
     </div>
   )
 }
+
+export const Comment = memo(CommentComponent)
+Comment.displayName = 'Comment'

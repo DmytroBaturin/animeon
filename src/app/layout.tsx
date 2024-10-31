@@ -17,7 +17,6 @@ export default async function RootLayout({
 }>) {
   const session = await checkSession()
 
-  console.log(session)
   return (
     <html lang="en">
       <meta

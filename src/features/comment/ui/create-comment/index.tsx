@@ -7,11 +7,10 @@ import { cn } from '@/shared/lib/utils'
 import { Input } from '@/shared/components/ui/input'
 import { PaperPlaneIcon } from '@radix-ui/react-icons'
 import { useCommentsModel } from '@/features/comment/model'
-import { useSession } from '@/entities/user/model'
 import { useState } from 'react'
 import { z } from 'zod'
+import { useSession } from '@/entities/session/model/model'
 
-// Створюємо схему валідації для коментаря
 const commentSchema = z.object({
   content: z
     .string()

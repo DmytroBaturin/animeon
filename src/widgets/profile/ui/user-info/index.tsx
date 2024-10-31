@@ -6,7 +6,7 @@ export const UserProfileInfo = () => {
       <div className="bg-userwallpaper bg-cover w-full h-[250px] rounded-[10px]">
         <UserSettings />
       </div>
-      <div className="flex w-[75%] justify-between flex-wrap items-center gap-3">
+      <div className="flex w-[75%] lg:justify-between justify-center flex-wrap items-center gap-3">
         <div>
           <h4 className="font-bold">Всього аніме переглянуто</h4>
           <div

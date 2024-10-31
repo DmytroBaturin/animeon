@@ -4,10 +4,6 @@ import { cookies } from 'next/headers'
 
 import { userRead } from '@/shared/api/user/user'
 
-export async function logout() {
-  cookies().delete('session')
-}
-
 async function getSessionData(): Promise<string | false> {
   const encryptedSessionData = cookies().get('session')?.value
   if (!encryptedSessionData) return ''
@@ -18,7 +14,8 @@ async function getSessionData(): Promise<string | false> {
         Authorization: `Bearer ${encryptedSessionData}`,
       },
     })
-    if (res.status === 401 || res.status === 500) {
+    console.log(res)
+    if (res.status === 401 || res.status === 500 || !res.data) {
       return ''
     }
     return encryptedSessionData

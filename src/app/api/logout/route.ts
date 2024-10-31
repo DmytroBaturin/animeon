@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server'
-import { logout } from '@/entities/session'
+import { cookies } from 'next/headers'
 
 export async function POST() {
-  await logout()
-  console.log('Logged out')
-  return NextResponse.json({ message: 'Logged out successfully' })
+  cookies().delete('session')
+  return NextResponse.json({ success: true })
 }

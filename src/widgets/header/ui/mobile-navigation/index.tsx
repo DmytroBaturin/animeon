@@ -3,6 +3,7 @@ import { headerLinks } from '@/widgets/header/model/navigation'
 import Link from 'next/link'
 import { forwardRef, ReactNode } from 'react'
 import { routes } from '@/shared/config/routes'
+import { useRouter } from 'next/navigation'
 
 interface MobileNavigationProps {
   handleCloseMenu: () => void
@@ -14,6 +15,7 @@ export const MobileNavigation = forwardRef<
   HTMLDivElement,
   MobileNavigationProps
 >(({ handleCloseMenu, searchNode, isLogged }, ref) => {
+  const router = useRouter()
   return (
     <div
       ref={ref}
@@ -36,9 +38,21 @@ export const MobileNavigation = forwardRef<
           )}
         </div>
         {headerLinks.map((link) => (
-          <Link onClick={handleCloseMenu} href={link.href} key={link.title}>
-            <li>{link.title}</li>
-          </Link>
+          <li onClick={handleCloseMenu} key={link.title}>
+            <a
+              onClick={
+                link.onClick
+                  ? async () => {
+                      const randomRoute = await link.onClick!()
+                      router.push(randomRoute)
+                    }
+                  : undefined
+              }
+              href={link.href || '#'}
+            >
+              {link.title}
+            </a>
+          </li>
         ))}
 
         {searchNode}

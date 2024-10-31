@@ -16,7 +16,6 @@ export default async function Layout({
   params: { id: number; slug: string }
 }) {
   const anime = await getAnime(params.id, params.slug)
-
   return (
     <PageLayout>
       <Image

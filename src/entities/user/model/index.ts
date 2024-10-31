@@ -1,19 +1,16 @@
 import { create } from 'zustand'
+import { User } from '@/shared/api/model'
 
-interface SessionState {
-  isAuthenticated: boolean
-  token: string
-
-  setSession: (isAuthenticated: boolean, token: string) => void
+interface UserState {
+  user: User
+  api: {
+    setUser: (user: User) => void
+  }
 }
 
-export const useSession = create<SessionState>((set) => ({
-  isAuthenticated: false,
-  token: '',
-  setSession: (isAuthenticated: boolean, token: string) => {
-    set({
-      isAuthenticated,
-      token,
-    })
+export const useUser = create((set) => ({
+  user: {} as User,
+  api: {
+    setUser: (user) => set({ user }),
   },
 }))

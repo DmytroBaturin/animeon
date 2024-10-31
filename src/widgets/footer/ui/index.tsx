@@ -4,10 +4,10 @@ import { routes } from '@/shared/config/routes'
 
 export const Footer = () => {
   return (
-    <footer className="flex items-center w-full h-[96px] bg-gradient-primary">
+    <footer className="flex items-center w-full h-full min-h-[96px] bg-gradient-primary">
       <PageLayout>
         <div className="flex justify-between flex-wrap gap-y-4 items-center">
-          <nav className="list-none sm:flex-row flex-col wrap font-bold flex gap-x-9">
+          <nav className="list-none sm:flex-row gap-y-4 flex-col wrap font-bold flex gap-x-9">
             <Link href={routes.privacyPolicy}>Конфіденційність</Link>
             <Link href={routes.support}>Допомога</Link>
             <Link href={routes.owners}>Правовласникам</Link>

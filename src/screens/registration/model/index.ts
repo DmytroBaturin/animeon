@@ -2,6 +2,7 @@ import { userRegister } from '@/shared/api/auth/auth'
 import { type RequestUserRegister } from '@/shared/api/model'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { setCookie } from '@/shared/utils'
 
 interface ErrorMessages {
   location: string
@@ -29,6 +30,8 @@ export const useRegistration = () => {
       if (res.status === 400 && (res as any).data?.errors) {
         setErrors((res as any).data.errors)
       } else {
+        await setCookie('session', res.data.access)
+        await setCookie('refresh', res.data.refresh)
         router.back()
       }
     } catch (error) {

@@ -17,6 +17,6 @@ export default async function Layout({ children }: { children: ReactNode }) {
       Authorization: `Bearer ${session}`,
     },
   })
-  console.log(user.data)
+
   return <UserPage user={user.data}>{children}</UserPage>
 }

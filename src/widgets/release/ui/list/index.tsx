@@ -1,7 +1,7 @@
 'use client'
 
 import { userAddAnime } from '@/shared/api/user/user'
-import { useSession } from '@/entities/user/model'
+import { useSession } from '@/entities/session/model/model'
 
 export const ListToAdd = ({ id }: { id?: number }) => {
   const { token } = useSession()

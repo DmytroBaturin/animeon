@@ -1,7 +1,7 @@
 'use client'
 
-import { useSession } from '@/entities/user/model'
 import { ReactNode, useEffect } from 'react'
+import { useSession } from '@/entities/session/model/model'
 
 export const SessionInitializer = ({
   children,

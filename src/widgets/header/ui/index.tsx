@@ -12,8 +12,10 @@ import Link from 'next/link'
 import { headerLinks } from '@/widgets/header/model/navigation'
 import { useHeader } from '@/widgets/header/model'
 import { MobileNavigation } from '@/widgets/header/ui/mobile-navigation'
+import { useRouter } from 'next/navigation'
 
 export const Header = ({ isLogged }: { isLogged: boolean }) => {
+  const router = useRouter()
   const {
     handleCloseMenu,
     isMenuOpen,
@@ -28,9 +30,21 @@ export const Header = ({ isLogged }: { isLogged: boolean }) => {
         <div className="flex justify-between items-center w-full">
           <nav className="hidden md:flex list-none font-bold gap-9">
             {headerLinks.map((link) => (
-              <Link onClick={handleCloseMenu} href={link.href} key={link.title}>
-                <li>{link.title}</li>
-              </Link>
+              <li key={link.title}>
+                <a
+                  onClick={
+                    link.onClick
+                      ? async () => {
+                          const randomRoute = await link.onClick!()
+                          router.push(randomRoute)
+                        }
+                      : undefined
+                  }
+                  href={link.href || '#'}
+                >
+                  {link.title}
+                </a>
+              </li>
             ))}
           </nav>
           <Link onClick={handleCloseMenu} href={routes.home}>

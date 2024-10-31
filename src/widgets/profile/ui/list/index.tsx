@@ -12,6 +12,9 @@ import { FilterProfileList } from '@/features/profile/filter-list'
 import { getAnimeFilters } from '@/shared/api/anime/anime'
 import { useEffect, useState } from 'react'
 import { PaginationProfileFilter } from '@/features/profile/filter-list/ui/pagination'
+import { userDeleteAnime } from '@/shared/api/user/user'
+import { useSession } from '@/entities/session/model/model'
+import { useRouter } from 'next/navigation'
 
 export const ProfileAnimeList = ({
   type,
@@ -20,6 +23,8 @@ export const ProfileAnimeList = ({
   type?: UserAnimeListAction
   list: ResponsePaginatedUserAnimeList
 }) => {
+  const router = useRouter()
+  const { token } = useSession()
   const [animeFilters, setAnimeFilters] = useState<ResponseFiltersAnime | {}>(
     {},
   )
@@ -35,15 +40,31 @@ export const ProfileAnimeList = ({
   return (
     <div className="w-full flex-col gap-y-4 flex">
       <FilterProfileList filters={animeFilters} />
-      {list.results.length > 0 ? (
+      {list?.results.length > 0 ? (
         <div>
-          {list.results.map((anime) => (
+          {list?.results.map((anime) => (
             <AnimeProfileCard
               key={anime.anime.id}
               typeСard={type || anime.action}
               {...anime.anime}
               action={
-                <Button className="p-2" size="icon">
+                <Button
+                  onClick={() => {
+                    router.refresh()
+                    userDeleteAnime(
+                      {
+                        anime: anime.anime.id,
+                      },
+                      {
+                        headers: {
+                          Authorization: `Bearer ${token}`,
+                        },
+                      },
+                    )
+                  }}
+                  className="p-2"
+                  size="icon"
+                >
                   <TrashIcon />
                 </Button>
               }
@@ -56,7 +77,7 @@ export const ProfileAnimeList = ({
         </h2>
       )}
 
-      {list.results.length > 0 && <PaginationProfileFilter {...list} />}
+      {list?.results.length > 0 && <PaginationProfileFilter {...list} />}
     </div>
   )
 }

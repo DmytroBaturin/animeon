@@ -1,14 +1,10 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 import type { CreateComment, ResponseCommentAnime } from '@/shared/api/model'
-import {
-  getAnimeComments,
-  getAnimeCommentsResponse,
-} from '@/shared/api/anime/anime'
+import { getAnimeComments } from '@/shared/api/anime/anime'
 import {
   createAnimeComment,
   getReplyComments,
-  getReplyCommentsResponse,
 } from '@/shared/api/comment/comment'
 
 interface CommentsState {
@@ -18,27 +14,20 @@ interface CommentsState {
   replyNext: { [key: number]: boolean }
   totalPages: number | null
   currentPage: number
-  activeMoreReplies: { [key: number]: boolean } // Додаємо стан для відстеження активності "показати більше" для кожного коментаря
+  activeMoreReplies: { [key: number]: boolean }
   replyTo: { commentId: number; username: string } | null
   replyContent: string
   errors: string | null
-  isOpenReplies: { [key: number]: boolean } // Додаємо стан для відкриття/закриття відповідей
-  activeReplyForm: number | null // Додаємо стан для активної форми відповіді
+  isOpenReplies: { [key: number]: boolean }
+  activeReplyForm: number | null
   api: {
     toggleReplyForm: (commentId: number) => void
     toggleMoreReplies: (commentId: number) => void
-    loadMoreReplies: (commentId: number) => Promise<void>
+    loadMoreReplies: (commentId: number) => void
     toggleReplyMessages: (commentId: number) => void
-    fetchComments: (
-      id: string,
-      slug: string,
-      page: number,
-    ) => Promise<void | getAnimeCommentsResponse>
-    fetchReplyComments: (
-      commentId: number,
-      page?: number,
-    ) => Promise<void | getReplyCommentsResponse>
-    createComment: (comment: CreateComment, token: string) => Promise<unknown>
+    fetchComments: (id: string, slug: string, page: number) => void
+    fetchReplyComments: (commentId: number, page?: number) => void
+    createComment: (comment: CreateComment, token: string) => void
   }
 }
 
@@ -66,7 +55,7 @@ export const useCommentsModel = create<CommentsState>()(
             state.totalPages = response.data.num_pages
           })
         } catch (error) {
-          return Promise.reject(error)
+          console.error('Failed to fetch comments:', error)
         }
       },
 
@@ -84,9 +73,8 @@ export const useCommentsModel = create<CommentsState>()(
             state.replyNext[commentId] = !!response.data.next
             state.replyPage[commentId] = page
           })
-          return response // Повертаємо успішну відповідь
         } catch (error) {
-          return Promise.reject(error) // Повертаємо помилку, якщо запит невдалий
+          console.error('Failed to fetch reply comments:', error)
         }
       },
 
@@ -113,10 +101,8 @@ export const useCommentsModel = create<CommentsState>()(
             state.replyTo = null
             state.replyContent = ''
           })
-          return response // Повертаємо успішну відповідь
         } catch (error) {
-          return error
-          return Promise.reject(error)
+          console.error('Failed to create comment:', error)
         }
       },
 
@@ -130,32 +116,28 @@ export const useCommentsModel = create<CommentsState>()(
       toggleMoreReplies: (commentId: number) => {
         set((state) => {
           state.activeMoreReplies[commentId] =
-            !state.activeMoreReplies[commentId] // Перемикаємо стан "показати більше"
+            !state.activeMoreReplies[commentId]
         })
       },
 
       toggleReplyMessages: (commentId: number) => {
         set((state) => {
-          state.isOpenReplies[commentId] = !state.isOpenReplies[commentId] // Перемикаємо стан "відкрити відповіді"
+          state.isOpenReplies[commentId] = !state.isOpenReplies[commentId]
         })
 
         if (get().isOpenReplies[commentId]) {
-          return get().api.fetchReplyComments(commentId) // Якщо відповіді відкриваються, завантажуємо відповіді
+          get().api.fetchReplyComments(commentId)
+        } else {
+          set((state) => {
+            state.replyComments[commentId] = []
+          })
         }
-        // Якщо відповіді закриваються, очищаємо список відповідей
-        set((state) => {
-          state.replyComments[commentId] = []
-        })
       },
 
       loadMoreReplies: async (commentId: number) => {
         const { replyPage } = get()
         const nextPage = (replyPage[commentId] || 1) + 1
-        try {
-          return await get().api.fetchReplyComments(commentId, nextPage) // Повертаємо результат
-        } catch (error) {
-          return Promise.reject(error) // Повертаємо помилку, якщо не вдалося завантажити відповіді
-        }
+        await get().api.fetchReplyComments(commentId, nextPage)
       },
     },
   })),

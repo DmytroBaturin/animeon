@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 import { User } from '@/shared/api/model'
 import Link from 'next/link'
 import { routes } from '@/shared/config/routes'
-import { logout } from '@/entities/session'
+import { logout } from '@/entities/session/model/_auth/logout'
 
 const navList = [
   { label: 'Усі', href: '/all' },
@@ -55,8 +55,7 @@ export const UserPage = ({ children, user }: { children; user?: User }) => {
       </div>
       <Button
         onClick={() => {
-          router.refresh()
-          logout()
+          logout().then(() => router.refresh())
         }}
       >
         Logout

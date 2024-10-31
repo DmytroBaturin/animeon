@@ -26,6 +26,7 @@ export const useLogin = () => {
       } else {
         router.refresh()
         await setCookie('session', res.data.access)
+        await setCookie('refresh', res.data.refresh)
         router.back()
       }
     } catch (error) {
