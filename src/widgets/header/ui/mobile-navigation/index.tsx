@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { forwardRef, ReactNode } from 'react'
 import { routes } from '@/shared/config/routes'
 import { useRouter } from 'next/navigation'
+import { logout } from '@/entities/session'
 
 interface MobileNavigationProps {
   handleCloseMenu: () => void
@@ -37,27 +38,40 @@ export const MobileNavigation = forwardRef<
             </Link>
           )}
         </div>
-        {headerLinks.map((link) => (
-          <li onClick={handleCloseMenu} key={link.title}>
+        {headerLinks.map((link) =>
+          link.onClick ? (
             <a
-              onClick={
-                link.onClick
-                  ? async () => {
-                      const randomRoute = await link.onClick!()
-                      router.push(randomRoute)
-                    }
-                  : undefined
+              className="cursor-pointer"
+              key={link.href}
+              onClick={() =>
+                link.onClick().then((res) => {
+                  router.push(res)
+                  handleCloseMenu()
+                })
               }
-              href={link.href || '#'}
             >
               {link.title}
             </a>
-          </li>
-        ))}
+          ) : (
+            <Link onClick={handleCloseMenu} href={link.href} key={link.href}>
+              {link.title}
+            </Link>
+          ),
+        )}
 
         {searchNode}
 
         <li className="text-yellow-400">Підписка</li>
+        <div className="border-t-2 border-white/10 pt-4">
+          <li
+            className="text-base font-bold"
+            onClick={() => {
+              logout().then(() => router.refresh())
+            }}
+          >
+            Вийти з профілю
+          </li>
+        </div>
       </nav>
     </div>
   )

@@ -11,7 +11,7 @@ export const ReleasesPage = ({
 }) => {
   return (
     <PageLayout>
-      <div className="mt-24  flex flex-col gap-9">
+      <div className="mt-24 mb-12  flex flex-col gap-[72px]">
         <h1 className="text-2xl font-bold">Каталог</h1>
         <div className="flex w-full items-end justify-end">
           <FilterAnime />
@@ -26,7 +26,7 @@ export const ReleasesPage = ({
             <AnimeCard key={anime.id} {...anime} />
           ))}
         </ListLayout>
-        <div className="w-full   justify-start items-start flex">
+        <div className="w-full justify-center items-center flex">
           <PaginationFilter {...animeList} />
         </div>
       </div>

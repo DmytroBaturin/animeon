@@ -1,10 +1,10 @@
+'use server'
+
 import { HomePage, HomePageList, HomeTabList } from '@/screens/home'
 import { getAnimePosters } from '@/shared/api/anime/anime'
 import { Suspense } from 'react'
 import { ListLayout } from '@/shared/layouts/list'
 import { AnimeCardSkeleton } from '@/entities/anime'
-
-export const runtime = 'edge'
 
 export default async function Page({
   searchParams,

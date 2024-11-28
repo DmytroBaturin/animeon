@@ -5,7 +5,9 @@
  * OpenAPI spec version: ##VERSION## DEV
  */
 
-export interface ChildPreviewImage {
+export interface ResponseUserSettings {
   /** @nullable */
-  readonly file?: string | null;
+  readonly avatar?: string | null;
+  /** @maxLength 255 */
+  telegram?: string;
 }

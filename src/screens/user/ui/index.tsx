@@ -3,12 +3,10 @@
 import { PageLayout } from '@/shared/layouts/page'
 import { AvatarImage } from '@/screens/user/ui/avatar-image'
 import { Card, CardContent, CardHeader } from '@/shared/components/ui/card'
-import { Button } from '@/shared/components/ui/button'
 import { useRouter } from 'next/navigation'
 import { User } from '@/shared/api/model'
 import Link from 'next/link'
 import { routes } from '@/shared/config/routes'
-import { logout } from '@/entities/session/model/_auth/logout'
 
 const navList = [
   { label: 'Усі', href: '/all' },
@@ -27,7 +25,7 @@ export const UserPage = ({ children, user }: { children; user?: User }) => {
       <div className="flex sm:flex-nowrap flex-wrap justify-between gap-4">
         <Card className="max-w-full sm:max-w-[300px] sm:w-[30%] w-full min-w-[256px]  overflow-hidden p-0">
           <CardHeader className="p-0 border-b-2 border-blue-400 top-0 mt-0">
-            <AvatarImage />
+            <AvatarImage src={`${process.env.API_HOST}/${user.avatar}`} />
             <div className="flex flex-col gap-2 p-6">
               <Link
                 href={routes.profile}
@@ -53,13 +51,6 @@ export const UserPage = ({ children, user }: { children; user?: User }) => {
         </Card>
         {children}
       </div>
-      <Button
-        onClick={() => {
-          logout().then(() => router.refresh())
-        }}
-      >
-        Logout
-      </Button>
     </PageLayout>
   )
 }

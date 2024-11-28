@@ -2,7 +2,6 @@
 
 import { CreateComment } from '@/features/comment/ui/create-comment'
 import { Comment } from '@/shared/components/ui/comment'
-import { ReactionComment } from '@/features/comment/ui/reaction-comment'
 import { useRelease } from '@/entities/anime/model'
 import { useCommentsModel } from '@/features/comment/model'
 import { useEffect } from 'react'
@@ -24,7 +23,7 @@ export const CommentsSection = () => {
     if (!release.id || !release.slug) return
     api.fetchComments(String(release.id!), release.slug!, 1)
   }, [release.id, release.slug])
-  console.log(replyNext)
+
   return (
     <div className="flex flex-col">
       {isAuthenticated && <CreateComment object_id={release.id!} />}
@@ -43,7 +42,7 @@ export const CommentsSection = () => {
                 />
               )
             }
-            reactions={<ReactionComment />}
+            // reactions={<ReactionComment />}
             content={comment.content_main}
             userName={comment.username}
             openReplies={() => api.toggleReplyMessages(comment.id!)}
@@ -65,7 +64,7 @@ export const CommentsSection = () => {
                     )
                   }
                   toggleReplyForm={() => api.toggleReplyForm(reply.id!)}
-                  reactions={<ReactionComment />}
+                  // reactions={<ReactionComment />}
                   content={reply.content_main}
                   userName={reply.username}
                   date={reply.created || ''}

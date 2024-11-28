@@ -15,7 +15,7 @@ interface FilterSelectProps {
 
 export const FilterSelect = ({
   placeholder,
-  options,
+  options = {},
   value,
   onChange,
 }: FilterSelectProps) => {

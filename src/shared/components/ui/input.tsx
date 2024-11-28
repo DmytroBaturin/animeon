@@ -25,7 +25,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <input
             type={type}
             className={cn(
-              error ? 'border-red-700' : 'border-muted-foreground',
+              error ? 'border-red-500' : 'border-muted-foreground',
               'flex h-9 w-full rounded-[10px] border bg-transparent px-3 py-1 text-sm  transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
               className,
             )}
@@ -34,7 +34,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           />
           {action && <div className="absolute right-0 px-3 py-1">{action}</div>}
         </span>
-        {error && <p className="text-red-700 text-sm">{error}</p>}
+        {error && <p className="text-red-500 text-sm">{error}</p>}
       </div>
     )
   },

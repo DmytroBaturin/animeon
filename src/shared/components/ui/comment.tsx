@@ -1,13 +1,18 @@
 'use client'
 
 import { memo, ReactNode } from 'react'
-import { UserAvatar } from '@/entities/user'
 import moment from 'moment'
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '@/shared/components/ui/avatar'
 
 interface CommentProps {
   replies?: ReactNode
   content: string
   userName: string
+  avatar?: string
   replyForm?: ReactNode
   date: string
   commentTo?: string
@@ -26,6 +31,7 @@ export const CommentComponent = ({
   date,
   seeMore = false,
   replyForm,
+  avatar = '',
   handleMoreReplies,
   toggleReplyForm,
   commentTo,
@@ -50,7 +56,10 @@ export const CommentComponent = ({
   }
   return (
     <div className="flex w-full gap-3">
-      <UserAvatar />
+      <Avatar>
+        <AvatarImage src={`${process.env.API_HOST}/${avatar}`} />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
       <div className="flex gap-5 w-full items-center flex-col">
         <div className="flex gap-2 w-full flex-col">
           <div className="flex w-full flex-col">

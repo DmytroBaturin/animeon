@@ -14,7 +14,7 @@ async function getSessionData(): Promise<string | false> {
         Authorization: `Bearer ${encryptedSessionData}`,
       },
     })
-    console.log(res)
+
     if (res.status === 401 || res.status === 500 || !res.data) {
       return ''
     }

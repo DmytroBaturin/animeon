@@ -8,7 +8,7 @@ interface UserState {
   }
 }
 
-export const useUser = create((set) => ({
+export const useUser = create<UserState>((set) => ({
   user: {} as User,
   api: {
     setUser: (user) => set({ user }),

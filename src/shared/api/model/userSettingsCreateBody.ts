@@ -5,7 +5,8 @@
  * OpenAPI spec version: ##VERSION## DEV
  */
 
-export interface Genre {
-  readonly get_params?: string;
-  readonly value?: string;
-}
+export type UserSettingsCreateBody = {
+  avatar?: Blob;
+  /** @maxLength 255 */
+  telegram?: string;
+};

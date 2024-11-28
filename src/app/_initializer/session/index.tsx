@@ -2,6 +2,8 @@
 
 import { ReactNode, useEffect } from 'react'
 import { useSession } from '@/entities/session/model/model'
+import { useUser } from '@/entities/user/model'
+import { userRead } from '@/shared/api/user/user'
 
 export const SessionInitializer = ({
   children,
@@ -13,9 +15,17 @@ export const SessionInitializer = ({
   isAuthenticated: boolean
 }) => {
   const { setSession } = useSession()
+  const { api } = useUser()
 
   useEffect(() => {
     setSession(isAuthenticated, token || '')
+    userRead({
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((user) => {
+      api.setUser(user.data)
+    })
   }, [isAuthenticated, token])
   return children
 }

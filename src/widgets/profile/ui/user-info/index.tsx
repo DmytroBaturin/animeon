@@ -1,4 +1,4 @@
-import { UserSettings } from '@/screens/user/ui/settings'
+import { UserSettings } from '@/features/profile/settings'
 
 export const UserProfileInfo = () => {
   return (

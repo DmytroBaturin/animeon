@@ -38,7 +38,7 @@ export const ReleasePage = ({
         className="mt-4 rounded-[30px] px-[10%] py-[10px] lg:h-full lg:min-h-[650px] md:mt-6 bg-muted"
       >
         {tabs}
-        <TabsContent value={activeTab}>{children}</TabsContent>
+        <TabsContent value={activeTab}>{children} </TabsContent>
       </Tabs>
     </div>
   )

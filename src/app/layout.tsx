@@ -16,7 +16,6 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   const session = await checkSession()
-
   return (
     <html lang="en">
       <meta

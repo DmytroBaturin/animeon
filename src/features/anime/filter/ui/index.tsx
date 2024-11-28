@@ -91,43 +91,43 @@ export const FilterAnime = () => {
           <CardContent className="p-4 flex-wrap justify-center flex gap-2">
             <FilterSelect
               placeholder="Озвучка"
-              options={state.filterList.voiceover}
+              options={state.filterList?.voiceover}
               value={getActiveFilterValue('voiceover')}
               onChange={(value) => handleChangeFilter('voiceover', value)}
             />
             <FilterSelect
               placeholder="Сезони"
-              options={state.filterList.season}
+              options={state.filterList?.season}
               value={getActiveFilterValue('season')}
               onChange={(value) => handleChangeFilter('season', value)}
             />
             <FilterSelect
               placeholder="Режисери"
-              options={state.filterList.directors}
+              options={state.filterList?.directors}
               value={getActiveFilterValue('directors')}
               onChange={(value) => handleChangeFilter('directors', value)}
             />
             <FilterSelect
               placeholder="Студії"
-              options={state.filterList.studios}
+              options={state.filterList?.studios}
               value={getActiveFilterValue('studios')}
               onChange={(value) => handleChangeFilter('studios', value)}
             />
             <FilterSelect
               placeholder="Статус"
-              options={state.filterList.status}
+              options={state.filterList?.status}
               value={getActiveFilterValue('status')}
               onChange={(value) => handleChangeFilter('status', value)}
             />
             <FilterSelect
               placeholder="Країна"
-              options={state.filterList.countries}
+              options={state.filterList?.countries}
               value={getActiveFilterValue('countries')}
               onChange={(value) => handleChangeFilter('countries', value)}
             />
             <FilterSelect
               placeholder="Тип"
-              options={state.filterList.type}
+              options={state.filterList?.type}
               value={getActiveFilterValue('type')}
               onChange={(value) => handleChangeFilter('type', value)}
             />

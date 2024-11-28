@@ -17,7 +17,7 @@ const nextConfig = {
     trailingSlash: false,
     skipTrailingSlashRedirect: true,
     images: {
-        domains: ['via.placeholder.com', 'localhost'],
+        domains: ['via.placeholder.com', 'animeon-static-bucket.s3.amazonaws.com', 'localhost'],
     },
     eslint: {
         ignoreDuringBuilds: true,
@@ -26,7 +26,7 @@ const nextConfig = {
         return [
             {
                 source: "/api/v1/:path*",
-                destination: `${HOST}/api/v1/:path*`,
+                destination: `${HOST}/:path*`,
             },
         ];
     },

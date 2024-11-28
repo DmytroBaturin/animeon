@@ -1,14 +1,19 @@
+'use client'
+
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from '@/shared/components/ui/avatar'
+import { useUser } from '@/entities/user/model'
+import { memo } from 'react'
 
-export const UserAvatar = () => {
+export const UserAvatar = memo(() => {
+  const { user } = useUser()
   return (
     <Avatar>
-      <AvatarImage alt="@shadcn" />
+      {user && <AvatarImage src={`${process.env.API_HOST}/${user.avatar}`} />}
       <AvatarFallback>CN</AvatarFallback>
     </Avatar>
   )
-}
+})

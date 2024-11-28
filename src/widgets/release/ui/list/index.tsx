@@ -2,10 +2,12 @@
 
 import { userAddAnime } from '@/shared/api/user/user'
 import { useSession } from '@/entities/session/model/model'
+import Link from 'next/link'
+import { routes } from '@/shared/config/routes'
 
 export const ListToAdd = ({ id }: { id?: number }) => {
-  const { token } = useSession()
-  return (
+  const { token, isAuthenticated } = useSession()
+  return isAuthenticated ? (
     <nav className="list-none font-bold flex flex-col gap-2">
       <li
         className=" hover:underline"
@@ -80,5 +82,9 @@ export const ListToAdd = ({ id }: { id?: number }) => {
         Кинуті
       </li>
     </nav>
+  ) : (
+    <Link href={routes.login} className="text-white underline">
+      Авторизуватись
+    </Link>
   )
 }

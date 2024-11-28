@@ -22,10 +22,10 @@ export const PlayerVoiceOverSelect = ({
   )
   return voiceovers && voiceovers.length > 0 ? (
     <Select
-      defaultValue={voiceovers[0].file}
+      defaultValue={voiceovers[0].url}
       onValueChange={(url) => {
         setVoiceOver(url)
-        const selected = voiceovers.find((val) => val.file === url)
+        const selected = voiceovers.find((val) => val.url === url)
         if (selected) {
           setSelectedVoiceover(selected.value)
         }
@@ -36,7 +36,7 @@ export const PlayerVoiceOverSelect = ({
       </SelectTrigger>
       <SelectContent>
         {voiceovers.map((val) => (
-          <SelectItem key={val.file} value={val.file || ''}>
+          <SelectItem key={val.url} value={val.url || ''}>
             {val.value}
           </SelectItem>
         ))}

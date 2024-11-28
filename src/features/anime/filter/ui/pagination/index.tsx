@@ -27,7 +27,7 @@ export const PaginationFilter = ({
   }
 
   return (
-    <Pagination className="items-start justify-start">
+    <Pagination className="w-full flex items-center justify-center">
       <PaginationContent>
         {previous && (
           <PaginationItem className="hidden sm:flex">

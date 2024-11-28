@@ -66,6 +66,7 @@ export const OwnersPage = () => {
               </CardHeader>
               <CardContent className="flex flex-col gap-3">
                 <Input
+                  className="bg-muted"
                   label="Назва організації"
                   name="organization"
                   placeholder="Введіть назву організації"
@@ -82,6 +83,7 @@ export const OwnersPage = () => {
                   )}
                 />
                 <Input
+                  className="bg-muted"
                   label="Контактне лице"
                   name="contact_person"
                   placeholder="Введіть контактну особу"
@@ -99,6 +101,7 @@ export const OwnersPage = () => {
                 />
                 <Input
                   label="E-mail"
+                  className="bg-muted"
                   name="email"
                   placeholder="Введіть e-mail"
                   value={values.email}
@@ -110,6 +113,7 @@ export const OwnersPage = () => {
                   error={getFieldError(touched.email, errors.email, 'email')}
                 />
                 <Textarea
+                  className="bg-muted"
                   label="Прямі посилання на сторінки ресурсу, інформація з яких потребує видалення"
                   name="release_url"
                   placeholder="Введіть URL сторінки"
@@ -126,6 +130,7 @@ export const OwnersPage = () => {
                   )}
                 />
                 <Textarea
+                  className="bg-muted"
                   label="Посилання на документ, який є доказом наявності у Вас прав на матеріал, розміщений на сайті"
                   name="document_url"
                   placeholder="Введіть URL документа"
@@ -142,6 +147,7 @@ export const OwnersPage = () => {
                   )}
                 />
                 <Textarea
+                  className="bg-muted"
                   label="Текст-пояснення, який ви хотіли залишити в оголошенні факту видалення публікації"
                   name="explanation"
                   placeholder="Введіть текст пояснення"
@@ -158,6 +164,7 @@ export const OwnersPage = () => {
                   )}
                 />
                 <Textarea
+                  className="bg-muted"
                   label="Повідомлення"
                   name="message"
                   placeholder="Введіть повідомлення"

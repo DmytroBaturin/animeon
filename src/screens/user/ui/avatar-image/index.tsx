@@ -1,8 +1,10 @@
 'use client'
 
-import japanIco from '@/shared/assets/Avatar.png'
+interface AvatarImageProps {
+  src?: string
+}
 
-export const AvatarImage = () => {
+export const AvatarImage = ({ src }: AvatarImageProps) => {
   return (
     <div className="w-full flex">
       <svg
@@ -19,7 +21,11 @@ export const AvatarImage = () => {
             width="100%"
             height="100%"
           >
-            <image href={japanIco.src} width="100%" />
+            {src ? (
+              <image href={src} height="100%" />
+            ) : (
+              <rect width="100%" height="100%" fill="#C4C4C4" />
+            )}
           </pattern>
         </defs>
         <path
