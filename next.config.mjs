@@ -17,6 +17,7 @@ const nextConfig = {
     trailingSlash: false,
     skipTrailingSlashRedirect: true,
     images: {
+        unoptimized: true,
         domains: ['via.placeholder.com', 'animeon-static-bucket.s3.amazonaws.com', 'localhost'],
     },
     eslint: {
