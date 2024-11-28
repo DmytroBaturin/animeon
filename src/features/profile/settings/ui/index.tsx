@@ -28,6 +28,7 @@ export const UserSettings = () => {
   const onChange = (imageList) => {
     setImages(imageList)
   }
+
   const handleSave = () => {
     userSettingsCreate(
       { avatar: images[0].file },
