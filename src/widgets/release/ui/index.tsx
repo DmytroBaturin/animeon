@@ -40,7 +40,7 @@ export const ReleaseDetails = ({ anime }: { anime: ResponseAnime }) => {
           <Image
             width={297}
             height={420}
-            className="h-[420px] rounded w-[297px]"
+            className="h-[420px] rounded min-w-[297px]"
             src={anime.card_image}
             alt="card_image"
           />
