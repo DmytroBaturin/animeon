@@ -19,13 +19,15 @@ export default async function Layout({
   return (
     <ErrorBoundary fallback={<div>Something went wrong</div>}>
       <PageLayout>
-        <Image
-          src={anime.data.card_image}
-          height={400}
-          width={500}
-          alt="background"
-          className="absolute right-0 top-[20px] gradient-mask-b-0 w-full h-[400px] object-cover"
-        />
+        {anime.data.card_image && (
+          <Image
+            src={anime.data.card_image}
+            height={400}
+            width={500}
+            alt="background"
+            className="absolute right-0 top-[20px] gradient-mask-b-0 w-full h-[400px] object-cover"
+          />
+        )}
 
         <ReleaseInitializer data={anime.data}>
           <ReleasePage
