@@ -19,6 +19,7 @@ import numbersIco from '@/shared/assets/icons/release/Numbers.svg'
 import type { ResponseAnime } from '@/shared/api/model'
 import { StatItem } from '@/widgets/release/ui/stat-item'
 import { ListToAdd } from '@/widgets/release/ui/list'
+import Image from 'next/image'
 
 const stats = [
   { icon: analyticsIco, text: 'Статус', key: 'status' },
@@ -35,7 +36,17 @@ export const ReleaseDetails = ({ anime }: { anime: ResponseAnime }) => {
   return (
     <div className="flex flex-col lg:flex-row justify-around gap-[42px] w-full">
       <div className="w-full lg:w-fit flex-col gap-3 items-center flex">
-        <Skeleton className="h-[420px] w-[297px] bg-gray-300" />
+        {anime.card_image ? (
+          <Image
+            width={297}
+            height={420}
+            className="h-[420px] rounded w-[297px]"
+            src={anime.card_image}
+            alt="card_image"
+          />
+        ) : (
+          <Skeleton className="h-[420px] w-[297px] bg-gray-300" />
+        )}
         <Popover>
           <PopoverTrigger asChild>
             <Button>

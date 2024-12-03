@@ -62,16 +62,18 @@ export const MobileNavigation = forwardRef<
         {searchNode}
 
         <li className="text-yellow-400">Підписка</li>
-        <div className="border-t-2 border-white/10 pt-4">
-          <li
-            className="text-base font-bold"
-            onClick={() => {
-              logout().then(() => router.refresh())
-            }}
-          >
-            Вийти з профілю
-          </li>
-        </div>
+        {isLogged && (
+          <div className="border-t-2 border-white/10 pt-4">
+            <li
+              className="text-base font-bold"
+              onClick={() => {
+                logout().then(() => router.refresh())
+              }}
+            >
+              Вийти з профілю
+            </li>
+          </div>
+        )}
       </nav>
     </div>
   )
