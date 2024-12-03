@@ -44,10 +44,10 @@ export const RegistrationPage = () => {
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center w-full h-full">
         <Formik
           initialValues={{
-            username: 'admin',
-            email: 'admin@gmail.com',
-            password: 'admin',
-            password_repeat: 'admin',
+            username: '',
+            email: '',
+            password: '',
+            password_repeat: '',
           }}
           validationSchema={registrationSchema}
           onSubmit={(values: RequestUserRegister) => {

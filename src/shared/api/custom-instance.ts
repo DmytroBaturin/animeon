@@ -31,30 +31,18 @@ export const customInstance = async <T>(
   url: string,
   options: RequestInit,
 ): Promise<T> => {
-  try {
-    const requestUrl = getUrl(url);
-    const requestHeaders = getHeaders(options.headers);
-    const requestInit: RequestInit = {
-      ...options,
-      headers: requestHeaders,
-    };
+  const requestUrl = getUrl(url);
+  const requestHeaders = getHeaders(options.headers);
 
-    const request = new Request(requestUrl, requestInit);
-    const response = await fetch(request);
-    if (response.status === 401) {
-      await logout();
-      return { status: 401, data: null, error: 'Unauthorized' } as unknown as T;
-    }
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`Request failed with status ${response.status}: ${errorText}`);
-    }
+  const requestInit: RequestInit = {
+    ...options,
+    headers: requestHeaders,
+  };
 
-    const data = await getBody<T>(response);
-    return { status: response.status, data } as T;
+  const request = new Request(requestUrl, requestInit);
+  const response = await fetch(request);
+  const data = await getBody<T>(response);
 
-  } catch (error) {
-    return { status: error.status, data: null, error: error.message } as unknown as T;
-  }
+  return { status: response.status, data, headers: response.headers } as T;
 };
 

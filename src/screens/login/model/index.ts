@@ -17,7 +17,6 @@ export const useLogin = () => {
           headers: { 'Content-Type': 'application/json' },
         },
       )
-
       if (
         res.status === 400 ||
         (res.status === 401 && (res as any).data?.errors)

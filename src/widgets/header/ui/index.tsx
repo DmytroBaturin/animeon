@@ -91,9 +91,11 @@ export const Header = ({ isLogged }: { isLogged: boolean }) => {
               <SearchAnime />
               {!isLogged && <Link href={routes.login}>Авторизація</Link>}
             </nav>
-            <Link href={routes.profile}>
-              <UserAvatar />
-            </Link>
+            {isLogged && (
+              <Link href={routes.profile}>
+                <UserAvatar />
+              </Link>
+            )}
           </div>
         </div>
 

@@ -17,13 +17,16 @@ import Link from 'next/link'
 import { routes } from '@/shared/config/routes'
 import { useLogin } from '@/screens/login/model'
 import { TokenObtainPair } from '@/shared/api/model'
+import * as React from 'react'
 
 export const LoginPage = () => {
-  const { login, clearError, getFieldError } = useLogin()
+  const { login, clearError, getFieldError, errors: errorsServer } = useLogin()
   const loginSchema = yup.object().shape({
     username: yup.string().required("Це обов'язкове поле"),
     password: yup.string().required("Це обов'язкове поле"),
   })
+
+  console.log(errorsServer)
 
   return (
     <PageLayout>
@@ -82,10 +85,16 @@ export const LoginPage = () => {
                     )}
                   />
                 </CardContent>
+
                 <CardFooter className="flex gap-2 items-center justify-center flex-col">
                   <Button type="submit" className="w-full">
                     Увійти
                   </Button>
+                  {errorsServer && (
+                    <p className="text-red-500 text-sm">
+                      {errorsServer[0]?.message}
+                    </p>
+                  )}
                   <CardDescription className="w-full">
                     Ще не маєте профілю на нашому сайті?
                     <span className="font-bold text-[#00CF05]">
