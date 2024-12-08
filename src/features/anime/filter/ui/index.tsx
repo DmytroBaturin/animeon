@@ -64,7 +64,7 @@ export const FilterAnime = () => {
         <Card className="w-full">
           <CardContent className="p-4 flex-wrap justify-center flex gap-2">
             <FilterInput
-              placeholder="Навза..."
+              placeholder="Назва..."
               onChange={(value) => handleInputChange('name', value)}
             />
             <FilterSelect
