@@ -7,7 +7,12 @@ export default async function Page({
 }: {
   searchParams: { [key: string]: string }
 }) {
-  const animeList = await getAnimeList(searchParams, { cache: 'no-cache' })
+  const animeList = await getAnimeList(searchParams, {
+    next: {
+      revalidate: 60,
+    },
+    cache: 'no-cache',
+  })
 
   return <ReleasesPage animeList={animeList.data} />
 }
