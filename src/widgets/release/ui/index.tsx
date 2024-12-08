@@ -20,6 +20,7 @@ import type { ResponseAnime } from '@/shared/api/model'
 import { StatItem } from '@/widgets/release/ui/stat-item'
 import { ListToAdd } from '@/widgets/release/ui/list'
 import Image from 'next/image'
+import { AnimeSlider } from '@/widgets/release/ui/slider'
 
 const stats = [
   { icon: analyticsIco, text: 'Статус', key: 'status' },
@@ -79,6 +80,12 @@ export const ReleaseDetails = ({ anime }: { anime: ResponseAnime }) => {
               data={anime[stat.key]}
             />
           ))}
+          {anime?.images?.length > 0 && (
+            <div className="mt-[10px] flex gap-2 flex-col">
+              <span className="w-full font-bold">Кадри</span>
+              <AnimeSlider data={anime.images} />
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>

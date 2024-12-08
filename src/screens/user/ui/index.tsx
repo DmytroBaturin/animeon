@@ -18,11 +18,11 @@ const navList = [
 
 export const UserPage = ({ children, user }: { children; user?: User }) => {
   return (
-    <PageLayout classname="pt-[40px]">
+    <PageLayout classname="p-[40px]">
       <div className="flex sm:flex-nowrap flex-wrap justify-between gap-4">
         <Card className="max-w-full sm:max-w-[300px] sm:w-[30%] w-full min-w-[256px]  overflow-hidden p-0">
           <CardHeader className="p-0 border-b-2 border-blue-400 top-0 mt-0">
-            <AvatarImage src={user.avatar || ''} />
+            <AvatarImage src={user.avatar} />
             <div className="flex flex-col gap-2 p-6">
               <Link
                 href={routes.profile}
