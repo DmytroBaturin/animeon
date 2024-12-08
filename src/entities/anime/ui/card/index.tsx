@@ -22,6 +22,7 @@ const AnimeCardComponent = ({
       <div className="h-[320px] flex justify-between flex-col items-center w-full max-w-[200px]">
         {card_image ? (
           <Image
+            quality={20}
             src={card_image}
             className="h-[280px] object-cover rounded-[10px]"
             alt={card_image}
