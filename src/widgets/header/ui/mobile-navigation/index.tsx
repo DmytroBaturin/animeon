@@ -20,7 +20,7 @@ export const MobileNavigation = forwardRef<
   return (
     <div
       ref={ref}
-      className="absolute  animate-slide-in top-[96px] left-0 w-full bg-primary shadow-md md:hidden"
+      className="absolute top-[96px] left-0 w-full bg-primary shadow-md md:hidden"
     >
       <nav className="list-none font-bold p-4 flex flex-col gap-4">
         <div className="border-b-2 flex items-center justify-between border-white/10 pb-4">

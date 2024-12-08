@@ -45,7 +45,7 @@ export const Header = ({ isLogged }: { isLogged: boolean }) => {
     <header className="fixed flex z-50 items-center w-screen h-[96px] md:h-[80px]">
       <div
         className={clsx(
-          (isScrolled || !isDynamicOpacity) && 'opacity-100',
+          (isScrolled || !isDynamicOpacity || isMenuOpen) && 'opacity-100',
           'bg-gradient-to-b from-[#104C81] opacity-0 z-0 to-[#021F5D] absolute w-[100vw] h-24 transition-opacity duration-300 ease-in-out',
         )}
       />

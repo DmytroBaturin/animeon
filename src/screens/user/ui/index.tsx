@@ -3,7 +3,6 @@
 import { PageLayout } from '@/shared/layouts/page'
 import { AvatarImage } from '@/screens/user/ui/avatar-image'
 import { Card, CardContent, CardHeader } from '@/shared/components/ui/card'
-import { useRouter } from 'next/navigation'
 import { User } from '@/shared/api/model'
 import Link from 'next/link'
 import { routes } from '@/shared/config/routes'
@@ -18,10 +17,8 @@ const navList = [
 ]
 
 export const UserPage = ({ children, user }: { children; user?: User }) => {
-  const router = useRouter()
-
   return (
-    <PageLayout>
+    <PageLayout classname="pt-[40px]">
       <div className="flex sm:flex-nowrap flex-wrap justify-between gap-4">
         <Card className="max-w-full sm:max-w-[300px] sm:w-[30%] w-full min-w-[256px]  overflow-hidden p-0">
           <CardHeader className="p-0 border-b-2 border-blue-400 top-0 mt-0">

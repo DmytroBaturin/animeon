@@ -129,7 +129,6 @@ export const SearchAnime = forwardRef<HTMLInputElement, SearchAnimeProps>(
                   </List>
                 )}
               </InfiniteLoader>
-              {!hasMore && <p>Немає більше результатів</p>}
             </CredenzaBody>
           </div>
         </CredenzaContent>

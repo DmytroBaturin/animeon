@@ -22,14 +22,25 @@ export const CommentsSection = () => {
   useEffect(() => {
     if (!release.id || !release.slug) return
     api.fetchComments(String(release.id!), release.slug!, 1)
+
+    return () => api.resetComments()
   }, [release.id, release.slug])
 
   return (
     <div className="flex flex-col">
-      {isAuthenticated && <CreateComment object_id={release.id!} />}
+      {isAuthenticated ? (
+        <CreateComment object_id={release.id!} />
+      ) : (
+        <div className="flex items-center py-4 justify-center h-full">
+          <span className="text-sm text-muted-foreground">
+            Зареєструйся, щоб залишити коментар
+          </span>
+        </div>
+      )}
       <section className="mt-4 flex flex-col">
         {comments?.map((comment) => (
           <Comment
+            isAuth={isAuthenticated}
             key={`comment-${comment.id}`}
             seeMore={replyNext[comment.id!]}
             handleMoreReplies={() => api.loadMoreReplies(comment.id!)}
@@ -53,6 +64,7 @@ export const CommentsSection = () => {
               isOpenReplies[comment.id!] &&
               replyComments[comment.id!]?.map((reply) => (
                 <Comment
+                  isAuth={isAuthenticated}
                   key={`reply-${reply.id}`}
                   replyForm={
                     activeReplyForm === reply.id && (

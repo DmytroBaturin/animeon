@@ -21,6 +21,7 @@ interface CommentsState {
   isOpenReplies: { [key: number]: boolean }
   activeReplyForm: number | null
   api: {
+    resetComments: () => void
     toggleReplyForm: (commentId: number) => void
     toggleMoreReplies: (commentId: number) => void
     loadMoreReplies: (commentId: number) => void
@@ -132,6 +133,23 @@ export const useCommentsModel = create<CommentsState>()(
             state.replyComments[commentId] = []
           })
         }
+      },
+
+      resetComments: () => {
+        set((state) => {
+          state.comments = []
+          state.replyComments = {}
+          state.replyPage = {}
+          state.replyNext = {}
+          state.isOpenReplies = {}
+          state.totalPages = null
+          state.currentPage = 1
+          state.replyTo = null
+          state.replyContent = ''
+          state.errors = null
+          state.activeReplyForm = null
+          state.activeMoreReplies = {}
+        })
       },
 
       loadMoreReplies: async (commentId: number) => {

@@ -7,6 +7,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from '@/shared/components/ui/avatar'
+import { useRouter } from 'next/navigation'
 
 interface CommentProps {
   replies?: ReactNode
@@ -16,7 +17,7 @@ interface CommentProps {
   replyForm?: ReactNode
   date: string
   commentTo?: string
-  isReply?: boolean
+  isAuth?: boolean
   hasReplies?: boolean
   toggleReplyForm?: () => void
   reactions?: ReactNode
@@ -32,6 +33,7 @@ export const CommentComponent = ({
   seeMore = false,
   replyForm,
   avatar = '',
+  isAuth,
   handleMoreReplies,
   toggleReplyForm,
   commentTo,
@@ -40,6 +42,7 @@ export const CommentComponent = ({
   content,
   openReplies,
 }: CommentProps) => {
+  const router = useRouter()
   const formatTelegramTime = (date: Date | string): string => {
     const now = moment()
     const messageDate = moment(date)
@@ -78,14 +81,14 @@ export const CommentComponent = ({
               {content}
             </p>
             <div className="flex gap-3">
-              <p
+              <button
                 className="font-light opacity-40"
                 onClick={() => {
-                  toggleReplyForm()
+                  isAuth ? toggleReplyForm() : router.push('/profile')
                 }}
               >
                 Відповісти
-              </p>
+              </button>
               {reactions}
             </div>
           </div>
@@ -102,7 +105,7 @@ export const CommentComponent = ({
 
         <div className="flex items-start  w-full flex-col justify-startmr-32">
           {replies}
-          {seeMore && (
+          {seeMore && replies && (
             <p
               className="hover:underline opacity-60 text-xs mb-5"
               onClick={() => handleMoreReplies()}

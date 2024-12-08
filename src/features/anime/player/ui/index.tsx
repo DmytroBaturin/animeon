@@ -7,6 +7,7 @@ import { usePlayerModel } from '@/features/anime/player/model'
 import { useEffect } from 'react'
 import { ReleasePlayer } from '@/features/anime/player/ui/player'
 import { PlayerVoiceOverSelect } from '@/features/anime/player/ui/voiceover-select'
+import { AspectRatio } from '@/shared/components/ui/aspect-ratio'
 
 export const Player = ({
   release,
@@ -30,7 +31,7 @@ export const Player = ({
   return (
     <div className="flex flex-col gap-3">
       {release?.voiceover && release.voiceover.length > 0 ? (
-        <>
+        <div>
           <PlayerVoiceOverSelect
             voiceovers={release.voiceover as EpisodeVoiceover[]}
           />
@@ -43,11 +44,15 @@ export const Player = ({
             }}
             src={voiceOver ?? ''}
           />
-        </>
-      ) : (
-        <div className="w-full items-center h-[400px] justify-center flex">
-          <h1 className="font-bold text-2xl">Серія недоступна</h1>
         </div>
+      ) : (
+        <AspectRatio ratio={16 / 9} className="h">
+          <div className="flex items-center py-4 justify-center h-full">
+            <span className="text-sm text-muted-foreground">
+              Серія недоступна для перегляду
+            </span>
+          </div>
+        </AspectRatio>
       )}
       <PlayerPagination currentOrder={currentOrder} />
     </div>

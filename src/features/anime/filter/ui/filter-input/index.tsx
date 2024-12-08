@@ -1,8 +1,8 @@
 import { Input } from '@/shared/components/ui/input'
 
-interface FilterSelectProps {
+interface FilterInputProps {
   placeholder: string
-  onChange?: (value: string) => void // змінюємо тип onChange на прийняття значення
+  onChange?: (value: string) => void
   value: string
 }
 
@@ -10,20 +10,20 @@ export const FilterInput = ({
   placeholder,
   value,
   onChange,
-}: FilterSelectProps) => {
+}: FilterInputProps) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e?.target?.value !== undefined) {
+      onChange?.(e.target.value)
+    }
+  }
+
   return (
     <Input
-      placeholder={placeholder}
-      onChange={(e) => {
-        if (e?.target) {
-          onChange?.(e.target.value)
-        } else {
-          console.error('Event target is undefined')
-        }
-      }}
-      value={value}
       widthMain="w-full sm:w-[160px]"
-      className="border-white rounded-[7px] w-full sm:w-[160px] bg-primary placeholder:text-white/60"
+      placeholder={placeholder}
+      onChange={handleChange}
+      value={value}
+      className="border-white rounded-[7px] w-full sm:w-[160px] bg-primary/70 placeholder:text-white/60"
     />
   )
 }
