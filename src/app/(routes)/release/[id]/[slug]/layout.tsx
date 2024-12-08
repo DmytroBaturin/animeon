@@ -17,7 +17,15 @@ export default async function Layout({
 }) {
   const anime = await getAnime(params.id, params.slug)
   return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+    <ErrorBoundary
+      fallback={
+        <div className="flex items-center py-4 justify-center h-full">
+          <span className="text-sm text-muted-foreground">
+            Щось пішло не так
+          </span>
+        </div>
+      }
+    >
       <PageLayout>
         {anime.data.card_image && (
           <Image
