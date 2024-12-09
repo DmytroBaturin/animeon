@@ -35,8 +35,6 @@ export const customInstance = async <T>(
   const requestUrl = getUrl(url);
   const requestHeaders = getHeaders(options.headers);
 
-
-
   const requestInit: RequestInit = {
     ...options,
     headers: requestHeaders,
@@ -52,8 +50,6 @@ export const customInstance = async <T>(
 
    })
   }
-
-  console.log(request)
 
   return { status: response.status, data, headers: response.headers } as T;
 };

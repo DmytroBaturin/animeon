@@ -10,6 +10,7 @@ export async function POST() {
       refresh: refreshToken,
     },
     {
+      credentials: 'include',
       headers: {
         Authorization: `Bearer ${refreshToken}`,
       },

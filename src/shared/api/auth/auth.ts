@@ -145,7 +145,7 @@ export const authTokenRefreshCreate = async (tokenRefresh: NonReadonly<TokenRefr
   return customInstance<Promise<authTokenRefreshCreateResponse>>(getAuthTokenRefreshCreateUrl(),
   {      
     ...options,
-    method: 'POST',
+    method: 'GET',
     headers: { 'Content-Type': 'application/json', ...options?.headers },
     body: JSON.stringify(
       tokenRefresh,)
