@@ -12,7 +12,7 @@ export const UserAvatar = () => {
 
   return (
     <Avatar>
-      {user && <AvatarImage src={`${process.env.API_HOST}/${user.avatar}`} />}
+      {user && <AvatarImage src={user.avatar} />}
       <AvatarFallback>CN</AvatarFallback>
     </Avatar>
   )
