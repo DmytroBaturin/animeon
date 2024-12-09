@@ -64,10 +64,12 @@ export const SupportPage = () => {
                     errors.title,
                     'organization',
                   )}
+                  className="bg-muted"
                 />
                 <Input
                   label="E-mail"
                   name="email"
+                  className="bg-muted"
                   placeholder="Введіть e-mail"
                   value={values.email}
                   onChange={(e) => {
@@ -80,6 +82,7 @@ export const SupportPage = () => {
                 <Textarea
                   label="Повідомлення"
                   name="message"
+                  className="bg-muted"
                   placeholder="Введіть повідомлення"
                   value={values.message}
                   onChange={(e) => {
