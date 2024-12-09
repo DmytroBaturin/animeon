@@ -19,9 +19,11 @@ import { useRouter } from 'next/navigation'
 import { useSession } from '@/entities/session/model/model'
 import { Input } from '@/shared/components/ui/input'
 import { logout } from '@/entities/session'
+import { useUser } from '@/entities/user/model'
 
 export const UserSettings = () => {
   const { token } = useSession()
+  const { api } = useUser()
   const router = useRouter()
   const [images, setImages] = useState([])
   const maxNumber = 1
@@ -38,7 +40,8 @@ export const UserSettings = () => {
           Authorization: `Bearer ${token}`,
         },
       },
-    ).then(() => {
+    ).then((res) => {
+      api.setAvatar(images[0].data_url)
       router.refresh()
     })
   }
