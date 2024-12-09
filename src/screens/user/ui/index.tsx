@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader } from '@/shared/components/ui/card'
 import { User } from '@/shared/api/model'
 import Link from 'next/link'
 import { routes } from '@/shared/config/routes'
+import { Button } from '@/shared/components/ui/button'
 
 const navList = [
   { label: 'Усі', href: '/all' },
@@ -44,6 +45,7 @@ export const UserPage = ({ children, user }: { children; user?: User }) => {
                 </Link>
               ))}
             </nav>
+            <Button>Вийти з профілю</Button>
           </CardContent>
         </Card>
         {children}
