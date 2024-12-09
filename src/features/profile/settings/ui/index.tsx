@@ -40,7 +40,6 @@ export const UserSettings = () => {
       },
     ).then(() => {
       router.refresh()
-      console.log('saved')
     })
   }
 

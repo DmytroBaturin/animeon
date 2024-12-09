@@ -8,6 +8,33 @@ import { ReleaseInitializer } from '@/entities/anime/model/initializer/release'
 import Image from 'next/image'
 import { ErrorBoundary } from 'react-error-boundary'
 
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { id: number; slug: string }
+}) => {
+  const episodeData = await getAnime(params.id, params.slug, {
+    cache: 'no-cache',
+  })
+
+  return {
+    title: `Дивитися епізод ${episodeData.data.title} онлайн`,
+    description: `Дивіться аніме ${episodeData.data.title} з озвучкою та субтитрами. Найкраща якість відео та оновлення епізодів.`,
+    openGraph: {
+      title: `Дивитися епізод ${episodeData.data.title} онлайн`,
+      description: `Дивіться аніме ${episodeData.data.title} у високій якості.`,
+      images: [
+        {
+          url: episodeData.data.background_image || '/default-preview.jpg',
+          width: 1200,
+          height: 630,
+          alt: episodeData.data.title,
+        },
+      ],
+    },
+  }
+}
+
 export default async function Layout({
   children,
   params,

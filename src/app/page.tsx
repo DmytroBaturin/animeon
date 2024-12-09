@@ -6,6 +6,22 @@ import { Suspense } from 'react'
 import { ListLayout } from '@/shared/layouts/list'
 import { AnimeCardSkeleton } from '@/entities/anime'
 import type { ResponseAnimeListType } from '@/shared/api/model'
+import { Metadata } from 'next'
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'AnimeOn',
+    description: 'Дивись останні аніме',
+    keywords: ['Anime', 'Аніме', 'Популярні серіали', 'Фільми'],
+    openGraph: {
+      title: 'Anime Home Page',
+      description: 'Переглядайте найкращі аніме серіали та фільми.',
+      url: 'https://www.animeon.top',
+
+      type: 'website',
+    },
+  }
+}
 
 export default async function Page({
   searchParams,
