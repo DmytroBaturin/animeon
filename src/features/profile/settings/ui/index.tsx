@@ -18,6 +18,7 @@ import { userSettingsCreate } from '@/shared/api/user/user'
 import { useRouter } from 'next/navigation'
 import { useSession } from '@/entities/session/model/model'
 import { Input } from '@/shared/components/ui/input'
+import { logout } from '@/entities/session'
 
 export const UserSettings = () => {
   const { token } = useSession()
@@ -106,6 +107,15 @@ export const UserSettings = () => {
               </div>
             </div>
             <Button onClick={handleSave}>Зберегти</Button>
+            <Button
+              onClick={() => {
+                logout().then(() => {
+                  router.refresh()
+                })
+              }}
+            >
+              Вийти з профілю
+            </Button>
           </section>
         </CredenzaBody>
       </CredenzaContent>
