@@ -14,6 +14,7 @@ import task from '@/shared/assets/icons/profile/Task.svg'
 import watched from '@/shared/assets/icons/profile/Eye.svg'
 import dropped from '@/shared/assets/icons/profile/Invisible.svg'
 import { WithIcon } from '@/shared/components/ui/with-icon'
+import Image from 'next/image'
 
 const navList = [
   { label: 'Усі', href: '/all', icon: all },
@@ -43,7 +44,10 @@ export const UserPage = ({ children, user }: { children; user?: User }) => {
           <CardContent>
             <nav className="flex list-none font-bold  flex-col pt-6 gap-2">
               {navList.map((item) => (
-                <WithIcon icon={item.icon} key={item.href}>
+                <WithIcon
+                  icon={<Image alt={item.href} src={item.icon} />}
+                  key={item.href}
+                >
                   <Link
                     href={`${routes.profile}/${item.href}`}
                     className="cursor-pointer hover:underline"
