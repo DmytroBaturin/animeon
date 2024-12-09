@@ -6,6 +6,7 @@
  */
 
 export interface ChildTeam {
+  readonly avatar?: string;
   readonly get_params?: string;
   readonly value?: string;
 }

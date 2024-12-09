@@ -17,6 +17,7 @@ import Link from 'next/link'
 import { routes } from '@/shared/config/routes'
 import type { RequestUserRegister } from '@/shared/api/model'
 import { useRegistration } from '@/screens/registration/model'
+import { CenteringLayout } from '@/shared/layouts/center'
 
 const registrationSchema = yup.object().shape({
   username: yup.string().required("Це обов'язкове поле"),
@@ -41,7 +42,7 @@ export const RegistrationPage = () => {
 
   return (
     <PageLayout>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center w-full h-full">
+      <CenteringLayout>
         <Formik
           initialValues={{
             username: '',
@@ -142,7 +143,7 @@ export const RegistrationPage = () => {
             </Form>
           )}
         </Formik>
-      </div>
+      </CenteringLayout>
     </PageLayout>
   )
 }

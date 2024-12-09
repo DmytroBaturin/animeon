@@ -18,6 +18,7 @@ import { routes } from '@/shared/config/routes'
 import { useLogin } from '@/screens/login/model'
 import { TokenObtainPair } from '@/shared/api/model'
 import * as React from 'react'
+import { CenteringLayout } from '@/shared/layouts/center'
 
 export const LoginPage = () => {
   const { login, clearError, getFieldError, errors: errorsServer } = useLogin()
@@ -30,7 +31,7 @@ export const LoginPage = () => {
 
   return (
     <PageLayout>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center w-full h-full">
+      <CenteringLayout>
         <Formik
           initialValues={{
             username: '',
@@ -106,7 +107,7 @@ export const LoginPage = () => {
             </Form>
           )}
         </Formik>
-      </div>
+      </CenteringLayout>
     </PageLayout>
   )
 }
