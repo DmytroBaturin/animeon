@@ -9,7 +9,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
   const session = await checkSession()
 
   if (!session) {
-    return redirect(routes.login)
+    return redirect(routes.home)
   }
 
   const user = await userRead({

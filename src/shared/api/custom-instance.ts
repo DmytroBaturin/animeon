@@ -1,6 +1,7 @@
 import { logout } from '@/entities/session'
 import { fetchExternalImage } from 'next/dist/server/image-optimizer'
 import { authTokenRefreshCreate } from '@/shared/api/auth/auth'
+import { cookies } from 'next/headers'
 
 const getBody = <T>(c: Response | Request): Promise<T> => {
   const contentType = c.headers.get('content-type')
@@ -34,6 +35,8 @@ export const customInstance = async <T>(
   const requestUrl = getUrl(url);
   const requestHeaders = getHeaders(options.headers);
 
+
+
   const requestInit: RequestInit = {
     ...options,
     headers: requestHeaders,
@@ -41,7 +44,16 @@ export const customInstance = async <T>(
 
   const request = new Request(requestUrl, requestInit);
   const response = await fetch(request);
+
   const data = await getBody<T>(response);
+
+  if (response.status === 401 && !url.includes('/login') && !url.includes('/registration')) {
+   fetch('/api/refresh', { method: 'POST' }).then((res) => {
+
+   })
+  }
+
+  console.log(request)
 
   return { status: response.status, data, headers: response.headers } as T;
 };

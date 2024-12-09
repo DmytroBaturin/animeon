@@ -16,14 +16,14 @@ export const CommentsSection = () => {
     isOpenReplies,
     activeReplyForm,
   } = useCommentsModel()
+
   const { isAuthenticated } = useSession()
   const { release } = useRelease()
 
   useEffect(() => {
     if (!release.id || !release.slug) return
+    api.initRelease(release.id, release.slug)
     api.fetchComments(String(release.id!), release.slug!, 1)
-
-    return () => api.resetComments()
   }, [release.id, release.slug])
 
   return (

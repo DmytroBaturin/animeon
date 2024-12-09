@@ -4,9 +4,11 @@ import { ErrorMessages } from '@/shared/types'
 import { userLogin } from '@/shared/api/auth/auth'
 import { setCookie } from '@/shared/utils'
 import { useRouter } from 'next/navigation'
+import { useAuthStore } from '@/entities/session/model'
 
 export const useLogin = () => {
   const router = useRouter()
+  const { closeDialog } = useAuthStore()
   const [errors, setErrors] = useState<ErrorMessages[]>([])
 
   const login = async ({ password, username }: TokenObtainPair) => {
@@ -23,10 +25,10 @@ export const useLogin = () => {
       ) {
         setErrors((res as any).data.errors)
       } else {
+        closeDialog()
         router.refresh()
         await setCookie('session', res.data.access)
         await setCookie('refresh', res.data.refresh)
-        router.back()
       }
     } catch (error) {
       console.error('Registration failed', error)

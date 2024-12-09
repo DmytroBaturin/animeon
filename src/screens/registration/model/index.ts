@@ -1,8 +1,8 @@
 import { userRegister } from '@/shared/api/auth/auth'
 import { type RequestUserRegister } from '@/shared/api/model'
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { setCookie } from '@/shared/utils'
+import { useAuthStore } from '@/entities/session/model'
 
 interface ErrorMessages {
   location: string
@@ -11,8 +11,7 @@ interface ErrorMessages {
 
 export const useRegistration = () => {
   const [errors, setErrors] = useState<ErrorMessages[]>([])
-  const router = useRouter()
-
+  const { closeDialog } = useAuthStore()
   const registration = async ({
     password,
     username,
@@ -30,9 +29,10 @@ export const useRegistration = () => {
       if (res.status === 400 && (res as any).data?.errors) {
         setErrors((res as any).data.errors)
       } else {
+        closeDialog()
+
         await setCookie('session', res.data.access)
         await setCookie('refresh', res.data.refresh)
-        router.back()
       }
     } catch (error) {
       console.error('Registration failed', error)

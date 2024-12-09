@@ -14,13 +14,7 @@ import { useHeader } from '@/widgets/header/model'
 import { MobileNavigation } from '@/widgets/header/ui/mobile-navigation'
 import { usePathname, useRouter } from 'next/navigation'
 import { clsx } from 'clsx'
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from '@/shared/components/ui/dialog'
-import { LoginPage } from '@/screens/login'
-import { RegistrationPage } from '@/screens/registration'
+import { AuthDialog } from '@/entities/session/ui'
 
 export const Header = ({ isLogged }: { isLogged: boolean }) => {
   const router = useRouter()
@@ -33,10 +27,6 @@ export const Header = ({ isLogged }: { isLogged: boolean }) => {
     buttonRef,
   } = useHeader()
   const pathname = usePathname()
-
-  const [isLogin, setIsLogin] = useState(true)
-
-  const togglePage = () => setIsLogin(!isLogin)
 
   const isDynamicOpacity = pathname === '/'
   const [isScrolled, setIsScrolled] = useState(false)
@@ -100,18 +90,7 @@ export const Header = ({ isLogged }: { isLogged: boolean }) => {
           <div className="hidden md:flex items-center gap-9">
             <nav className="list-none items-center flex gap-9">
               <SearchAnime />
-              {!isLogged && (
-                <Dialog>
-                  <DialogTrigger>Авторизація</DialogTrigger>
-                  <DialogContent className="lg:w-[40%] w-full">
-                    {isLogin ? (
-                      <LoginPage togglePage={togglePage} />
-                    ) : (
-                      <RegistrationPage togglePage={togglePage} />
-                    )}
-                  </DialogContent>
-                </Dialog>
-              )}
+              <AuthDialog />
             </nav>
             {isLogged && (
               <Link href={routes.profile}>
@@ -123,8 +102,6 @@ export const Header = ({ isLogged }: { isLogged: boolean }) => {
 
         {isMenuOpen && (
           <MobileNavigation
-            isLogin={isLogin}
-            togglePage={togglePage}
             isLogged={isLogged}
             handleCloseMenu={handleCloseMenu}
             ref={menuRef as LegacyRef<HTMLDivElement>}

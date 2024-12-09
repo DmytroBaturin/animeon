@@ -43,6 +43,7 @@ export const UserSettings = () => {
       console.log('saved')
     })
   }
+
   return (
     <Credenza>
       <CredenzaTrigger asChild>
@@ -81,6 +82,8 @@ export const UserSettings = () => {
                 {({ onImageUpload, onImageUpdate, dragProps }) => (
                   <div>
                     {images.length > 0 ? (
+                      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                      // @ts-expect-error
                       <Button {...dragProps} onClick={onImageUpdate}>
                         Змінити попереднє фото
                       </Button>
@@ -109,6 +112,7 @@ export const UserSettings = () => {
             <div className="flex flex-col gap-2">
               <Button onClick={handleSave}>Зберегти</Button>
               <Button
+                variant="destructive"
                 onClick={() => {
                   logout().then(() => {
                     router.refresh()

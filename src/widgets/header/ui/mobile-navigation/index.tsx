@@ -5,26 +5,18 @@ import { forwardRef, ReactNode } from 'react'
 import { routes } from '@/shared/config/routes'
 import { useRouter } from 'next/navigation'
 import { logout } from '@/entities/session'
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from '@/shared/components/ui/dialog'
-import { LoginPage } from '@/screens/login'
-import { RegistrationPage } from '@/screens/registration'
+import { AuthDialog } from '@/entities/session/ui'
 
 interface MobileNavigationProps {
   handleCloseMenu: () => void
   searchNode?: ReactNode
   isLogged: boolean
-  isLogin: boolean
-  togglePage: () => void
 }
 
 export const MobileNavigation = forwardRef<
   HTMLDivElement,
   MobileNavigationProps
->(({ handleCloseMenu, searchNode, isLogged, togglePage, isLogin }, ref) => {
+>(({ handleCloseMenu, searchNode, isLogged }, ref) => {
   const router = useRouter()
   return (
     <div
@@ -42,18 +34,7 @@ export const MobileNavigation = forwardRef<
               <UserAvatar />
             </Link>
           ) : (
-            !isLogged && (
-              <Dialog>
-                <DialogTrigger>Авторизація</DialogTrigger>
-                <DialogContent ref={ref} className="lg:w-[40%] w-full">
-                  {isLogin ? (
-                    <LoginPage togglePage={togglePage} />
-                  ) : (
-                    <RegistrationPage togglePage={togglePage} />
-                  )}
-                </DialogContent>
-              </Dialog>
-            )
+            <AuthDialog ref={ref} />
           )}
         </div>
         {headerLinks.map((link) =>

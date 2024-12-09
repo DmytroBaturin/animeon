@@ -7,7 +7,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from '@/shared/components/ui/avatar'
-import { useRouter } from 'next/navigation'
+import { useAuthStore } from '@/entities/session/model'
 
 interface CommentProps {
   replies?: ReactNode
@@ -33,7 +33,7 @@ export const CommentComponent = ({
   seeMore = false,
   replyForm,
   avatar = '',
-  isAuth,
+  isAuth = false,
   handleMoreReplies,
   toggleReplyForm,
   commentTo,
@@ -42,7 +42,7 @@ export const CommentComponent = ({
   content,
   openReplies,
 }: CommentProps) => {
-  const router = useRouter()
+  const { openDialog } = useAuthStore()
   const formatTelegramTime = (date: Date | string): string => {
     const now = moment()
     const messageDate = moment(date)
@@ -60,7 +60,7 @@ export const CommentComponent = ({
   return (
     <div className="flex w-full gap-3">
       <Avatar>
-        <AvatarImage src={`${process.env.API_HOST}/${avatar}`} />
+        <AvatarImage src={avatar} />
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
       <div className="flex gap-5 w-full items-center flex-col">
@@ -82,9 +82,10 @@ export const CommentComponent = ({
             </p>
             <div className="flex gap-3">
               <button
+                type="button"
                 className="font-light opacity-40"
                 onClick={() => {
-                  isAuth ? toggleReplyForm() : router.push('/profile')
+                  isAuth ? toggleReplyForm() : openDialog()
                 }}
               >
                 Відповісти
@@ -93,7 +94,7 @@ export const CommentComponent = ({
             </div>
           </div>
           <div className="">{replyForm}</div>
-          {hasReplies && (
+          {(hasReplies || replies) && (
             <p
               onClick={() => openReplies()}
               className="text-xs text-blue-400 underline"

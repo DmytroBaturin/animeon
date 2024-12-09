@@ -19,7 +19,9 @@ export const ReleaseTabs = () => {
       <TabsTrigger disabled={isObjectEmpty(release.voiceovers)} value="teams">
         Команди
       </TabsTrigger>
-      <TabsTrigger value="arches">Арки</TabsTrigger>
+      <TabsTrigger disabled value="arches">
+        Арки
+      </TabsTrigger>
     </TabsList>
   )
 }

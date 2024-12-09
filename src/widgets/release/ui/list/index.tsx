@@ -2,11 +2,11 @@
 
 import { userAddAnime } from '@/shared/api/user/user'
 import { useSession } from '@/entities/session/model/model'
-import Link from 'next/link'
-import { routes } from '@/shared/config/routes'
+import { useAuthStore } from '@/entities/session/model'
 
 export const ListToAdd = ({ id }: { id?: number }) => {
   const { token, isAuthenticated } = useSession()
+  const { openDialog } = useAuthStore()
   return isAuthenticated ? (
     <nav className="list-none font-bold flex flex-col gap-2">
       <li
@@ -83,8 +83,8 @@ export const ListToAdd = ({ id }: { id?: number }) => {
       </li>
     </nav>
   ) : (
-    <Link href={routes.login} className="text-white underline">
+    <span onClick={openDialog} className="text-white underline">
       Авторизуватись
-    </Link>
+    </span>
   )
 }
