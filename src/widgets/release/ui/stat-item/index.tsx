@@ -33,18 +33,24 @@ export const StatItem = ({
               <Link
                 key={index}
                 href={`${routes.releases}?${item.get_params}`}
-                className="w-full font-bold underline block"
+                className="font-bold underline"
               >
                 {parseValue(item)}
               </Link>
             )
           }
-          return null
+          return <span key={index}>{parseValue(item)}</span>
         })
         .filter(Boolean) // Видаляємо всі null значення
 
       if (links.length > 0) {
-        return links
+        // Додаємо коми між елементами
+        return links.map((link, index) => (
+          <span key={index}>
+            {link}
+            {index < links.length - 1 && ', '}
+          </span>
+        ))
       }
     }
 
@@ -52,7 +58,7 @@ export const StatItem = ({
       return (
         <Link
           href={`${routes.releases}?${data.get_params}`}
-          className="w-full font-bold underline"
+          className="font-bold underline"
         >
           {parseValue(data)}
         </Link>
@@ -60,7 +66,7 @@ export const StatItem = ({
     }
 
     // Якщо немає даних
-    return <span className="w-full font-bold">Немає</span>
+    return <span className="font-bold">Немає</span>
   }
 
   return (
@@ -68,7 +74,7 @@ export const StatItem = ({
       <WithIcon classname="w-[70%]" icon={<Image alt={text} src={icon} />}>
         {text}
       </WithIcon>
-      <div className="w-full">{renderLinks()}</div>
+      <div className="w-full flex flex-wrap">{renderLinks()}</div>
     </div>
   )
 }
