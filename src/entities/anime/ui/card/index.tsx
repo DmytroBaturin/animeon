@@ -24,7 +24,7 @@ const AnimeCardComponent = ({
           <Image
             quality={20}
             src={card_image}
-            className="h-[280px] object-cover rounded-[10px]"
+            className="max-h-[280px] h-full object-cover rounded-[10px]"
             alt={card_image}
             width={200}
             height={280}
@@ -35,7 +35,9 @@ const AnimeCardComponent = ({
           </div>
         )}
         <div className="flex flex-col font-bold text-center items-center mt-2">
-          <h2 className="text-base">{title}</h2>
+          <h2 className="text-base">
+            {title.length >= 24 ? `${title.slice(0, 24)}...` : title}
+          </h2>
           <p className="text-xs">
             {year} | {type || 'Аніме'} | Серій: {count_episodes}
           </p>

@@ -41,7 +41,7 @@ export const HomePage = ({
           >
             {tablist}
             <TabsContent
-              className="py-5 flex flex-col sm:min-h-[800px] min-h-[680px] w-full gap-9"
+              className="py-5 min-h-[432px] flex flex-col w-full gap-9"
               value={activeTab}
             >
               {serverList}

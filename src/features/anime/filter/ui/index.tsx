@@ -4,12 +4,10 @@ import { FilterAnimeTrigger } from '@/features/anime/filter/ui/trigger'
 import { Card, CardContent } from '@/shared/components/ui/card'
 import { useFilterModel } from '@/features/anime/filter/model'
 import { getAnimeFilters } from '@/shared/api/anime/anime'
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { FilterSelect } from '@/features/anime/filter/ui/filter-select'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Button } from '@/shared/components/ui/button'
-import { FilterInput } from '@/features/anime/filter/ui/filter-input'
-import { debounce } from '@/shared/lib/hooks/debounce'
 
 export const FilterAnime = () => {
   const { state, api } = useFilterModel()
@@ -46,14 +44,14 @@ export const FilterAnime = () => {
     const params = new URLSearchParams()
     router.push(`?${params.toString()}`)
   }
-
-  const debouncedHandleChangeFilter = useRef(
-    debounce(handleChangeFilter, 300),
-  ).current
-
-  const handleInputChange = (filterKey: string, value: string) => {
-    debouncedHandleChangeFilter(filterKey, value)
-  }
+  //
+  // const debouncedHandleChangeFilter = useRef(
+  //   debounce(handleChangeFilter, 300),
+  // ).current
+  //
+  // const handleInputChange = (filterKey: string, value: string) => {
+  //   debouncedHandleChangeFilter(filterKey, value)
+  // }
 
   return (
     <div className="flex gap-2 w-full flex-col">
@@ -63,10 +61,10 @@ export const FilterAnime = () => {
       {state.isFilterOpen && (
         <Card className="w-full">
           <CardContent className="p-4 flex-wrap justify-center flex gap-2">
-            <FilterInput
-              placeholder="Назва..."
-              onChange={(value) => handleInputChange('name', value)}
-            />
+            {/* <FilterInput */}
+            {/*  placeholder="Назва..." */}
+            {/*  onChange={(value) => handleInputChange('name', value)} */}
+            {/* /> */}
             <FilterSelect
               placeholder="Озвучка"
               options={state.filterList?.voiceover}
@@ -109,6 +107,7 @@ export const FilterAnime = () => {
               value={getActiveFilterValue('type')}
               onChange={(value) => handleChangeFilter('type', value)}
             />
+
             <Button onClick={resetFilters}>Скинути фільтри</Button>
           </CardContent>
         </Card>

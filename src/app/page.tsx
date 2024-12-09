@@ -36,7 +36,7 @@ export default async function Page({
         <Suspense
           fallback={
             <ListLayout>
-              {Array.from({ length: 10 }).map((_, index) => (
+              {Array.from({ length: 4 }).map((_, index) => (
                 <AnimeCardSkeleton key={`skeleton-${index + 1}`} />
               ))}
             </ListLayout>
