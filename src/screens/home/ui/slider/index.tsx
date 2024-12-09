@@ -66,9 +66,11 @@ const SliderFullScreen = ({ posters }: { posters?: ResponsePosters[] }) => {
                     <h2 className="font-bold text-3xl text-white drop-shadow-sm">
                       {poster.anime?.title || 'Назва аніме'}
                     </h2>
-                    {/* <p className="font-bold text-base text-white drop-shadow-sm"> */}
-                    {/*  {poster.anime?. || 'Назва аніме'} */}
-                    {/* </p> */}
+                    <p className="font-bold opacity-70 text-base text-start max-w-[600px] text-white drop-shadow-sm">
+                      {poster.description.length >= 100
+                        ? `${poster.description.slice(0, 120)}...`
+                        : poster.description || ''}
+                    </p>
                     <div className="flex gap-2">
                       {posters.map((_, index) => (
                         <Button

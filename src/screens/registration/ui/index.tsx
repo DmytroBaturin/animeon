@@ -41,8 +41,8 @@ export const RegistrationPage = () => {
   } = useRegistration()
 
   return (
-    <PageLayout>
-      <CenteringLayout>
+    <PageLayout classname="w-full">
+      <CenteringLayout className="w-full">
         <Formik
           initialValues={{
             username: '',
@@ -56,7 +56,7 @@ export const RegistrationPage = () => {
           }}
         >
           {({ errors, touched, handleChange, handleBlur, values }) => (
-            <Form className="lg:w-[20%] w-full">
+            <Form className="lg:w-[40%] w-full">
               <Card
                 className="w-full bg-muted/40 border border-white/[15%] shadow-2xl"
                 variant="ghost"

@@ -18,7 +18,7 @@ export const CenteringLayout = ({
   return (
     <div
       className={cn(
-        'flex flex-grow justify-center items-center ',
+        'flex flex-grow justify-center items-center',
         className,
         forPage && 'h-[calc(100vh-128px)]',
       )}

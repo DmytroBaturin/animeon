@@ -27,8 +27,6 @@ export const LoginPage = () => {
     password: yup.string().required("Це обов'язкове поле"),
   })
 
-  console.log(errorsServer)
-
   return (
     <PageLayout>
       <CenteringLayout>
@@ -43,7 +41,7 @@ export const LoginPage = () => {
           }}
         >
           {({ errors, touched, handleChange, handleBlur, values }) => (
-            <Form className="lg:w-[20%] w-full p-2">
+            <Form className="lg:w-[40%] w-full">
               <Card
                 className="w-full bg-muted/40 border border-white/[15%] shadow-2xl"
                 variant="primary"
