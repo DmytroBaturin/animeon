@@ -106,16 +106,18 @@ export const UserSettings = () => {
                 />
               </div>
             </div>
-            <Button onClick={handleSave}>Зберегти</Button>
-            <Button
-              onClick={() => {
-                logout().then(() => {
-                  router.refresh()
-                })
-              }}
-            >
-              Вийти з профілю
-            </Button>
+            <div className="flex flex-col gap-2">
+              <Button onClick={handleSave}>Зберегти</Button>
+              <Button
+                onClick={() => {
+                  logout().then(() => {
+                    router.refresh()
+                  })
+                }}
+              >
+                Вийти з профілю
+              </Button>
+            </div>
           </section>
         </CredenzaBody>
       </CredenzaContent>
