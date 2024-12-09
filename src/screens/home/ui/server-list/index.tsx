@@ -2,16 +2,13 @@
 
 import { ListLayout } from '@/shared/layouts/list'
 import { AnimeCard } from '@/entities/anime'
-import { getAnimeList } from '@/shared/api/anime/anime'
-import type { ResponseAnimeListType } from '@/shared/api/model'
+import { getAnimeListResponse } from '@/shared/api/anime/anime'
 
-export const HomePageList = async ({ tab = '' }: { tab: string }) => {
-  const anime = await getAnimeList(
-    {
-      type: tab as ResponseAnimeListType,
-    },
-    { cache: 'no-cache' },
-  )
+export const HomePageList = async ({
+  anime,
+}: {
+  anime: getAnimeListResponse
+}) => {
   return (
     <ListLayout>
       {anime?.data?.results?.map((value) => (

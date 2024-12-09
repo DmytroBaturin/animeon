@@ -1,10 +1,11 @@
 'use server'
 
 import { HomePage, HomePageList, HomeTabList } from '@/screens/home'
-import { getAnimePosters } from '@/shared/api/anime/anime'
+import { getAnimeList, getAnimePosters } from '@/shared/api/anime/anime'
 import { Suspense } from 'react'
 import { ListLayout } from '@/shared/layouts/list'
 import { AnimeCardSkeleton } from '@/entities/anime'
+import type { ResponseAnimeListType } from '@/shared/api/model'
 
 export default async function Page({
   searchParams,
@@ -29,6 +30,24 @@ export default async function Page({
     ? posters.data
     : [posters.data]
 
+  const animeLists = await Promise.all(
+    Object.keys(tabs).map((key) =>
+      getAnimeList(
+        { type: key as ResponseAnimeListType },
+        { cache: 'no-cache' },
+      ),
+    ),
+  )
+
+  const tabsAvailability = Object.fromEntries(
+    Object.keys(tabs).map((key, index) => [
+      key,
+      animeLists[index]?.data.results?.length > 0,
+    ]),
+  )
+
+  const activeAnimeList = animeLists[Object.keys(tabs).indexOf(activeTab)]
+
   return (
     <HomePage
       posters={postersArray}
@@ -42,11 +61,11 @@ export default async function Page({
             </ListLayout>
           }
         >
-          <HomePageList tab={activeTab} />
+          <HomePageList anime={activeAnimeList} />
         </Suspense>
       }
       activeTab={activeTab}
-      tablist={<HomeTabList tabs={tabs} />}
+      tablist={<HomeTabList tabs={tabs} availability={tabsAvailability} />}
     />
   )
 }
