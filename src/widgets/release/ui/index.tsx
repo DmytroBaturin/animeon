@@ -72,14 +72,17 @@ export const ReleaseDetails = ({ anime }: { anime: ResponseAnime }) => {
       </div>
       <Card className="w-full bg-gradient-secondary backdrop-blur-sm">
         <CardContent className="p-4 flex flex-col gap-4">
-          {stats.map((stat) => (
-            <StatItem
-              key={stat.key}
-              icon={stat.icon}
-              text={stat.text}
-              data={anime[stat.key]}
-            />
-          ))}
+          {stats.map((stat) => {
+            return (
+              <StatItem
+                key={stat.key}
+                icon={stat.icon}
+                text={stat.text}
+                data={anime[stat.key]}
+              />
+            )
+          })}
+
           {anime?.images?.length > 0 && (
             <div className="mt-[10px] flex gap-2 flex-col">
               <span className="w-full font-bold">Кадри</span>
