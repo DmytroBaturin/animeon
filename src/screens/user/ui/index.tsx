@@ -7,13 +7,21 @@ import { User } from '@/shared/api/model'
 import Link from 'next/link'
 import { routes } from '@/shared/config/routes'
 
+import all from '@/shared/assets/icons/profile/Accept.svg'
+import facebook from '@/shared/assets/icons/profile/Facebook.svg'
+import favorite from '@/shared/assets/icons/profile/Heart.svg'
+import task from '@/shared/assets/icons/profile/Task.svg'
+import watched from '@/shared/assets/icons/profile/Eye.svg'
+import dropped from '@/shared/assets/icons/profile/Invisible.svg'
+import { WithIcon } from '@/shared/components/ui/with-icon'
+
 const navList = [
-  { label: 'Усі', href: '/all' },
-  { label: 'Дивлюсь зараз', href: '/watch-now' },
-  { label: 'Заплановані', href: '/planned' },
-  { label: 'Переглянуті', href: '/watched' },
-  { label: 'Улюблені', href: '/favorite' },
-  { label: 'Кинуті', href: '/dropped' },
+  { label: 'Усі', href: '/all', icon: all },
+  { label: 'Дивлюсь зараз', href: '/watch-now', icon: facebook },
+  { label: 'Заплановані', href: '/planned', icon: task },
+  { label: 'Переглянуті', href: '/watched', icon: watched },
+  { label: 'Улюблені', href: '/favorite', icon: favorite },
+  { label: 'Кинуті', href: '/dropped', icon: dropped },
 ]
 
 export const UserPage = ({ children, user }: { children; user?: User }) => {
@@ -34,14 +42,15 @@ export const UserPage = ({ children, user }: { children; user?: User }) => {
           </CardHeader>
           <CardContent>
             <nav className="flex list-none font-bold  flex-col pt-6 gap-2">
-              {navList.map((item, i) => (
-                <Link
-                  href={`${routes.profile}/${item.href}`}
-                  key={i}
-                  className="cursor-pointer hover:underline"
-                >
-                  {item.label}
-                </Link>
+              {navList.map((item) => (
+                <WithIcon icon={item.icon} key={item.href}>
+                  <Link
+                    href={`${routes.profile}/${item.href}`}
+                    className="cursor-pointer hover:underline"
+                  >
+                    {item.label}
+                  </Link>
+                </WithIcon>
               ))}
             </nav>
           </CardContent>
