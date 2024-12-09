@@ -33,7 +33,7 @@ export const ListToAdd = ({ id }: { id?: number }) => {
           userAddAnime(
             {
               anime: id!,
-              action: 'WATCHING',
+              action: 'VIEWED',
             },
             {
               headers: {
@@ -80,6 +80,24 @@ export const ListToAdd = ({ id }: { id?: number }) => {
         }}
       >
         Кинуті
+      </li>
+      <li
+        className=" hover:underline"
+        onClick={() => {
+          userAddAnime(
+            {
+              anime: id!,
+              action: 'WATCHING',
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            },
+          )
+        }}
+      >
+        Дивлюся зараз
       </li>
     </nav>
   ) : (

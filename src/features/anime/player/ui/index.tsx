@@ -8,6 +8,8 @@ import { useEffect } from 'react'
 import { ReleasePlayer } from '@/features/anime/player/ui/player'
 import { PlayerVoiceOverSelect } from '@/features/anime/player/ui/voiceover-select'
 import { AspectRatio } from '@/shared/components/ui/aspect-ratio'
+import { useSession } from '@/entities/session/model/model'
+import { userAddViewedEpisode } from '@/shared/api/user/user'
 
 export const Player = ({
   release,
@@ -16,9 +18,24 @@ export const Player = ({
   release?: ResponseAnimeEpisode
   currentOrder: number
 }) => {
+  const { isAuthenticated, token } = useSession()
   const { voiceOver, setVoiceOver } = usePlayerModel()
-
+  const postViewed = () => {
+    userAddViewedEpisode(
+      {
+        episode: release.id,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    ).then(() => {
+      console.log('')
+    })
+  }
   useEffect(() => {
+    isAuthenticated && release.id && postViewed()
     if (
       release?.voiceover &&
       release.voiceover.length > 0 &&
@@ -26,7 +43,7 @@ export const Player = ({
     ) {
       setVoiceOver(release.voiceover[0].url as string)
     }
-  }, [release, setVoiceOver])
+  }, [release, setVoiceOver, isAuthenticated])
 
   return (
     <div className="flex flex-col gap-3">

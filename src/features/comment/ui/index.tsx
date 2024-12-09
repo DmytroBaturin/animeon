@@ -65,6 +65,7 @@ export const CommentsSection = () => {
               isOpenReplies[comment.id!] &&
               replyComments[comment.id!]?.map((reply) => (
                 <Comment
+                  avatar={reply.avatar}
                   isAuth={isAuthenticated}
                   key={`reply-${reply.id}`}
                   replyForm={
