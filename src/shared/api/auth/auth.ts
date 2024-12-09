@@ -142,6 +142,7 @@ export const getAuthTokenRefreshCreateUrl = () => {
 }
 
 export const authTokenRefreshCreate = async (tokenRefresh: NonReadonly<TokenRefresh>, options?: RequestInit): Promise<authTokenRefreshCreateResponse> => {
+  
   return customInstance<Promise<authTokenRefreshCreateResponse>>(getAuthTokenRefreshCreateUrl(),
   {      
     ...options,

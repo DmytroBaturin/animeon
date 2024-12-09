@@ -61,7 +61,7 @@ export const CommentComponent = ({
     <div className="flex w-full gap-3">
       <Avatar>
         <AvatarImage src={avatar} />
-        <AvatarFallback>CN</AvatarFallback>
+        <AvatarFallback />
       </Avatar>
       <div className="flex gap-5 w-full items-center flex-col">
         <div className="flex gap-2 w-full flex-col">

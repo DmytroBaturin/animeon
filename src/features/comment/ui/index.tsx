@@ -40,6 +40,7 @@ export const CommentsSection = () => {
       <section className="mt-4 flex flex-col">
         {comments?.map((comment) => (
           <Comment
+            avatar={comment.avatar}
             isAuth={isAuthenticated}
             key={`comment-${comment.id}`}
             seeMore={replyNext[comment.id!]}

@@ -6,6 +6,7 @@
  */
 
 export interface ResponseCommentAnime {
+  readonly avatar?: string;
   /** @minLength 1 */
   content_main: string;
   readonly created?: string;

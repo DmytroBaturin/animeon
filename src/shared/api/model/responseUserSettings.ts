@@ -6,8 +6,7 @@
  */
 
 export interface ResponseUserSettings {
-  /** @nullable */
-  readonly avatar?: string | null;
+  readonly avatar?: string;
   /** @maxLength 255 */
   telegram?: string;
 }
