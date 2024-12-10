@@ -6,6 +6,7 @@ import { useRelease } from '@/entities/anime/model'
 import { useCommentsModel } from '@/features/comment/model'
 import { useEffect } from 'react'
 import { useSession } from '@/entities/session/model/model'
+import { useAuthStore } from '@/entities/session/model'
 
 export const CommentsSection = () => {
   const {
@@ -19,6 +20,7 @@ export const CommentsSection = () => {
 
   const { isAuthenticated } = useSession()
   const { release } = useRelease()
+  const { openDialog } = useAuthStore()
 
   useEffect(() => {
     if (!release.id || !release.slug) return
@@ -32,9 +34,12 @@ export const CommentsSection = () => {
         <CreateComment object_id={release.id!} />
       ) : (
         <div className="flex items-center py-4 justify-center h-full">
-          <span className="text-sm text-muted-foreground">
-            Зареєструйся, щоб залишити коментар
-          </span>
+          <h3 className="text-sm text-muted-foreground">
+            <span onClick={openDialog} className="text-accent cursor-pointer">
+              Зареєструйся
+            </span>
+            , щоб залишити коментар
+          </h3>
         </div>
       )}
       <section className="mt-4 flex flex-col">

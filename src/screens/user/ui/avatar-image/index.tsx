@@ -9,20 +9,25 @@ export const AvatarImage = ({ src }: AvatarImageProps) => {
     <div className="w-full flex">
       <svg
         width="100%"
+        height="100%"
         viewBox="0 0 304 212"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
           <pattern
-            className="object-cover w-full h-full"
             id="bias"
-            patternUnits="objectBoundingBox"
-            width="100%"
-            height="100%"
+            patternUnits="userSpaceOnUse"
+            width="304"
+            height="212"
           >
             {src ? (
-              <image href={src} height="100%" />
+              <image
+                href={src}
+                width="304"
+                height="212"
+                preserveAspectRatio="xMidYMid slice"
+              />
             ) : (
               <rect width="100%" height="100%" fill="#C4C4C4" />
             )}
